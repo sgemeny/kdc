@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<?php
+  session_start();
+
+  require_once ('includes/server.php');
+  require_once ('includes/logError.php');
+
+  // get WordPress functionality
+  define('WP_USE_THEMES', false);
+  require_once($_SERVER['DOCUMENT_ROOT']."/wp-blog-header.php");
+
+//  $validate = "master/plugins/jquery-validate/dist/jquery.validate.js";
+//  echo '<script type="text/javascript" src="'.$validate.'"></script>';
+
+  if (isset($_SESSION["userID"]))
+  { // user is logged in
+echo "logged In<br>";
+    $_SESSION["MEMBER_LEVEL"] = OPTIMIZEMEMBER_CURRENT_USER_ACCESS_LEVEL;
+/****************/
+    if (!isset($_SESSION["userName"]))
+    {
+       logError("StartHere SESSION userID " . $_SESSION["userID"]);
+       logError("StartHere SESSION userName " . $_SESSION["userName"]);
+       logError("StartHere SESSION level " . $_SESSION["MEMBER_LEVEL"]);
+    }
+/*********************/
+  }
+ else
+ { // not logged in, send to login page
+echo "got here<br>";
+   header("Location: " . "http://www.kidneydietcentral.com/login");
+   exit(0);
+ } 
+
+
+//  if (isset($_SESSION["userID"]))
+//  {  // go straight to menu
+//logError("StartHere: UserName is  " . $_SESSION["userName"]);
+     header("Location:  " . $subDir . "menu.php?db=".$_SESSION["db"]);
+//  }
+
+/********************************* OLD LOG IN STUFF ************************
+  require_once ('includes/dbConnect.php');
+  require_once ('includes/banner.php');
+  require_once ('includes/displayButtons.php');
+  $conn = dbConnect();
+  showBanner("");
+
+  $btns = array( SIGNUP => "Sign Me Up!"
+               , LOGIN =>"Log In"
+               );
+
+  displayButtons($btns);
+
+  echo '<input type="hidden" name="subDir" id="subDir" value="' . $subDir .'" />';
+?>
+
+<script>
+
+$(document).ready( function()
+{
+  $( "#btnSignUp" ).click(function( event )
+  // ------------------------------------
+  {
+    var url = $("#subDir").val() + "includes/signUp.php";
+    document.location.href = url;
+  });
+
+
+  $( "#btnLogIn" ).click(function( event )
+  // ------------------------------------
+  {
+    var url = $("#subDir").val() + "includes/logIn.php";
+    document.location.href = url;
+  });
+
+  $("#btnLogOut").addClass("hidden");
+ }); // doc ready
+</script>
+/********************************* OLD LOG IN STUFF ************************/
+
+?>
+
+  </div> <!-- end of container (started in banner.php) -->
+</body>
+</html>;
+
+
+
+

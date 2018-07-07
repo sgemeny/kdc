@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Demo 1</title>
+
+    <!-- Show order of events -->
+    <script "text/javascript" src="jquery.js"></script>
+
+    <script>
+        alert('1: executed as soon as it is reached (as the DOCUMENT is downloaded)');
+        $(document).ready(function () { alert('3: on DOCument loaded & jQuery ready'); });
+    </script>
+  </head>
+
+  <body onload="alert('5: executed on document.onload event\nDOCument is Ready INIT here');">
+    <script>
+        alert('2: executed as soon as it is reached (as the document BODY is downloaded)');
+        $(document).ready(function () { alert('4: BODY & jQuery ready'); });
+    </script>
+  </body>

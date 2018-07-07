@@ -1,0 +1,58 @@
+  .hidden
+  {
+    display:none;
+  }
+
+  table, th, td
+  {
+    border: 1px solid green;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: .5em .25em;
+    white-space: nowrap;
+  }
+
+  th
+  {
+    font-weight: bold;
+    text-align: center;
+    color: MidnightBlue;
+    overflow: hidden;
+  }
+
+  h2
+  {
+    color:white;
+    font-weight: bold;
+    margin-left: 8em;
+  }
+
+  h5
+  {
+    font-weight: bold;
+  }
+
+  h4
+  {
+    font-weight: bold;
+  }
+
+  .myButton
+  {
+    background-color: OrangeRed;
+    display: inline-block;
+    font-weight: bold;
+//    font-size: 1em;
+    font-size: .8em;
+    color: White;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    padding: 5px;
+    margin-bottom: 2em;
+    min-width: 8em;
+  }
+
+  #itemChooser
+  {
+    width:300px;
+  }
