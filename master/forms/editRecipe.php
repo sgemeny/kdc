@@ -1,8 +1,13 @@
 <!doctype html>
 <?php
   session_start();
+echo "got here<br>";
+  require_once ('../includes/logError.php');
+  require_once ('../includes/debug/dumpIt.php');
+   dumpGetVars();
+   dumpPostVars();
 
-  if(!isset($_SESSION['userName']))
+  if(!isset($_POST['userName']))
   {
     logError("EditRecipe.php: userName not Set!");
     exit();
@@ -23,13 +28,8 @@
   require_once ('../includes/banner.php');
   require_once ('../includes/fractions.php');
   require_once ('getRecipeInfo.php');
-  require_once ('../includes/logError.php');
   require_once ('../includes/displayButtons.php');
 
-
-//logError("Edit Recipe SESSION userID " . $_SESSION["userID"]);
-//logError("Edit Recipe SESSION userName " . $_SESSION["userName"]);
-//logError("Edit Recipe SESSION level " . $_SESSION["MEMBER_LEVEL"]);
 
   $conn = dbConnect();
 
