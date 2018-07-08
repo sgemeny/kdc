@@ -1,0 +1,89 @@
+includes/addGrocItem.php:76:      $sts = call_user_func_array('mysqli_stmt_bind_param'
+includes/addUpdateTrackRow.php:32:    $userID = $updates[0]->userID;
+includes/addUpdateTrackRow.php:40:        if ( mysqli_stmt_bind_param($stmt, 'iiddddddddddddsd', $userID, $itemID, $qty, $wt
+includes/addUser.php:17:    $userName = $data->userName;
+includes/addUser.php:26:    $sql = "SELECT ID FROM users WHERE userName = ? LIMIT 1;";
+includes/addUser.php:29:      if ( mysqli_stmt_bind_param($stmt, 's', $userName))
+includes/addUser.php:49:    $sql = "SELECT email FROM users WHERE email = ? LIMIT 1;";
+includes/addUser.php:78:   $sql = "INSERT INTO users VALUES (NULL,?,?,?,?,?,'1','$timestamp', '$endDate')";
+includes/addUser.php:81:      if ( mysqli_stmt_bind_param($stmt, 'sssss', $userName, $hashAndSalt, $firstName, $lastName, $email))
+includes/banner.php:9:  $user = $_SESSION["userName"];
+includes/chooseRecipe.php:12:  $userID=$_SESSION['userID'];
+includes/chooseRecipe.php:21:    if ( mysqli_stmt_bind_param($stmt, 'i', $userID))
+includes/chooseRecipe.php:79:     var user = $("#userID").val();
+includes/chooseRecipe.php:80:     if (owner == user) $("#btnEdit").prop('disabled', false);
+includes/dailyTotals.php:9:  if(!isset($_SESSION['userID']))
+includes/dailyTotals.php:15:  $userID =  $_SESSION["userID"];
+includes/dailyTotals.php:88:        echo '<input type="hidden" name="userID" id="userID" value="' . $userID .'" />';
+includes/dailyTotals.php:144:    var userID = $("#userID").val();
+includes/dailyTotals.php:172:    var arrayData = { "from" : from, "to" : to, "userID" : userID };
+includes/dbConnect.php:10:	             , $db['username']
+includes/getDailyTotals.php:3:  $_POST["data"] = '{"from":"2015-11-19","to":"2015-11-20","userID":"20"}';
+includes/getDailyTotals.php:17:     $userID = $updates->userID;
+includes/getDailyTotals.php:32:     $sql .= "FROM userLog ";
+includes/getDailyTotals.php:34:     $sql .= "AND userID=? ";
+includes/getDailyTotals.php:44:      if ( mysqli_stmt_bind_param($stmt, 'ssi', $from, $to, $userID))
+includes/getRecipe.php:5:  $userID=22;
+includes/getTrack.php:19:function getTrackInfo($conn, $userID)
+includes/getTrack.php:43:  $sql .= "FROM userLog, getItemNames ";
+includes/getTrack.php:44:  $sql .= "WHERE userID=? ";
+includes/getTrack.php:52:   if ( mysqli_stmt_bind_param($stmt, 'i', $userID))
+includes/getUser.php:8:  $userID= get_current_user_id();
+includes/getUser.php:9:  $result = get_userdata($userID);
+includes/getUser.php:11:      $userName = $result->user_login;
+includes/getUser.php:12:      if ($userName != false)
+includes/getUser.php:14:          $_SESSION["userID"] = $userID;
+includes/getUser.php:15:          $_SESSION["userName"] = $userName;
+includes/getUser.php:16:          $_SESSION["MEMBER_LEVEL"] = OPTIMIZEMEMBER_CURRENT_USER_ACCESS_LEVEL;
+includes/myfunctions.php:20:     $current_user = wp_get_current_user();
+includes/myfunctions.php:22:     if ($current_user->ID != 0)
+includes/myfunctions.php:24:       $_SESSION["userName"] =  $current_user->user_login;
+includes/myfunctions.php:25:       $_SESSION["userID"] = $current_user->ID;
+includes/myfunctions.php:26:echo 'user is ' . $_SESSION["userName"] . ' ' . $_SESSION["userID"] . "<br>";
+includes/recipes.php:6:  if(!isset($_SESSION['userID']))
+includes/recipes.php:16://logError("Recipes SESSION userID " . $_SESSION["userID"]);
+includes/recipes.php:17://logError("Recipes SESSION userName " . $_SESSION["userName"]);
+includes/recipes.php:29:  echo '<input type="hidden" name="userID" id="userID" value="' . $_SESSION["userID"] .'" />';
+includes/recipes.php:74:    var user = $("#userID").val();
+includes/recipes.php:76://alert("owner: " + owner + ", user: " + user);
+includes/recipes.php:77:    if (owner == user)
+includes/recipes.php:212:     var owner = $("#userID").val();
+includes/recipes.php:272:     var myData = { "userID" : $("#userID").val() };
+includes/removeTrack.php:16:    $sql = "DELETE FROM userLog WHERE trackingID = ?";
+includes/saveGrocery.php:91:      $sts = call_user_func_array('mysqli_stmt_bind_param'
+includes/saveTrack.php:3:$_POST["data"] = '[{"userID":"1"},[{"Qty":"1.00"},{"UOM_DESC":"Serving"},{"itemID":"50019"},{"servingAmt":"51.549999237061"},{"Water":"23.017074659348"},{"Calories":"134.82386800461"},{"Protein":"2.9383499565125"},{"Fat":"4.4075249347687"},{"Carbs":"20.55813969574"},{"Fiber":"0.74747498893738"},{"Sugars":"1.0103799850464"},{"Phosphorus":"34.847799484253"},{"Potassium":"38.672809427643"},{"Sodium":"163.78981257591"},{"gramsPerUnit":"51.549999237061"},{"trackingID":"0"}],[{"Qty":"1.00"},{"UOM_DESC":"Each"},{"itemID":"72"},{"servingAmt":"50.0000"},{"Water":"38.05"},{"Calories":"71.5"},{"Protein":"6.3"},{"Fat":"4.75"},{"Carbs":"0.35"},{"Fiber":"0"},{"Sugars":"0.2"},{"Phosphorus":"99"},{"Potassium":"69"},{"Sodium":"71"},{"gramsPerUnit":"50.0000"},{"trackingID":"0"}]]';
+includes/saveTrack.php:23:    $sqlAppend  = "INSERT INTO userLog ( userID, itemID, Qty, servingAmt, Water, Calories";
+includes/saveTrack.php:29:    $sqlUpdate  = "UPDATE userLog ";
+includes/saveTrack.php:36:    $userID = $updates[0]->userID;
+includes/saveTrack.php:43:      if ( mysqli_stmt_bind_param($stmtA, 'iiddddddddddddsd', $userID, $itemID, $qty, $wt
+includes/saveTrack.php:77:    // Save each row to user log file
+includes/showGroceries.php:7:  if(!isset($_SESSION['userID']))
+includes/showGroceries.php:29:  echo '<input type="hidden" name="userID" id="userID" value="' . $_SESSION["userID"] .'" />';
+includes/showGroceries.php:86:  // Allow user to edit values
+includes/showGroceries.php:1146:     var myData = { "userName" : $("#userID").val() };
+includes/showRecipe.php:3:  if(!isset($_SESSION['userName']))
+includes/showRecipe.php:85:  echo '<input type="hidden" name="username" id="username" value="' . $_SESSION["userName"] .'" />';
+includes/showRecipe.php:86:  echo '<input type="hidden" name="userID" id="userID" value="' . $_SESSION["userID"] .'" />';
+includes/showRecipe.php:211:     var myData = { "userName" : $("#username").val() };
+includes/track.php:15:  $userID= get_current_user_id();
+includes/track.php:16:  $result = get_userdata($userID);
+includes/track.php:18:      $userName = $result->user_login;
+includes/track.php:19:      if ($userName != false)
+includes/track.php:21:          $_SESSION["userID"] = $userID;
+includes/track.php:22:          $_SESSION["userName"] = $userName;
+includes/track.php:23:          $_SESSION["MEMBER_LEVEL"] = OPTIMIZEMEMBER_CURRENT_USER_ACCESS_LEVEL;
+includes/track.php:30://logError("TRACKER SESSION userID " . $_SESSION["userID"]);
+includes/track.php:31://logError("TRACKER SESSION userName " . $_SESSION["userName"]);
+includes/track.php:35:  $userID = $_SESSION["userID"];
+includes/track.php:113:      echo '<input type="hidden" name="userID" id="userID" value="' . $userID .'" />';
+includes/track.php:167:      if ($stmt = getTrackInfo($conn, $userID))
+includes/track.php:510:    var userID = $("#userID").val();
+includes/track.php:514:    myData[0] =  {"userID" : userID };
+includes/track.php:666:  var myData = { "userName" : $("#username").val() };
+includes/track.php:1050:    var userID = $("#userID").val();
+includes/track.php:1062:       "userID" : userID
+forms/editRecipe.php:5:  if(!isset($_SESSION['userName']))
+forms/editRecipe.php:30://logError("Edit Recipe SESSION userID " . $_SESSION["userID"]);
+forms/editRecipe.php:31://logError("Edit Recipe SESSION userName " . $_SESSION["userName"]);
+forms/editRecipe.php:253:  { // User changed grocery item, update UOM select
+forms/editRecipe.php:651:     var myData = { "userName" : $("#username").val() };

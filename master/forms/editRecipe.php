@@ -4,7 +4,7 @@
 
   if(!isset($_SESSION['userName']))
   {
-    logError("EditRecipe.php: userName not Set!");
+    header("Location: " . "../../index.php");
     exit();
   }
 

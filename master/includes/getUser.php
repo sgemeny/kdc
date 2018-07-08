@@ -11,6 +11,7 @@
 
   $userID= get_current_user_id();
   $result = get_userdata($userID);
+
       $userName = $result->user_login;
       if ($userName != false)
       {

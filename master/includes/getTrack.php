@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
     global $trackingID, $itemID, $qty, $serving, $water;
     global $calories, $protein, $fat, $carbs, $fiber;
     global $sugars, $phos, $potas, $sodium, $gramsPer;

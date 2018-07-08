@@ -13,12 +13,6 @@
   require_once ('displayButtons.php');
   require_once ('chooseRecipe.php');
 
-  require_once ('logError.php');
-
-//logError("Recipes SESSION userID " . $_SESSION["userID"]);
-//logError("Recipes SESSION userName " . $_SESSION["userName"]);
-//logError("Recipes SESSION level " . $_SESSION["MEMBER_LEVEL"]);
-//logError("Recipes path= " . getcwd());
   
 
   showBanner("Choose A Recipe");
@@ -123,7 +117,6 @@ $(document).ready( function() {
     $("#choice").prop('value', chosenRecipe);
     $("#btnCmd").prop('value', EDIT);
 
-alert("curdir is " + window.location.pathname);
     var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
      document.location.href = url;
   });

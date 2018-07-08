@@ -36,7 +36,6 @@ echo '<head>';
   echo '<link href="../css/style.css" rel="stylesheet"> ';
   echo '<link href="../css/datepicker.css" rel="stylesheet"> ';
 
-
   // jQuery-UI
   echo '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>';
 
@@ -117,7 +116,6 @@ echo '<body>';
         echo '</div>';   // dateHolder;
 
       echo '<div id="chooserHolder">';  // AQUA
-
         echo '<input type="hidden" name="recipeChoice" id="recipeChoice" />';
         selectRecipe($conn, "Add to List");
 
@@ -264,7 +262,13 @@ echo '<body>';
   {
     pageName = '../starthere.php';
     if (!pageDirty)
+<<<<<<< HEAD
       document.location.href = pageName;
+=======
+{
+      document.location.href = pageName;
+}
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     else
       $('#cancelModal').modal('show');
   }
@@ -555,8 +559,11 @@ echo '<body>';
     // save new rows
     myData=[];
     myData[0] =  {"userID" : userID };
+<<<<<<< HEAD
     var beginDate =  $("#sqlDate").val();
     myData[1] = {"sqlDate" : beginDate };
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     var idx = 0;
     var breakFlag = false;
 
@@ -658,9 +665,14 @@ echo '<body>';
 
     if (breakFlag) 
        return false;
+<<<<<<< HEAD
 
     var itemData = JSON.stringify(myData);
 
+=======
+    var itemData = JSON.stringify(myData);
+x=1;
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     $.ajax(
     {
       url: "./saveTrack.php",
@@ -760,6 +772,7 @@ $(document).ready( function() {
   var txt = txt + 'Your changes will be lost?';
   var myButtons = { "Yes, Your Changes will NOT be saved!": true, "No, Stay On Page": false };
 
+<<<<<<< HEAD
   var today = new Date;
 
   $( "#btnChange" ).datepicker(
@@ -820,6 +833,10 @@ $(document).ready( function() {
 
 /***********************************/
 
+=======
+
+/***********************************/
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
   // On initialization, set each cell 'value' property
   // for later manipulation
   // each row
@@ -832,6 +849,11 @@ $(document).ready( function() {
      });
   });
 
+<<<<<<< HEAD
+=======
+/********************************/
+
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
   // Append a new row to tracking table
   function newRow(itemID, itemInfo)
   // -------------------------------
@@ -1197,7 +1219,10 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
   //----------------------------------
   {
     var userID = $("#userID").val();
+<<<<<<< HEAD
     var sqlDate = $("#sqlDate").val();
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     var row = $("#log tbody").find('tr').eq(rowIndex);
 
     var qty = row.find('td').eq(QTY).attr("dataVal");
@@ -1210,7 +1235,10 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
     arrayData[0] =
     {
        "userID" : userID
+<<<<<<< HEAD
      , "sqlDate" : sqlDate
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
      ,  "itemID" : row.find('td').eq(ITEMID).text()
      ,  "Qty": qty
      ,  "UOM_Desc" : row.find('td').eq(UOM_DESC).text()
@@ -1230,7 +1258,11 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
    }
 
     var itemData = JSON.stringify(arrayData);
+<<<<<<< HEAD
 
+=======
+a=1;
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     $.ajax(
     {
       url: "./addUpdateTrackRow.php",

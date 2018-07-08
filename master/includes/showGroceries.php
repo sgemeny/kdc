@@ -660,20 +660,6 @@ $(document).ready( function() {
   });
 *************/
 
-
-
-
-
-
-/**************************
-  $("#itemChooser").change(function()
-  // ------------------------------------
-  {
-    var myItem = $("#itemChooser").val();
-    $("#choice").prop('value', myItem);
-  });
-/**************************/
-
   function btnChooseCallBack(v)
   // ------------------------------------
   {
@@ -1158,7 +1144,6 @@ function saveError()
          });
      } // pageDirty
   }
-
 
 });  // end on page loaded
 

@@ -404,12 +404,6 @@
      margin-top: 1em;
   }
 
-/*******
-  label[for="itemChooser"]
-  {
-     margin-left: 3.5em;
-  }
-/*******/
 
 
   #box
@@ -423,7 +417,6 @@
   #trackContainer
   {
     width: 80%;
-    background: yellow;
     margin-top: -1em;
     margin-left: 10%;
     padding: 10px;

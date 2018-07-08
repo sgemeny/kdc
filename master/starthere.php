@@ -1,13 +1,10 @@
 <?php
   session_start();
+  $sessionID= session_ID();
+  
+
   require_once('includes/server.php');
   require_once('includes/getUser.php');
-  header("Location:  menu.php?db=3");
-exit(0);
-//  $sessionID= session_ID();
-  
-//  require_once('includes/server.php');
-//  require_once('includes/getUser.php');
 
 //require_once('includes/logError.php');
 //logError("start here SESSION ID " . $sessionID);
@@ -16,9 +13,8 @@ exit(0);
 //logError("start here SESSION MEMBER_LEVEL " . $_SESSION["MEMBER_LEVEL"]);
 
   // start the app
-//  header("Location:  menu.php?db=3");
+  header("Location:  menu.php?db=3");
 
-//echo "got here " . __LINE__ . "<br>";
-//  exit(0);
+  exit(0);
 ?>
 
