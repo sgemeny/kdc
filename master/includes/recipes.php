@@ -11,10 +11,10 @@
   require_once ('dbConnect.php');
   require_once ('banner.php');
   require_once ('displayButtons.php');
-  require_once ('chooseRecipe.php');
-
+  require_once ('chooseRecipeItem.php');
   require_once ('logError.php');
 
+  
 //logError("Recipes SESSION userID " . $_SESSION["userID"]);
 //logError("Recipes SESSION userName " . $_SESSION["userName"]);
 //logError("Recipes SESSION level " . $_SESSION["MEMBER_LEVEL"]);
@@ -29,6 +29,7 @@
 
   echo '<form id="frmShowRecipes" action="'.$self.'" method="get" >';
   echo '<input type="hidden" name="userID" id="userID" value="' . $_SESSION["userID"] .'" />';
+  echo '<input type="hidden" name="userName" id="userName" value="' . $_SESSION["userName"] .'" />';
 
   echo '<div id="addItemBox" class="hidden">';
    echo '<label for "itemName">New Name</label>';
@@ -57,6 +58,7 @@ function chooseRecipe($conn)
 
   displayButtons($btns);
   echo '<input type="hidden" name="choice" id="choice" />';
+  echo '<input type="hidden" name="owner" id="owner" />';
   selectRecipe($conn, "");  // recipe selector
 } // choose Recipe
 
@@ -70,9 +72,11 @@ function chooseRecipe($conn)
  function checkIfCanEdit()
  // ----------------------
  {
-    var opt = $("#recipeChooser").val().split("+");
-    var chosenRecipe = opt[0];
-    var owner = opt[1];
+//    var opt = $("#recipeChooser").val().split("+");
+//    var chosenRecipe = opt[0];
+//    var owner = opt[1];
+    var chosenRecipe = $("#choice").val();   
+    var owner = $("#owner").val();   
     var user = $("#userID").val();
 
 //alert("owner: " + owner + ", user: " + user);
@@ -103,14 +107,13 @@ $(document).ready( function() {
   $("#btnShow").click(function(event)
   // ------------------------------------
   {
-    var opt = $("#recipeChooser").val().split("+");
-    var chosenRecipe = opt[0];
-
+//    var opt = $("#recipeChooser").val().split("+");
+//    var chosenRecipe = opt[0];
     canEdit = checkIfCanEdit();
-    $("#choice").prop('value', chosenRecipe);
-    $("#btnCmd").prop('value', SHOW);
+	var chosenRecipe = $("#choice").val();
+//    $("#choice").prop('value', chosenRecipe);
+//    $("#btnCmd").prop('value', SHOW);
 
-//    var url =  $("#subDir").val() + "includes/showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
     var url =  "showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
 
      document.location.href = url;
@@ -119,13 +122,20 @@ $(document).ready( function() {
   $("#btnEdit").click(function(event)
   // ------------------------------------
   {
-    var chosenRecipe = $("#recipeChooser").val();
-    $("#choice").prop('value', chosenRecipe);
-    $("#btnCmd").prop('value', EDIT);
+    var userName = $("#userName").val();
+    var userID = $("#userID").val();
+	var chosenRecipe = $("#choice").val();
+    var cmd =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
 
-alert("curdir is " + window.location.pathname);
+    $("#btnCmd").prop('value', EDIT);
     var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
-     document.location.href = url;
+    $.post("../forms/editRecipe.php"
+          ,{ userID : userID
+           , userName : userName 
+           , cmd : EDIT
+           , chosenRecipe : chosenRecipe
+           });
+//    window.location.href = url;
   });
 
   $("#btnAdd").click(function(event)
@@ -134,13 +144,6 @@ alert("curdir is " + window.location.pathname);
      $("#btnLine").addClass("hidden");
      $("#chooseRecipe").addClass("hidden");
      $("#pageTitle").text("Add Recipe");
-/*****************
-     $("#btnMenu").addClass("hidden");
-     $("#btnShow").addClass("hidden");
-     $("#btnEdit").addClass("hidden");
-     $("#btnAdd").addClass("hidden");
-     $("#chooser").addClass("hidden");
-/*****************/
      $("#addItemBox").removeClass("hidden");
      $("#itemName").focus();
 
@@ -164,13 +167,6 @@ alert("curdir is " + window.location.pathname);
      $("#btnLine").removeClass("hidden");
      $("#chooseRecipe").removeClass("hidden");
      $("#pageTitle").text("Choose A Recipe");
-/**************
-     $("#btnMenu").removeClass("hidden");
-     $("#btnAdd").removeClass("hidden");
-     $("#btnShow").removeClass("hidden");
-     $("#btnEdit").removeClass("hidden");
-     $("#chooser").removeClass("hidden");
-/**************/
   }
 
   $("#btnCnclBox").click(function(event)
@@ -274,39 +270,6 @@ alert("curdir is " + window.location.pathname);
                 }
      });
   }
-
-
-/**************************************
-  $("#btnLogOut").click(function(event)
-  // ------------------------------------
-  {
-     var myData = { "userID" : $("#userID").val() };
-
-     $.ajax(
-     {
-       url: "./logOut.php",
-       type: "post",
-       data: {"data" : JSON.stringify(myData)},
-       success: function( data, status)  // callback
-                {
-                   if (status=="success")
-                   {
-                       alert("Your have successfully logged out.");
-                       var url = "../../index.php";
-                       document.location.href = url;
-                   }
-                   else
-                   {
-                      alert("Error Occurred, Unable to log out");
-                   }
-                },
-       error: function(xhr)
-                {
-                  alert( "An error occured: " + xhr.status + " " + xhr.statusText);
-                }
-     });
-  });
-/**************************************/
 
 });  // doc ready
 
