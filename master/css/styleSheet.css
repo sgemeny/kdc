@@ -1,0 +1,712 @@
+ /************************************
+ * for Banner
+ * ***********************************/
+  #container
+  {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 85%;
+    margin: 0 auto;
+//    background-color: coral;
+  }
+
+  #banner #kdc-logo
+  { /* NOTE: path is relative to location of this css file */
+    background-image: url(../images/KDC_BannerHeader.jpg); 
+    background-repeat:no-repeat;
+    display:block;
+
+    width: 960px;
+    height: 200px; 
+  }
+
+  #kdc-logo
+  { 
+    overflow: hidden;
+    text-indent:100%;
+    white-space: nowrap;
+  }
+
+  #logOut
+  {
+    float: right;
+    max-height: 2em;
+  }
+ /************************************
+ * for General Use
+ * ***********************************/
+  h2
+  {
+    margin-top: -.10em;
+    font-size: 1.4em;
+    color:DarkBlue;
+  }
+
+  h3
+  {
+    color: maroon;
+    margin-left: 8em;
+  }
+
+  .divCaption
+  { 
+    margin-top: 1em;
+    margin-bottom: .5em;
+    font-weight: bold;
+    color: maroon;
+  }
+
+  body {
+      background-color: linen;
+      margin: 0;
+  }
+
+  label
+  {
+    color: maroon;
+  }
+
+  select
+  {
+    width : 400px;
+    height: 1.4em;
+    font-size: 1.1em;
+  }
+
+  .center
+  {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btnBar
+  {
+    display: inline-block;
+//    background-color: yellow;
+  }
+
+  .myButton
+  {
+    background-color: OrangeRed;
+    display: inline-block;
+    font-weight: bold;
+//    font-size: 1em;
+    font-size: .8em;
+    color: White;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    padding: 5px;
+    margin-bottom: 2em;
+    min-width: 8em;
+  }
+  
+  .myButton:disabled
+  {
+    background-color: darkGray;
+  }
+
+  #btnSave:enabled
+  {
+    background-color: green;
+  }
+
+  table, th, td
+  {
+    border: 1px solid green; 
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: .5em .25em;
+//    table-layout: fixed;
+//    width: 100%;
+    white-space: nowrap;
+  }
+
+  th 
+  {
+    font-weight: bold;
+    text-align: center;
+    color: MidnightBlue;
+    overflow: hidden;
+  }
+
+  tfoot
+  {
+    color: MidnightBlue;
+    font-weight: bold;
+//    font-size: 1.25em;  /* 1em=16px */
+    text-align: right;
+  }
+
+  .hidden
+  {
+    display:none;
+  }
+
+  input[type="text"]
+  {
+    font-size: 1em;
+  }
+
+  input[type="number"]
+  {
+    font-size: 1em;
+    width: 4em;
+    background-color: #FAFAD2;
+  }
+
+  .bigText
+  {
+    font-size: 1.0em;
+    margin-bottom: 1em;
+  }
+
+/*******************
+  select
+  {
+    height: 1.4em;
+    font-size: 1.1em;
+  }
+*******************/
+
+ /************************************
+ * for chooseRecipe.php
+ * ***********************************/
+
+  #chooserBox
+  {
+    display: inline-block;
+    font-size: 1.25em;  /* 1em=16px */
+  }
+
+
+  /* this is the same as the general label */
+  #frmChooseRecipe label
+  {
+    color: #191970;
+    font-weight: bold;
+  }
+
+ /************************************
+ * for showRecipe.php 
+ * ***********************************/
+
+  table#showRecipe
+  {
+/*    margin-top: -1.0em;  */
+    margin:auto;
+  }
+
+  .totalsHolder
+  {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1em;  /* 1em=16px */
+    width: 50%;
+  }
+
+
+  #servingInfo
+  {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #enterServing
+  {
+    float: left;
+  }
+
+ /************************************
+ * for showRecipe.php & editRecipe
+ * ***********************************/
+
+  .recipeHolder
+  {
+    width: 90%;
+    margin: auto;
+  }
+
+  th.multiCol
+  {
+    text-align: center;
+  }
+
+  table.totals 
+  {
+    margin-left: 0;
+    text-align: right; 
+  }
+
+  .totals th
+  {
+    text-align: right; 
+  }
+
+  #commentCap
+  {
+    width:55%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #commentBox
+  {
+      width: 55%;
+      height: 100px;
+      padding: 4px;
+//      background-color: Beige;
+      text-align: left;
+      border-style: solid;
+      border-color: green;   /* #008000; */
+      border-width: 1px;
+    margin-bottom: .3em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #editCaption
+  {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+ /************************************
+ * for editRecipe.php
+ * ***********************************/
+  #tblRecipe
+  {
+    table-layout: fixed;
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  #tblRecipe td
+  {
+    table-layout: fixed;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  #tblRecipe .qty
+  {
+    width: 10%;
+  }
+
+  #tblRecipe .uom
+  {
+    width: 15%;
+  }
+
+  #tblRecipe .item
+  {
+    width: 35%;
+  }
+
+  #tblRecipe .dirs
+  {
+    width: 30%;
+  }
+
+  #tblRecipe .seqCol
+  {
+    width: 10%;
+  }
+
+
+/***************************/
+  .grocItem
+  {
+    width: 15.0em;
+  }
+
+  .UOM
+  {
+    width: 6em;
+  }
+
+  .Directions
+  {
+    width: 55em;
+  }
+
+  .detailID
+  {
+    width: 3.125em;
+  }
+
+/*
+  .seq
+  {
+    width: 3.125em;
+  }
+*/
+/********************/
+  #editCaption
+  {
+    margin-top: -.3em;
+  }
+
+  #comments
+  {
+    width:55%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #addComment
+  {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    border: 1px solid green;
+    width: 100%;
+  }
+
+    #info2
+    {
+      margin:auto;
+      width:65%;
+//      display: inline-block;
+//      margin-left: 4em;
+      color:DarkBlue;
+    }
+
+   #nameUp
+   {
+      margin-top:-40%;
+
+      margin-left:25%;
+      width:25%; 
+      height:25%;
+      background-color: LightBlue;
+   }  
+
+  /************** End Edit Recipe Section *********/
+
+  /********************** For Track Food *********/
+
+  #chooserHolder
+  {
+//    width: 45em;
+    width: 50%
+    border: 1px solid green;
+    margin: auto;
+  }
+
+  label[for="recipeChooser"]
+  {
+     margin-left: 6.0em;
+  }
+
+  #recipeChooser
+  {
+     margin-top: 1em;
+  }
+
+/*******
+  label[for="itemChooser"]
+  {
+     margin-left: 3.5em;
+  }
+/*******/
+
+
+  #box
+  {
+    background: red;  
+    margin: auto;
+    width: 90%
+    padding: 10px;
+  }
+
+  #trackContainer
+  {
+    width: 80%;
+    background: yellow;
+    margin-top: -1em;
+    margin-left: 10%;
+    padding: 10px;
+    float: left;
+  }
+
+  #nutrientContainer
+  {
+//    background: chartreuse;
+    margin-top: 2%; /*.5em; */
+//    margin-left: 15%
+  }
+
+  #log
+  {
+    table-layout: fixed;
+  }
+
+  #log th.nutriCol td.nutriCol
+  {
+     width:10%;
+  }
+
+
+  .itemName
+  {
+    width: 12em;
+//    background-color: pink;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .qtyCol
+  {
+    width: 7%;
+  }
+
+  .qtyNameCol
+  {
+    width: 10%;
+  }
+
+  .stdCol
+  {
+    width: 55%;
+  }
+
+  #listHolder
+  {
+    margin-top: -.1%;
+    margin: auto;
+    margin-left: 69%;
+//    background: pink;
+    border: 1px solid green;
+    width: 20em;
+  }
+
+  #listCap
+  {
+    text-align: center;
+    font-size: 1.7em;
+  }
+
+  #foodList
+  {
+    display: inline-block;
+    margin-top: .5em;
+    min-height: 85px;
+  }
+  .selButton
+  {
+    background-color: #FF6606;
+//    display: inline-block;
+    display: none;
+    font-weight: bold;
+    font-size: 1em;
+    color: White;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    padding: 5px;
+    margin-bottom: 2em;
+    min-width: 9em;
+
+    margin-top: 0em;
+    margin-left: 0em;
+  }
+ 
+  .rightJustify
+  {
+    text-align: right;
+  }
+
+  .delButton
+  {
+    background-color: orangeRed;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1em;
+    color: White;
+    padding: 5px;
+    vertical-align: middle;
+    width: 100%
+  }
+  
+  .saveButton
+  {
+    background-color: Green;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1em;
+    color: White;
+    padding: 5px;
+    vertical-align: middle;
+    width: 100%
+  }
+
+/*************************************
+ * Couldn't make this work!  Why???
+ *
+  td.itemName;
+  {
+    background-color: yellow;
+     white-space:nowrap;
+  }
+
+  th.itemName;
+  {
+    background-color: yellow;
+     white-space:nowrap;
+  }
+/*************************************/
+
+  /********************** End Track Food *********/
+
+/********** Test Stuff *****************/
+   #myTable
+     {
+       width: 50%
+       margin: auto;
+     }
+
+   #myTable1
+     {
+    margin-left:13%;
+     }
+
+  .myHead
+  {
+/*
+    width: 75%;
+    margin-left:auto;
+    margin-right:auto; 
+*/
+    font-weight: bold;
+    color: maroon;
+  }
+
+  #sub
+  {
+    display: inline-block;
+    margin-left:15%;
+  }
+
+  #pub
+  {
+    display: inline-block;
+    float: right;
+  }
+
+  .grocHead
+  {
+    margin-left: 0px;
+    width: 55%;
+  } 
+
+  #grocery
+  {
+    display: inline-block;
+    margin-left: 1em;
+  }
+
+  #itemIDs
+  {
+    display: inline-block;
+    margin-left: 1em;
+  }
+
+
+/****/
+  #frameDiv
+  {
+     height: 550px;
+     float:right;
+     margin-top: -325px;
+     width: 40%;
+  }
+
+
+/*** Add Grocery Item ****/
+    #addItemBox
+    {
+      float: left;
+      height: 50px;
+      margin-top: 20px;
+      margin-left: 3em;
+      padding: 40px;
+      font-weight: bold;
+      background-color: LightBlue;
+    }
+
+    #btnEnter
+    {
+//      margin-left: 8em;
+      margin-top: .4em;
+    }
+
+    #info
+    {
+      width:45%;
+      color:DarkBlue;
+    }
+
+  #waitBox
+  {
+      margin-left: 1em;
+      font-weight: bold;
+      color: red;
+  }
+
+  #logInInfo
+  {
+    margin-top: 2em;
+  }
+
+  #spacer
+  {
+    display: inline-block;
+    width: 30px;
+  }
+
+
+/********** Daily Totals *************************/
+  .dateType
+  {
+//    background-color: pink;
+    margin-left: .5em;
+    font-size: 1.1em;
+  }
+
+    #tableHolder
+    {
+      width: 65%;
+//      background-color: green;
+      margin-top: 2em;
+      margin-left: auto;
+    margin-right: auto;
+    }
+
+  #dailys
+  {
+//    background-color: pink;
+    table-layout: fixed;
+    text-align: right;
+  }
+
+  #dailys.th
+  {
+    text-align: right;
+  }
+
+  .dateCol
+  {
+//    background-color: pink;
+    width: 40%;
+  }
+
+  .stdCol1
+  {
+    width: 35%;
+  }
+
+  .dayCol
+  {
+    width: 40%;
+  }
+/********** End Daily Totals *********************/

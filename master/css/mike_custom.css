@@ -1,0 +1,189 @@
+.navbar-inverse {
+  background-color: OrangeRed;
+  border-color: #080808;
+}
+.navbar-inverse .navbar-brand {
+  color: White;
+}
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-inverse .navbar-text {
+  color: White;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: White;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #080808;
+}
+.navbar-inverse .navbar-nav > .disabled > a,
+.navbar-inverse .navbar-nav > .disabled > a:hover,
+.navbar-inverse .navbar-nav > .disabled > a:focus {
+  color: #444;
+  background-color: transparent;
+}
+.navbar-inverse .navbar-toggle {
+  border-color: #333;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+  background-color: #333;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #101010;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  color: #fff;
+  background-color: #080808;
+}
+@media (max-width: 767px) {
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #080808;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+    background-color: #080808;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: White;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff;
+    background-color: transparent;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #080808;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+  }
+}
+.navbar-inverse .navbar-link {
+  color: White;
+}
+.navbar-inverse .navbar-link:hover {
+  color: #fff;
+}
+.navbar-inverse .btn-link {
+  color: White;
+}
+.navbar-inverse .btn-link:hover,
+.navbar-inverse .btn-link:focus {
+  color: #fff;
+}
+.navbar-inverse .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-inverse .btn-link:hover,
+.navbar-inverse .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-inverse .btn-link:focus {
+  color: #444;
+}
+
+
+
+/*
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td, 
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td 
+.table-bordered {
+    border: 1px solid green; 
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: .5em .25em;
+}
+
+th, thead {
+    border: 1px solid green; 
+    border-color: green;
+    text-align: left;
+    color: MidnightBlue;
+    overflow: hidden;
+}
+*/
+
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+  border: 1px solid green;
+}
+
+th, td {
+  padding-right: 2px;
+  padding-left: 2px;
+}
+
+.table-bordered {
+  border: 1px solid green;
+  border-spacing: .5em .25em;
+}
+
+.btn {
+  background-color: OrangeRed;
+  border-color: Black;
+  color: White;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.navbar-btn {
+  background-color: OrangeRed;
+  border-color: Black;
+  color: White;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#banner {
+   background-image:url("../images/KDC_BannerHeader.jpg");
+   background-repeat: no-repeat;
+   //background-color:blue;
+   background-size: cover;
+   position: relative;
+   padding-left: 0px;
+   padding-right: 0px;
+}
+
+
+.banner_holder{
+  width: 90%;
+  height: 200px;
+}
+
+.banner {
+   background-image:url("../images/KDC_BannerHeader.jpg");
+   background-color:blue;
+   background-size: 100%;
+   background-repeat:no-repeat;
+   height: auto;
+   width: 100%;
+//   width: 960px;
+//   height: 200px;
+}
+

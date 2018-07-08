@@ -1,0 +1,224 @@
+body {
+  padding-top: 50px;
+}
+
+  .hidden
+  {
+    display:none;
+  }
+
+
+ /************************************
+ * Stylized buttons
+ * **********************************/
+  .myButton
+  {
+    background-color: OrangeRed;
+    display: inline-block;
+    font-weight: bold;
+    font-size: .8em;
+    color: White;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    padding: 5px;
+    margin-bottom: 2em;
+    min-width: 8em;
+  }
+
+  .myButton:disabled
+  {
+    background-color: darkGray;
+  }
+
+  #btnSave:enabled
+  {
+    background-color: green;
+  }
+
+  .myIconButton
+  {
+    background-color: OrangeRed;
+    font-weight: bold;
+    font-size: .8em;
+    color: White;
+  }
+
+  #dateHolder
+  { 
+//    display: inline-block;
+    margin-top: 2px;
+    float: right;
+  }
+
+ /************************************
+ * General table styling
+ * **********************************/
+  table, th, td
+  {
+    border: 1px solid green;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: .5em .25em;
+    white-space: nowrap;
+  }
+
+  th
+  {
+    font-weight: bold;
+    text-align: center;
+    color: MidnightBlue;
+    overflow: hidden;
+  }
+
+  tfoot
+  {
+    color: MidnightBlue;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  .rightJustify
+  {
+    text-align: right;
+  }
+
+
+  /* not working */
+  .input[type="number"]
+  {
+    width:10%;
+  }
+
+ /*************************************
+ * Buttons for Tracking table
+ * ***********************************/
+  .delButton
+  {
+    background-color: orangeRed;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1em;
+    color: White;
+    padding: 5px;
+    vertical-align: middle;
+    width: 100%
+  }
+
+  .saveButton
+  {
+    background-color: Green;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1em;
+    color: White;
+    padding: 5px;
+    vertical-align: middle;
+    width: 100%
+  }
+
+
+
+ /*************************************
+ * For Recipe & Item Chooser Dropdowns
+ * ***********************************/
+
+  #chooserHolder
+  {
+    margin: auto;
+/*    background-color: aqua; */
+  }
+
+  label[for="recipeChooser"]
+  {
+     margin-left: 6.0em;
+  }
+
+  label[for="itemChooser"]
+  {
+     margin-left: 3.5em;
+  }
+
+  #itemChooser
+  {
+      width: 50%;
+  }
+
+  #trackContainer
+  {
+    width: 80%;
+/*    background: yellow; */
+    margin-top: -1em;
+    margin-left: 10%;
+    padding: 10px;
+    float: left;
+  }
+
+
+  #recipeChooser
+  {
+     margin-top: 1em;
+      width: 50%;
+  }
+
+  #xxxdateHolder
+  {
+/*      padding-left: 50px;
+      margin-top: 24px;
+      margin-bottom: -30px;
+*/
+      margin:auto;
+      width:50%;
+      font-weight: bold;
+      font-size: 120%;
+  }
+
+ /*************************************
+ * For Add New Recipe Box
+ * ***********************************/
+    #addItemBox
+    {
+      float: left;
+      height: 50px;
+      margin-top: 20px;
+      margin-left: 3em;
+      padding: 40px;
+      font-weight: bold;
+      background-color: LightBlue;
+    }
+
+    #btnEnter
+    {
+//      margin-left: 8em;
+      margin-top: .4em;
+    }
+
+/*********************************
+.em-text{
+	color:#1caa98 !important;
+}
+
+.jumbotron{
+	background: url(../img/site_showcase_bg.jpg) no-repeat top center;
+	color:#fff;
+	height:500px;
+	overflow:none;
+
+}
+
+.jumbotron h1{
+	margin-top:60px;
+}
+
+.jumbotron p{
+	margin-bottom:40px;
+}
+
+.jumbotron img.app-btn{
+	width:40%;
+	margin-right:30px;
+}
+
+.jumbotron img.showcase-img{
+	width:75%;
+}
+*****************************************/
