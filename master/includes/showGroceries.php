@@ -597,8 +597,6 @@ $(document).ready( function() {
   {
     if (!pageDirty)
     {
-//      var myItem = $("#itemChooser").val();
-//      $("#choice").prop('value', myItem);
       var myItem = $("#choice").val();
       $("#btnCmd").prop('value', SHOW);
       $("#frmShowItems").submit();
@@ -612,7 +610,7 @@ $(document).ready( function() {
   {
     if (v)
     {
-      var myItem = $("#itemChooser").val();
+      var myItem = $("#choice").val();
       $("#choice").prop('value', myItem);
       $("#btnCmd").prop('value', SHOW);
       $("#frmShowItems").submit();

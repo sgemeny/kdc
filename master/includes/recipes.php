@@ -154,7 +154,8 @@ $(document).ready( function() {
   // ------------------------------------
   {
      $("#btnLine").addClass("hidden");
-     $("#chooseRecipe").addClass("hidden");
+//     $("#chooseRecipe").addClass("hidden");
+     $("#chooseHolder").addClass("hidden");
      $("#pageTitle").text("Add Recipe");
      $("#addItemBox").removeClass("hidden");
      $("#itemName").focus();
@@ -177,7 +178,8 @@ $(document).ready( function() {
   {
      $("#addItemBox").addClass("hidden");
      $("#btnLine").removeClass("hidden");
-     $("#chooseRecipe").removeClass("hidden");
+//     $("#chooseRecipe").removeClass("hidden");
+     $("#chooseHolder").removeClass("hidden");
      $("#pageTitle").text("Choose A Recipe");
   }
 

@@ -20,8 +20,15 @@
       }
       else // not logged in
       {
-         header("Location: " . "../index.php");
-         exit(0);
+         if(headers_sent())
+         {
+            exit("You are not logged in");
+         }
+         else
+         {
+           header("Location: " . "../index.php");
+           exit(0);
+         }
       }
 //logError("getUser SESSION userID " . $_SESSION["userID"]);
 //logError("getUser SESSION userName " . $_SESSION["userName"]);
