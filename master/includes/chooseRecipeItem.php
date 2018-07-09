@@ -134,7 +134,7 @@ $(document).ready( function() {
      $("#owner").prop('value', data[1]);
      $("#myInput").val($(this).text());
      checkIfCanEdit();
-alert( $(this).text() + '\nchoice=' + data[0] + " owner=" + data[1] );
+//alert( $(this).text() + '\nchoice=' + data[0] + " owner=" + data[1] );
      $("#chooser").hide();
 
   });

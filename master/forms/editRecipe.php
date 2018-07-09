@@ -1,18 +1,16 @@
 <!doctype html>
 <?php
-  session_start();
-echo "got here<br>";
-  require_once ('../includes/logError.php');
-  require_once ('../includes/debug/dumpIt.php');
-   dumpGetVars();
-   dumpPostVars();
-
-  if(!isset($_POST['userName']))
+  if (session_status() == PHP_SESSION_NONE) 
   {
-    logError("EditRecipe.php: userName not Set!");
-    exit();
+    session_start();
+    if(!isset($_POST['userName']))
+    {
+      require_once ('../includes/getUser.php');
+//echo "1 user is " . $_POST['userName'] . "<br>";
+    }
   }
-
+//echo "2 user is " . $_POST['userName'] . "<br>";
+//  require_once ('../includes/logError.php');
   global $canBeSubRecipe;
 
   // placed first for these these plugins
@@ -649,39 +647,6 @@ $(document).ready( function() {
          });
      } // pageDirty
   } // saveRecipe
-
-/******************
-  $("#btnLogOut").click(function(event)
-  // ------------------------------------
-  {
-     var myData = { "userName" : $("#username").val() };
-
-     $.ajax(
-     {
-       url: "../includes/logOut.php",
-       type: "post",
-       data: {"data" : JSON.stringify(myData)},
-       success: function( data, status)  // callback
-                {
-                   if (status=="success")
-                   {
-                       alert("Your have successfully logged out.");
-                       var url = "../../starthere.php";
-                       document.location.href = url;
-                   }
-                   else
-                   {
-                      alert("Error Occurred, Unable to log out");
-                   }
-                },
-       error: function(xhr)
-                {
-                  alert( "An error occured: " + xhr.status + " " + xhr.statusText);
-                }
-     });
-  });
-/******************/
-
 
 });  // end on page loaded
 

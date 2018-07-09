@@ -125,17 +125,29 @@ $(document).ready( function() {
     var userName = $("#userName").val();
     var userID = $("#userID").val();
 	var chosenRecipe = $("#choice").val();
-    var cmd =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
 
     $("#btnCmd").prop('value', EDIT);
     var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
+    document.location.href = url;
+/*****************
+    var cmd =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
+    var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
     $.post("../forms/editRecipe.php"
-          ,{ userID : userID
-           , userName : userName 
-           , cmd : EDIT
-           , chosenRecipe : chosenRecipe
-           });
+          , { userID : userID
+            , userName : userName 
+            , cmd : "+ EDIT +"
+            , chosenRecipe : chosenRecipe
+            }
+         , function(data, status, xhr) 
+         {
+           alert( "success" );
+         })
+//         jqXHR.done(function() { alert( "second success" ); })
+//         jqXHR.fail(function() { alert( "error" ); })
+//         jqXHR.always(function() { alert( "finished" ); });
+// Perform other work here ...
 //    window.location.href = url;
+/*****************/
   });
 
   $("#btnAdd").click(function(event)
