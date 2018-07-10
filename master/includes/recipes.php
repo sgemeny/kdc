@@ -33,9 +33,11 @@
 
   echo '<div id="addItemBox" class="hidden">';
    echo '<label for "itemName">New Name</label>';
-   echo '<input type="text" id="itemName" required>';
-   echo '<input name="btnEnter" id="btnEnter" class="myButton" type="button" value="Enter" >';
-   echo '<input name="btnCnclBox" class="myButton" id="btnCnclBox" type="button" value="Cancel">';
+   echo '<input type="text" id="itemName" tabindex="1" required>';
+   echo '<input name="btnEnter" id="btnEnter" class="myButton" 
+                type="button" value="Enter" tabindex="2" >';
+   echo '<input name="btnCnclBox" class="myButton" id="btnCnclBox" 
+                type="button" value="Cancel" tabindex=3>';
   echo '</div>';  // addItemBox
 
   switch ($cmd)
@@ -72,9 +74,6 @@ function chooseRecipe($conn)
  function checkIfCanEdit()
  // ----------------------
  {
-//    var opt = $("#recipeChooser").val().split("+");
-//    var chosenRecipe = opt[0];
-//    var owner = opt[1];
     var chosenRecipe = $("#choice").val();   
     var owner = $("#owner").val();   
     var user = $("#userID").val();
@@ -129,25 +128,6 @@ $(document).ready( function() {
     $("#btnCmd").prop('value', EDIT);
     var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
     document.location.href = url;
-/*****************
-    var cmd =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
-    var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
-    $.post("../forms/editRecipe.php"
-          , { userID : userID
-            , userName : userName 
-            , cmd : "+ EDIT +"
-            , chosenRecipe : chosenRecipe
-            }
-         , function(data, status, xhr) 
-         {
-           alert( "success" );
-         })
-//         jqXHR.done(function() { alert( "second success" ); })
-//         jqXHR.fail(function() { alert( "error" ); })
-//         jqXHR.always(function() { alert( "finished" ); });
-// Perform other work here ...
-//    window.location.href = url;
-/*****************/
   });
 
   $("#btnAdd").click(function(event)
@@ -211,16 +191,16 @@ $(document).ready( function() {
     $("#frmShowRecipes").submit();
   });
 
-  function updateChooser(id, newItem)
+  function updateChooser(owner, id, newItem)
   // ------------------------------------
   {
      // update "chooser" select
-     $("#recipeChooser option").each(function(ndx, option)
+     $("#itemChooser li").each(function(ndx)
      {
-        if ( option.text.toUpperCase() >= newItem.toUpperCase())
+        if ( $(this).text().toUpperCase() >= newItem.toUpperCase())
         { // insert new item here
-          newOption = $('<option value="' + id + '">' + newItem + '</option>');
-          $("#recipeChooser option").eq(ndx).before(newOption);
+          newOption = $('<li data-id=' + owner + '+' + id + '>' + newItem + '</li>');
+          $('#itemChooser li:eq(ndx)').after(newOption);
           return false;
         }
     });
@@ -233,15 +213,13 @@ $(document).ready( function() {
      var owner = $("#userID").val();
      var arrayData = { "owner" : owner,  "RecipeName" : itemName };
      var itemData = JSON.stringify(arrayData).replace(/'/g, "\\'")
-     var itemId;
-
 
      // This approach is nasty & time consuming, but I
      // couldn't get the more elegant approaches to compile correctly
      // var exists = $("#recipeChooser option[value='" +itemName+"']").length
      // var exists = $("#recipeChooser").find('option[value="'+itemName +'"]').length > 0
      var found = false;
-     $("#recipeChooser option").each(function()
+     $("#itemChooser li").each(function()
      {
        if ($(this).text().toUpperCase()==itemName.toUpperCase())
        {
@@ -268,7 +246,7 @@ $(document).ready( function() {
                      var itemID = $.parseJSON(data);
                      if (itemID)
                      {
-                       updateChooser(itemID, itemName);
+                       updateChooser(owner, itemID, itemName);
                        editItem(itemID);
                        alert("Your Item was Successfully Added");
                      }

@@ -6,10 +6,8 @@
     if(!isset($_POST['userName']))
     {
       require_once ('../includes/getUser.php');
-//echo "1 user is " . $_POST['userName'] . "<br>";
     }
   }
-//echo "2 user is " . $_POST['userName'] . "<br>";
 //  require_once ('../includes/logError.php');
   global $canBeSubRecipe;
 

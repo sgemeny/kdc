@@ -551,7 +551,6 @@ $(document).ready( function() {
 
   /*************************/
 
-
   function jConfirm(text, title, btns, callback)
   // ------------------------------------
   {
@@ -621,9 +620,9 @@ $(document).ready( function() {
   // ------------------------------------
   { // can get here when itemChooser not on screen
     // it will be undefined, but choice will be defined
-    var myItem = $("#itemChooser").val();
-    if (typeof myItem === "undefined")
-         myItem = $("#choice").val();
+    var myItem = $("#choice").val();
+//    if (typeof myItem === "undefined")
+//         myItem = $("#choice").val();
     editItem(myItem);
   });
 
@@ -650,28 +649,6 @@ $(document).ready( function() {
 //    $("#frmShowItems").submit();
   });
 
-/*************
-  $("#btnUSDA").click(function(event)
-  // ------------------------------------
-  {
-    window.open("foodList.php", "_blank","resizable=yes,top=400,left=550,width=400,height=400");
-  });
-*************/
-
-
-
-
-
-
-/**************************
-  $("#itemChooser").change(function()
-  // ------------------------------------
-  {
-    var myItem = $("#itemChooser").val();
-    $("#choice").prop('value', myItem);
-  });
-/**************************/
-
   function btnChooseCallBack(v)
   // ------------------------------------
   {
@@ -696,7 +673,6 @@ $(document).ready( function() {
     }
   });
 
-
   $("#btnSave").click(function(event)
   // ------------------------------------
   {
@@ -705,15 +681,7 @@ $(document).ready( function() {
 
   $("#btnAdd").click(function(event)
   // ------------------------------------
-  {
-/********************
-     $("#frmShowItems").addClass("hidden");
-     $("#myTable").addClass("hidden");
-     $("#addItemBox").removeClass("hidden");
-     $("#grocName").focus();
-********************/
-
-     // show buttons
+  {  // show buttons
      $("#btnAddFood").removeClass("hidden");
      $("#btnCnclFood").removeClass("hidden");
 
@@ -741,7 +709,7 @@ $(document).ready( function() {
   {
      var volNames = ['tsp', 'tbsp', 'cup', 'each', 'quart', 'oz', 'can'];
      var volIds = [1, 2, 3, 4, 7, 9, 20];
-//debugger;
+
      // get item name and NDB number of chosen item
      var itemName = $("#frame").contents().find("#itemChooser option:selected").text() + ", ";
      var ndb = $("#frame").contents().find("#itemChooser option:selected").val();
@@ -824,8 +792,6 @@ $(document).ready( function() {
           myData["gramsPerCup"] = gramsPerCup;
 
         var itemData = JSON.stringify(myData);
-//console.debug(itemData);
-//debugger;
 
      // Add grocery item to data base
      $.ajax(
@@ -907,14 +873,6 @@ function saveError()
      $("#frmShowItems").removeClass("hidden");
      $("#myTable").removeClass("hidden");
      $("#addItemBox").addClass("hidden");
-/**************************************************
-     $("#btnMenu").removeClass("hidden");
-     $("#btnAdd").removeClass("hidden");
-     $("#btnShow").removeClass("hidden");
-     $("#btnEdit").removeClass("hidden");
-     $("#chooser").removeClass("hidden");
-     $("#btnChoose").removeClass("hidden");
-**************************************************/
   }
 
 
@@ -941,16 +899,9 @@ function saveError()
   function itemExists(itemName)
   // -------------------------------
   {
-     // This approach is nasty & time consuming, but I
-     // couldn't get the more elegant approaches to compile correctly
-     // var exists = $("#itemChooser option[value='" +itemName+"']").length
-     // var exists = $("#itemChooser").find('option[value="'+itemName +'"]').length > 0
-
      var found = false;
-     $("#itemChooser option").each(function()
-     {
-// console.debug( $(this).text());
-       // remove all spaces for compare
+     $("#itemChooser li").each(function()
+     { // remove all spaces for compare
        if ( $(this).text().toUpperCase().replace(/ /g,'') == itemName.toUpperCase().replace(/ /g,'') )
        {
            alert(itemName +  " Already Exists.  Please Try Another");
@@ -966,13 +917,14 @@ function saveError()
   // ------------------------------------
   {
      // update "chooser" select
-     newOption = $('<option value="' + id + '">' + newItem + '</option>');
+//     newOption = $('<option value="' + id + '">' + newItem + '</option>');
+     newOption = $('<li data-id=' + id + '>' + newItem + '</li>');
      done = false;
-     $("#itemChooser option").each(function(ndx, option)
+     $("#itemChooser li").each(function(ndx)
      {
-        if ( option.text.toUpperCase() >= newItem.toUpperCase())
+        if ( $(this).text().toUpperCase() >= newItem.toUpperCase())
         { // insert new item here
-          $("#itemChooser option").eq(ndx).before(newOption);
+          $('#itemChooser li:eq(ndx)').before(newOption);
           return false;
         }
     });
@@ -988,11 +940,6 @@ function saveError()
 //     var itemData = JSON.stringify(arrayData).replace(/'/g, "\\'")
      var itemData = JSON.stringify(arrayData);
      var itemId;
-
-     // This approach is nasty & time consuming, but I
-     // couldn't get the more elegant approaches to compile correctly
-     // var exists = $("#itemChooser option[value='" +itemName+"']").length
-     // var exists = $("#itemChooser").find('option[value="'+itemName +'"]').length > 0
 
      var found = false;
      $("#itemChooser option").each(function()
@@ -1052,8 +999,6 @@ function saveError()
         var arrayRow=0;
 
         var myData =  {items: [{GroceryNameID: itemNo}]};
-//        myData.items.push( {NDB_NO: ndb});
-//        myData.items.push( {GroceryName: itemName});
         $('#myTable1 tr').each(function(row, tr)
         {
             switch (row)
