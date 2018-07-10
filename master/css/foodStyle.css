@@ -39,17 +39,13 @@
     width: 28%;
   }
 
-  #itemChooser
+  #itemChooser li
   {
-/***
-    list-style-type: disc;
-    background-color: linen;
-    margin-top: -8px;
-****/
-
-  li 
+     padding:3px 0px;
+  }
+  #itemChooser li:hover
   {
     cursor: pointer
   }
-  }
+
 
