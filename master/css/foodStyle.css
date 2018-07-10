@@ -39,11 +39,12 @@
     width: 28%;
   }
 
-  #itemChooser li
+  li
   {
      padding:3px 0px;
   }
-  #itemChooser li:hover
+
+  li:hover
   {
     cursor: pointer
   }
