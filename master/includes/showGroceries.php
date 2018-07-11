@@ -42,7 +42,7 @@
        if (isset ($_GET["itemChooser"]))
            showEditItem($conn, $_GET["itemChooser"]);
        else
-           showEditItem($conn, $_GET["choice"]);
+           showEditItem($conn, $_GET["itemChoice"]);
       break;
 
       case SHOW:
@@ -50,7 +50,7 @@
        if (isset ($_GET["itemChooser"]))
            showItem($conn, $_GET["itemChooser"]);
        else
-           showItem($conn, $_GET["choice"]);
+           showItem($conn, $_GET["itemChoice"]);
       break;
   }
   echo "</form>";
@@ -64,7 +64,7 @@ function chooseItem($conn)
 //               , ADD => "Add New Item"
                );
 
-  echo '<input type="hidden" name="choice" id="choice" value=' . $itemNo . ' />';
+//  echo '<input type="hidden" name="itemChoice" id="itemChoice" value=' . $itemNo . ' />';
 
   // only ADMIN can edit food
   if ( $_SESSION["MEMBER_LEVEL"] ==10 ) $btns[EDIT]="Edit Item";
@@ -104,7 +104,7 @@ function showEditItem($conn, $itemNo)
   displayButtons($btns);
 
   // save in the form to make available to jquery code
-  echo '<input type="hidden" name="choice" id="choice" value=' . $itemNo . ' />';
+//  echo '<input type="hidden" name="itemChoice" id="itemChoice" value=' . $itemNo . ' />';
 
   $sql =  "SELECT GroceryName, groceryTypeID, NDB_No, Water, Calories, ";
   $sql .= "Protein, Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium, Sodium, ";
@@ -302,7 +302,7 @@ function showItem($conn, $itemNo)
   if ( $_SESSION["MEMBER_LEVEL"] ==10 ) $btns[EDIT]="Edit Item";
   displayButtons($btns);
 
-  echo '<input type="hidden" name="choice" id="choice" value=' . $itemNo . ' />';
+//  echo '<input type="hidden" name="itemChoice" id="itemChoice" value=' . $itemNo . ' />';
 
   $sql =  "SELECT GroceryName, groceryTypeID, NDB_No, Water, Calories, ";
   $sql .= "Protein, Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium, Sodium, ";
@@ -596,7 +596,7 @@ $(document).ready( function() {
   {
     if (!pageDirty)
     {
-      var myItem = $("#choice").val();
+      var myItem = $("#itemChoice").val();
       $("#btnCmd").prop('value', SHOW);
       $("#frmShowItems").submit();
     }
@@ -609,8 +609,8 @@ $(document).ready( function() {
   {
     if (v)
     {
-      var myItem = $("#choice").val();
-      $("#choice").prop('value', myItem);
+      var myItem = $("#itemChoice").val();
+//      $("#choice").prop('value', myItem);
       $("#btnCmd").prop('value', SHOW);
       $("#frmShowItems").submit();
     }
@@ -619,10 +619,8 @@ $(document).ready( function() {
   $("#btnEdit").click(function(event)
   // ------------------------------------
   { // can get here when itemChooser not on screen
-    // it will be undefined, but choice will be defined
-    var myItem = $("#choice").val();
-//    if (typeof myItem === "undefined")
-//         myItem = $("#choice").val();
+    // it will be undefined, but itemChoice will be defined
+    var myItem = $("#itemChoice").val();
     editItem(myItem);
   });
 
@@ -850,7 +848,7 @@ function saveError()
   function editItem(myItem)
   // ------------------------------------
   {
-    $("#choice").prop('value', myItem);
+    $("#itemChoice").prop('value', myItem);
     $("#btnCmd").prop('value', EDIT);
     $("itemChooser").prop('value', myItem);
     var url =  "showGroceries.php?cmd="+EDIT+"&itemChooser=" + myItem;
@@ -860,9 +858,9 @@ function saveError()
   function showNewItem(myItem)
   // ------------------------------------
   {
-    $("#choice").prop('value', myItem);
+    $("#itemChoice").prop('value', myItem);
     $("#btnCmd").prop('value', SHOW);
-    $("itemChooser").prop('value', myItem);
+//    $("itemChooser").prop('value', myItem);
     var url =  "showGroceries.php?cmd="+SHOW+"&itemChooser=" + myItem;
     document.location.href = url;
   }
@@ -990,7 +988,7 @@ function saveError()
   // ----------------
   {
      var ndb=  $("#ndbNo").val();
-     var itemNo = $("#choice").val();
+     var itemNo = $("#itemChoice").val();
      var itemName = $("#groceryName").val();
 
      if (pageDirty)

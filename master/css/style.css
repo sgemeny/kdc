@@ -45,7 +45,6 @@ body {
 
   #dateHolder
   { 
-//    display: inline-block;
     margin-top: 2px;
     float: right;
   }
@@ -83,12 +82,6 @@ body {
   }
 
 
-  /* not working */
-  .input[type="number"]
-  {
-    width:10%;
-  }
-
  /*************************************
  * Buttons for Tracking table
  * ***********************************/
@@ -124,8 +117,9 @@ body {
 
   #chooserHolder
   {
-    margin: auto;
-/*    background-color: aqua; */
+/*    margin: auto; */
+ margin-left:0px;
+    background-color: aqua; 
   }
 
   label[for="recipeChooser"]
@@ -138,17 +132,19 @@ body {
      margin-left: 3.5em;
   }
 
+/***
   #itemChooser
   {
       width: 50%;
   }
+/***/
 
   #trackContainer
   {
     width: 80%;
-/*    background: yellow; */
+    background: yellow; 
     margin-top: -1em;
-    margin-left: 10%;
+//    margin-left: 10%;
     padding: 10px;
     float: left;
   }

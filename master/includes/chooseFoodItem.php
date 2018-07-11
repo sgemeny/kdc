@@ -5,6 +5,8 @@ require_once ( 'jquery.php' );
 function getGroceryItems($conn, $btnCap)
 //----------------------------
 {
+  echo '<input type="hidden" name="itemChoice" id="itemChoice" />';
+
   $sql = "SELECT GroceryNameID, GroceryName FROM GROCERIES ";
   $sql .= "ORDER BY GroceryName";
   selectItem($conn, $sql, $btnCap);
@@ -37,9 +39,15 @@ function selectItem($conn, $sql, $btnCap="Select")
        echo '<input type="input" placeholder="Search.." id="myInput"
                    onkeyup="myFilter(event)" autocomplete="off">';
 
-       echo '<button id="btnSelectItem" name="btnSelectItem" type="button"
+       echo '<button id="btnSearch" name="btnearch" type="button"
                     <i class="fa fa-search"></i></button>';
-       echo '<div id="chooser" class="hidden">';
+       if ($btnCap != "")
+       {
+           echo '<input id="btnSelectItem" name="btnSelectItem" 
+                        type="button" value="' . $btnCap . '">';
+       }
+//       echo '<div id="chooser" class="hidden">';
+       echo '<div id="chooser">';
          echo '<ul id="itemChooser">';
           // Fetch one at a time from result
           while (mysqli_stmt_fetch($stmt))
@@ -119,31 +127,28 @@ $(document).ready( function() {
   $("#itemChooser").on('click', 'li', function(e)
   // ------------------------------------
   {
-alert( $(this).text() + '\n' + $(this).attr('data-id'));
 //     e.stopPropagation();
 //     $("#myInput").val(e.target.textContent);
       $("#myInput").val($(this).text());
-      $("#choice").prop('value', $(this).attr('data-id'));
+      $("#itemChoice").prop('value', $(this).attr('data-id'));
       $("#chooser").hide();
   });
 
   $("body").click(function(e)
   // ------------------------------------
   {
-//     e.stopPropagation();
-//     x= e.target.textContent;
      if ( ! $(e.target).parent().hasClass('item-list') )
            $("#chooser").hide();
 
   });
 
-  $("#myInput").click(function()
+  $("#myInput").on('click', function(e)
   // ------------------------------------
   {
      $("#chooser").show();
   });
 
-  $("#btnSelectItem").click(function()
+  $("#btnSearch").click(function()
   // ------------------------------------
   {
      $("#chooser").toggle();

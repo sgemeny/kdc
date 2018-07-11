@@ -35,6 +35,7 @@ echo '<head>';
   echo '<link href="../css/custom.css" rel="stylesheet"> ';
   echo '<link href="../css/style.css" rel="stylesheet"> ';
   echo '<link href="../css/datepicker.css" rel="stylesheet"> ';
+  echo '<link href="../css/foodStyle.css" rel="stylesheet"> ';
 
 
   // jQuery-UI
@@ -47,7 +48,7 @@ echo '<body>';
   require_once ( './dbConnect.php');
   require_once ( './displayButtons.php');
   require_once ( './chooseRecipe.php');
-  require_once ( './chooseItem.php');
+  require_once ( './chooseFoodItem.php');
   require_once ( './getTrack.php');
   require_once ( './getNewTrack.php');
   require_once ( './cancelModal.php');
@@ -119,10 +120,9 @@ echo '<body>';
       echo '<div id="chooserHolder">';  // AQUA
 
         echo '<input type="hidden" name="recipeChoice" id="recipeChoice" />';
-        selectRecipe($conn, "Add to List");
+        selectRecipe($conn, "Add Recipe to List");
 
-        echo '<input type="hidden" name="itemChoice" id="itemChoice" />';
-        getGroceryItems($conn, "Add to List");
+        getGroceryItems($conn, "Add Food To List");
       echo '</div>'; // chooserHolder   aqua
 
     echo '</div>';  // trackContainer   yellow
@@ -751,7 +751,6 @@ function logOff()
 $(document).ready( function() {
 // ----------------------------
   $('#btnSelectRecipe').show();
-  $('#btnSelectItem').show();
 
   firstNewRow=$("#log tbody tr").length;
 
@@ -844,7 +843,6 @@ $(document).ready( function() {
     var row  = '<tr class="rightJustify">';
     row += '<td dataVal="' + qty + '"><input type="number" value=' + '"' + qty + '"' ;;  // Qty
     row += ' min=".1" max="9999" step=".1"';
-//    row += 'onchange="qtyChanged(this)">';
     row += '</td>';
 
     row += '<td>' + itemInfo[UOM_DESC] + '</td>';   // serving
@@ -906,11 +904,7 @@ $("#log tbody").find('tr').eq(rowIndex).find('td').eq(QTY).focus();
   $("#btnSelectItem").click(function(event)
   // ------------------------------------
   {
-     var itemID = $("#itemChooser").val();
-     var tmp = $("select[name='itemChooser'").find('option:selected').text()
-     var tmp= "<li>" + tmp + "</li>";
-     $("#foodList").append(tmp);    // add to food List
-
+     var itemID = $("#itemChoice").val();
      var arrayData = { "GroceryNameID" : itemID };
      var itemData = JSON.stringify(arrayData);
 
