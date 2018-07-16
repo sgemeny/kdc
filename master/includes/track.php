@@ -47,7 +47,7 @@ echo '</head>';
 echo '<body>';
   require_once ( './dbConnect.php');
   require_once ( './displayButtons.php');
-  require_once ( './chooseRecipe.php');
+  require_once ( './chooseRecipeItem.php');
   require_once ( './chooseFoodItem.php');
   require_once ( './getTrack.php');
   require_once ( './getNewTrack.php');
@@ -119,7 +119,7 @@ echo '<body>';
 
       echo '<div id="chooserHolder">';  // AQUA
 
-        echo '<input type="hidden" name="recipeChoice" id="recipeChoice" />';
+//        echo '<input type="hidden" name="recipeChoice" id="recipeChoice" />';
         selectRecipe($conn, "Add Recipe to List");
 
         getGroceryItems($conn, "Add Food To List");
@@ -750,7 +750,7 @@ function logOff()
 
 $(document).ready( function() {
 // ----------------------------
-  $('#btnSelectRecipe').show();
+//  $('#btnSelectRecipe').show();
 
   firstNewRow=$("#log tbody tr").length;
 
@@ -901,9 +901,11 @@ $("#log tbody").find('tr').eq(rowIndex).find('td').eq(QTY).focus();
   }
 
 
-  $("#btnSelectItem").click(function(event)
+  $("#btnSelectFood").click(function(event)
   // ------------------------------------
   {
+     if ( $("#itemChoice").val() == "" )
+          return;
      var itemID = $("#itemChoice").val();
      var arrayData = { "GroceryNameID" : itemID };
      var itemData = JSON.stringify(arrayData);
@@ -935,11 +937,16 @@ $("#log tbody").find('tr').eq(rowIndex).find('td').eq(QTY).focus();
   $("#btnSelectRecipe").click(function(event)
   // ------------------------------------
   {
-     var opt = $("#recipeChooser").val().split("+");
+     if ($("#recipeChoice").val() == "")
+         return;
+     var recipID = $("#recipeChoice").val();
+
+     var opt = $("#recipeChoice").val().split("+");
      var recipeID = opt[0];
-     var tmp = $("select[name='chosenRecipe'").find('option:selected').text()
-     var tmp= "<li>" + tmp + "</li>";
-     $("#foodList").append(tmp);
+     var recipeOwner = opt[1];
+ //    var tmp = $("select[name='chosenRecipe'").find('option:selected').text()
+ //    var tmp= "<li>" + tmp + "</li>";
+//     $("#foodList").append(tmp);
 
      var arrayData = { "ID" : recipeID };
      var itemData = JSON.stringify(arrayData);

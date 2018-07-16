@@ -1,7 +1,50 @@
-  #myInput
+  .bigInput
   {
-/*    width:24.5%; */
-float: left;
+    float: left;
+    width:40%;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    background: #f1f1f1;
+  }
+
+  .searchButton
+  {
+    float: left;
+    width: 5%;
+    padding: 12px;
+    background: OrangeRed;
+    color: white;
+    font-size: 20px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+
+  .selectButton
+  {
+    margin-left: 10px;
+    float: left;
+//    width: 5%;
+    padding: 8px;
+    background: OrangeRed;
+    color: white;
+    font-size: 20px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+
+  .selectButton:hover
+  {
+    background: Orange;
+  }
+
+/********
+  #foodInput
+  {
+    float: left;
     width:40%;
     padding: 10px;
     font-size: 17px;
@@ -37,6 +80,20 @@ float: left;
     cursor: pointer;
   }
 
+  #btnSelectRecipe
+  {
+    margin-left: 10px;
+    float: left;
+//    width: 5%;
+    padding: 8px;
+    background: OrangeRed;
+    color: white;
+    font-size: 20px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+
     
   #btnSearch:hover
   {
@@ -48,7 +105,13 @@ float: left;
     background: Orange;
   }
 
-  #chooser
+  #btnSelectRecipe:hover
+  {
+    background: Orange;
+  }
+/********/
+
+  .chooser
   {
     display: none;
     width: 28%;

@@ -35,20 +35,22 @@ function selectItem($conn, $sql, $btnCap="Select")
   {
     // create drop down box
     echo '<div id="wrapper">';
-     echo '<div id="chooseHolder" class="item-list">';
-       echo '<input type="input" placeholder="Search.." id="myInput"
+     echo '<div id="chooseFoodHolder" class="item-list">';
+       echo '<input type="input" placeholder="Search.." id="foodInput"
+                   class="bigInput"
                    onkeyup="myFilter(event)" autocomplete="off">';
 
-       echo '<button id="btnSearch" name="btnearch" type="button"
+       echo '<button id="btnSearchFood" name="btnSearchFood" type="button"
+                    class="searchButton"
                     <i class="fa fa-search"></i></button>';
        if ($btnCap != "")
        {
-           echo '<input id="btnSelectItem" name="btnSelectItem" 
+           echo '<input id="btnSelectFood" name="btnSelectFood" 
+                        class="selectButton"
                         type="button" value="' . $btnCap . '">';
        }
-//       echo '<div id="chooser" class="hidden">';
-       echo '<div id="chooser">';
-         echo '<ul id="itemChooser">';
+       echo '<div id="foodChooser" class="chooser hidden">';
+         echo '<ul id="foodItemChooser">';
           // Fetch one at a time from result
           while (mysqli_stmt_fetch($stmt))
           {
@@ -66,6 +68,8 @@ function selectItem($conn, $sql, $btnCap="Select")
 ?>
 
 <script>
+  var textHighlighted = false;
+
   function myFilter(event)
   // ------------------------
   {  // check for space bar
@@ -73,12 +77,18 @@ function selectItem($conn, $sql, $btnCap="Select")
      if (x == 0x20)
          return false; // space, nothing to do;
 
-     if ( $("#myInput").val().length == 0 )
-              $("#itemChooser li").show();
+     if ( (textHighlighted==true) && (window.getSelection().toString()) == "")
+     {
+       $("#foodItemChooser li").show();
+       textHighlighted = false;
+     }
+
+     if ( $("#foodInput").val().length == 0 )
+              $("#foodItemChooser li").show();
 
      var hideIt = false;
-     var text = $("#myInput").val().toLowerCase();
-     $("#itemChooser li").each(function(ndx, optn)
+     var text = $("#foodInput").val().toLowerCase();
+     $("#foodItemChooser li").each(function(ndx, optn)
      {
        if ( $(this).is(":visible") )
        { // Showing
@@ -124,34 +134,39 @@ function selectItem($conn, $sql, $btnCap="Select")
 $(document).ready( function() {
 // ----------------------------
 
-  $("#itemChooser").on('click', 'li', function(e)
+  $("#foodItemChooser").on('click', 'li', function(e)
   // ------------------------------------
   {
-//     e.stopPropagation();
-//     $("#myInput").val(e.target.textContent);
-      $("#myInput").val($(this).text());
+      $("#foodInput").val($(this).text());
       $("#itemChoice").prop('value', $(this).attr('data-id'));
-      $("#chooser").hide();
+      $("#foodChooser").hide();
+  });
+
+  $("#foodInput").select(function(e)
+  // ------------------------------------
+  {
+     textHighlighted = true;
   });
 
   $("body").click(function(e)
   // ------------------------------------
   {
      if ( ! $(e.target).parent().hasClass('item-list') )
-           $("#chooser").hide();
+           $("#foodChooser").hide();
 
   });
 
-  $("#myInput").on('click', function(e)
+  $("#foodInput").on('click', function(e)
   // ------------------------------------
   {
-     $("#chooser").show();
+     $("#foodChooser").removeClass("hidden");
+     $("#foodChooser").show();
   });
 
-  $("#btnSearch").click(function()
+  $("#btnSearchFood").click(function()
   // ------------------------------------
   {
-     $("#chooser").toggle();
+     $("#foodChooser").toggle();
   });
 
 });  // end on page loaded

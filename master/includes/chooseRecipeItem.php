@@ -4,10 +4,14 @@ require_once ('./dbErr.php');
 require_once ('./jquery.php');
 require_once ('./logError.php');
 
+echo '<input type="hidden" name="recipeChoice" id="recipeChoice" />';
+echo '<input type="hidden" name="owner" id="owner" />';
+
 // Create & display recipe select
 function selectRecipe($conn, $btnCap="")
 //-----------------------------------------
 {
+
   $userID=$_SESSION['userID'];
 
   $sql= "SELECT RecipeName, ID, ownerID ";
@@ -37,14 +41,23 @@ function selectRecipe($conn, $btnCap="")
   {
     // create drop down box
     echo '<div id="wrapper">';
-     echo '<div id="chooseHolder" class="item-list">';
-       echo '<input type="input" placeholder="Search.." id="myInput"
+     echo '<div id="chooseRecipeHolder" class="item-list">';
+       echo '<input type="input" placeholder="Search.." id="recipeInput"
+                   class="bigInput"
                    onkeyup="myFilter(event)" autocomplete="off">';
 
-       echo '<button id="btnSelectItem" name="btnSelectItem" type="button"
+       echo '<button id="btnSearchRecipe" name="btnSearchRecipe" type="button"
+                    class="searchButton"
                     <i class="fa fa-search"></i></button>';
-       echo '<div id="chooser" class="hidden">';
-         echo '<ul id="itemChooser">';
+       if ($btnCap != "")
+       {
+           echo '<input id="btnSelectRecipe" name="btnSelectRecipe"
+                        class="selectButton"
+                        type="button" value="' . $btnCap . '">';
+       }
+
+       echo '<div id="recipeChooser" class="chooser hidden">';
+         echo '<ul id="recipeItemChooser">';
 
           // Fetch one at a time from result
           while (mysqli_stmt_fetch($stmt))
@@ -75,12 +88,18 @@ function selectRecipe($conn, $btnCap="")
      if (x == 0x20)
          return false; // space, nothing to do;
 
-     if ( $("#myInput").val().length == 0 )
-              $("#itemChooser li").show();
+     if ( (textHighlighted==true) && (window.getSelection().toString()) == "")
+     {
+       $("#recipeItemChooser li").show();
+       textHighlighted = false;
+     }
+
+     if ( $("#recipeInput").val().length == 0 )
+              $("#recipeItemChooser li").show();
 
      var hideIt = false;
-     var text = $("#myInput").val().toLowerCase();
-     $("#itemChooser li").each(function(ndx, optn)
+     var text = $("#recipeInput").val().toLowerCase();
+     $("#recipeItemChooser li").each(function(ndx, optn)
      {
        if ( $(this).is(":visible") )
        { // Showing
@@ -126,16 +145,14 @@ function selectRecipe($conn, $btnCap="")
 $(document).ready( function() {
 // ----------------------------
 
-  $("#itemChooser").on('click', 'li', function(e)
+  $("#recipeItemChooser").on('click', 'li', function(e)
   // ------------------------------------
   {
      var data = $(this).attr('data-id').split("+");
-     $("#choice").prop('value', data[0]);
+     $("#recipeChoice").prop('value', data[0]);
      $("#owner").prop('value', data[1]);
-     $("#myInput").val($(this).text());
-     checkIfCanEdit();
-//alert( $(this).text() + '\nchoice=' + data[0] + " owner=" + data[1] );
-     $("#chooser").hide();
+     $("#recipeInput").val($(this).text());
+     $("#recipeChooser").hide();
 
   });
 
@@ -143,20 +160,21 @@ $(document).ready( function() {
   // ------------------------------------
   {
      if ( ! $(e.target).parent().hasClass('item-list') )
-           $("#chooser").hide();
+           $("#recipeChooser").hide();
 
   });
 
-  $("#myInput").click(function()
+  $("#recipeInput").click(function()
   // ------------------------------------
   {
-     $("#chooser").show();
+     $("#recipeChooser").removeClass("hidden");
+     $("#recipeChooser").show();
   });
 
-  $("#btnSelectItem").click(function()
+  $("#btnSearchRecipe").click(function()
   // ------------------------------------
   {
-     $("#chooser").toggle();
+     $("#recipeChooser").toggle();
   });
 
 });  // end on page loaded
