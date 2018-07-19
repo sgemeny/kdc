@@ -34,15 +34,15 @@ function selectItem($conn, $sql, $btnCap="Select")
   if ($sts)
   {
     // create drop down box
-    echo '<div id="wrapper">';
+    echo '<div class="wrapper" id="foodWrapper">';
      echo '<div id="chooseFoodHolder" class="item-list">';
-       echo '<input type="input" placeholder="Search.." id="foodInput"
+       echo '<input type="input" placeholder="Search Food..." id="foodInput"
                    class="bigInput"
                    onkeyup="myFilter(event)" autocomplete="off">';
 
-       echo '<button id="btnSearchFood" name="btnSearchFood" type="button"
-                    class="searchButton"
-                    <i class="fa fa-search"></i></button>';
+       echo '<button type="submit" id="btnSearchFood" class="searchButton">
+                   <i class="fa fa-search"></i> </button>';
+
        if ($btnCap != "")
        {
            echo '<input id="btnSelectFood" name="btnSelectFood" 

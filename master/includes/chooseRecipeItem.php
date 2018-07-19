@@ -40,15 +40,15 @@ function selectRecipe($conn, $btnCap="")
   if ($sts)
   {
     // create drop down box
-    echo '<div id="wrapper">';
+    echo '<div class="wrapper" id="recipeWrapper">';
      echo '<div id="chooseRecipeHolder" class="item-list">';
-       echo '<input type="input" placeholder="Search.." id="recipeInput"
+       echo '<input type="input" placeholder="Search Recipe..." id="recipeInput"
                    class="bigInput"
                    onkeyup="myFilter(event)" autocomplete="off">';
 
-       echo '<button id="btnSearchRecipe" name="btnSearchRecipe" type="button"
-                    class="searchButton"
-                    <i class="fa fa-search"></i></button>';
+      echo '<button type="submit" id="btnSearchRecipe" class="searchButton">
+                   <i class="fa fa-search"></i> </button>';
+
        if ($btnCap != "")
        {
            echo '<input id="btnSelectRecipe" name="btnSelectRecipe"

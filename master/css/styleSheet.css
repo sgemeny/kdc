@@ -6,7 +6,6 @@
     font-family: Arial, Helvetica, sans-serif;
     width: 85%;
     margin: 0 auto;
-//    background-color: coral;
   }
 
   #banner #kdc-logo
@@ -81,7 +80,6 @@
   .btnBar
   {
     display: inline-block;
-//    background-color: yellow;
   }
 
   .myButton
@@ -89,7 +87,6 @@
     background-color: OrangeRed;
     display: inline-block;
     font-weight: bold;
-//    font-size: 1em;
     font-size: .8em;
     color: White;
     -moz-border-radius: 25px;
@@ -115,8 +112,6 @@
     overflow: hidden;
     border-collapse: separate;
     border-spacing: .5em .25em;
-//    table-layout: fixed;
-//    width: 100%;
     white-space: nowrap;
   }
 
@@ -132,7 +127,6 @@
   {
     color: MidnightBlue;
     font-weight: bold;
-//    font-size: 1.25em;  /* 1em=16px */
     text-align: right;
   }
 
@@ -159,14 +153,6 @@
     margin-bottom: 1em;
   }
 
-/*******************
-  select
-  {
-    height: 1.4em;
-    font-size: 1.1em;
-  }
-*******************/
-
  /************************************
  * for chooseRecipe.php
  * ***********************************/
@@ -191,7 +177,6 @@
 
   table#showRecipe
   {
-/*    margin-top: -1.0em;  */
     margin:auto;
   }
 
@@ -254,7 +239,6 @@
       width: 55%;
       height: 100px;
       padding: 4px;
-//      background-color: Beige;
       text-align: left;
       border-style: solid;
       border-color: green;   /* #008000; */
@@ -336,12 +320,6 @@
     width: 3.125em;
   }
 
-/*
-  .seq
-  {
-    width: 3.125em;
-  }
-*/
 /********************/
   #editCaption
   {
@@ -367,8 +345,6 @@
     {
       margin:auto;
       width:65%;
-//      display: inline-block;
-//      margin-left: 4em;
       color:DarkBlue;
     }
 
@@ -388,7 +364,6 @@
 
   #chooserHolder
   {
-//    width: 45em;
     width: 50%
     border: 1px solid green;
     margin: auto;
@@ -420,21 +395,10 @@
     padding: 10px;
   }
 
-  #trackContainer
-  {
-    width: 80%;
-    background: yellow;
-    margin-top: -1em;
-    margin-left: 10%;
-    padding: 10px;
-    float: left;
-  }
 
   #nutrientContainer
   {
-//    background: chartreuse;
     margin-top: 2%; /*.5em; */
-//    margin-left: 15%
   }
 
   #log
@@ -451,7 +415,6 @@
   .itemName
   {
     width: 12em;
-//    background-color: pink;
     white-space:nowrap;
     text-overflow: ellipsis;
   }
@@ -476,7 +439,6 @@
     margin-top: -.1%;
     margin: auto;
     margin-left: 69%;
-//    background: pink;
     border: 1px solid green;
     width: 20em;
   }
@@ -496,7 +458,6 @@
   .selButton
   {
     background-color: #FF6606;
-//    display: inline-block;
     display: none;
     font-weight: bold;
     font-size: 1em;
@@ -540,23 +501,7 @@
     width: 100%
   }
 
-/*************************************
- * Couldn't make this work!  Why???
- *
-  td.itemName;
-  {
-    background-color: yellow;
-     white-space:nowrap;
-  }
-
-  th.itemName;
-  {
-    background-color: yellow;
-     white-space:nowrap;
-  }
-/*************************************/
-
-  /********************** End Track Food *********/
+/********************** End Track Food *********/
 
 /********** Test Stuff *****************/
    #myTable
@@ -572,11 +517,6 @@
 
   .myHead
   {
-/*
-    width: 75%;
-    margin-left:auto;
-    margin-right:auto; 
-*/
     font-weight: bold;
     color: maroon;
   }
@@ -636,7 +576,6 @@
 
     #btnEnter
     {
-//      margin-left: 8em;
       margin-top: .4em;
     }
 
@@ -668,7 +607,6 @@
 /********** Daily Totals *************************/
   .dateType
   {
-//    background-color: pink;
     margin-left: .5em;
     font-size: 1.1em;
   }
@@ -676,7 +614,6 @@
     #tableHolder
     {
       width: 65%;
-//      background-color: green;
       margin-top: 2em;
       margin-left: auto;
     margin-right: auto;
@@ -684,7 +621,6 @@
 
   #dailys
   {
-//    background-color: pink;
     table-layout: fixed;
     text-align: right;
   }

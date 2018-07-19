@@ -1,7 +1,34 @@
+ /*************************************
+ * For Recipe & Item Chooser Dropdowns
+ * ***********************************/
+
+  .wrapper
+  {
+    margin-top: 20px;
+/*    width:45%; */
+    margin-left:0;
+    background: pink;
+  }
+
+  #recipeWrapper
+  {
+    width:50%;
+  }
+
+  #foodWrapper
+  {
+    margin-left:50%;
+  }
+
+  #chooserHolder
+  {
+    background-color: aqua;
+  }
+
   .bigInput
   {
     float: left;
-    width:40%;
+    width:50%;
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
@@ -12,21 +39,20 @@
   .searchButton
   {
     float: left;
-    width: 5%;
-    padding: 12px;
+    padding: 10px;
     background: OrangeRed;
     color: white;
     font-size: 20px;
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
+    height: 46px;
   }
 
   .selectButton
   {
     margin-left: 10px;
     float: left;
-//    width: 5%;
     padding: 8px;
     background: OrangeRed;
     color: white;
@@ -34,82 +60,14 @@
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
   }
 
-  .selectButton:hover
+  .searchButton:hover, .selectButton:hover
   {
     background: Orange;
   }
-
-/********
-  #foodInput
-  {
-    float: left;
-    width:40%;
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    background: #f1f1f1;
-  }
-
-  #btnSearch 
-  {
-    float: left;
-    width: 5%;
-    padding: 12px;
-    background: OrangeRed;
-    color: white;
-    font-size: 20px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-  }
-
-  #btnSelectItem
-  {
-    margin-left: 10px;
-    float: left;
-//    width: 5%;
-    padding: 8px;
-    background: OrangeRed;
-    color: white;
-    font-size: 20px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-  }
-
-  #btnSelectRecipe
-  {
-    margin-left: 10px;
-    float: left;
-//    width: 5%;
-    padding: 8px;
-    background: OrangeRed;
-    color: white;
-    font-size: 20px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-  }
-
-    
-  #btnSearch:hover
-  {
-    background: Orange;
-  }
-
-  #btnSelectItem:hover
-  {
-    background: Orange;
-  }
-
-  #btnSelectRecipe:hover
-  {
-    background: Orange;
-  }
-/********/
 
   .chooser
   {
@@ -125,6 +83,29 @@
   li:hover
   {
     cursor: pointer
+  }
+
+ /*************************************
+ * Date Stuff
+ * ***********************************/
+  #dateHolder
+  {
+    margin-top: 8px;
+/***
+ centering just looked a little off
+    margin-left: auto;
+    margin-right: auto;
+/***/
+    margin-left:400px;
+    width:200px;
+  }
+
+  .myIconButton
+  {
+    background-color: OrangeRed;
+    font-weight: bold;
+    font-size: 25px;
+    color: White;
   }
 
 

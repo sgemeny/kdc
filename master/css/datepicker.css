@@ -6,12 +6,10 @@ background: #fff -webkit-linear-gradient(top, #fcfcfc 0%, #fff 100%); /* Chrome1
 background: #fff -o-linear-gradient(top, #fcfcfc 0%, #fff 100%); /* Opera11.10+ */
 background: #fff -ms-linear-gradient(top, #fcfcfc 0%, #fff 100%); /* IE10+ */
 background: #fff linear-gradient(top, #fcfcfc 0%, #fff 100%); /* W3C */
-/******************* 
-// causes a white box, with border underneath nutrient table
+
 font-size:11px;
 padding:10px;
 border:1px solid #ccc;
-/*******************/
 }
 
 .ui-datepicker table {

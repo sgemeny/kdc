@@ -63,7 +63,9 @@ echo '<body>';
   $nutrients= "../scripts/nutrients.js";
   $numbers = "../scripts/numbers.js";
 
-//  echo '<html>';
+     /*****************
+     * Navigation Bar
+     ******************/
       echo '<nav class="navbar navbar-inverse navbar-fixed-top"> ';
         echo '<div class="container">';
           echo '<div class="navbar-header">';
@@ -97,7 +99,7 @@ echo '<body>';
 
 /**************/
   echo '<section>';
-  echo '<div class="container">';
+  echo '<div id=outerBox class="container">';
 
     echo '<form id="frmTrack" action="'.$self.'" method="get" >';
       echo '<input type="hidden" name="userID" id="userID" value="' . $userID .'" />';
@@ -105,7 +107,7 @@ echo '<body>';
 
     echo '<div id="trackContainer">';   // YELLOW
       echo '<br>';
-
+/********/
         echo '<div id="dateHolder">';
           $today = date('M d, Y');
           $startDate = date('Y-m-d');
@@ -116,12 +118,10 @@ echo '<body>';
           echo '<input id="btnChange" class="myIconButton" name="btnChange" type="button" value="' . $today . '"/`>';
           echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
         echo '</div>';   // dateHolder;
+/********/
 
       echo '<div id="chooserHolder">';  // AQUA
-
-//        echo '<input type="hidden" name="recipeChoice" id="recipeChoice" />';
         selectRecipe($conn, "Add Recipe to List");
-
         getGroceryItems($conn, "Add Food To List");
       echo '</div>'; // chooserHolder   aqua
 
