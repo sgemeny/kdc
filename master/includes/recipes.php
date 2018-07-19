@@ -59,11 +59,12 @@ function chooseRecipe($conn)
                );
 
   displayButtons($btns);
-  echo '<input type="hidden" name="choice" id="choice" />';
-  echo '<input type="hidden" name="owner" id="owner" />';
-  selectRecipe($conn, "");  // recipe selector
+//  echo '<input type="hidden" name="choice" id="choice" />';
+//  echo '<input type="hidden" name="owner" id="owner" />';
+    selectRecipe($conn, "");  // recipe selector
 } // choose Recipe
 
+  // At bottom to load last
   $buttons= "../scripts/buttons.js";
   echo '<script src="'.$buttons.'"></script>';
   require_once ( 'jquery.php' );
@@ -74,7 +75,7 @@ function chooseRecipe($conn)
  function checkIfCanEdit()
  // ----------------------
  {
-    var chosenRecipe = $("#choice").val();   
+    var chosenRecipe = $("#recipeChoice").val();   
     var owner = $("#owner").val();   
     var user = $("#userID").val();
 
@@ -109,8 +110,8 @@ $(document).ready( function() {
 //    var opt = $("#recipeChooser").val().split("+");
 //    var chosenRecipe = opt[0];
     canEdit = checkIfCanEdit();
-	var chosenRecipe = $("#choice").val();
-//    $("#choice").prop('value', chosenRecipe);
+	var chosenRecipe = $("#recipeChoice").val();
+//    $("#recipeChoice").prop('value', chosenRecipe);
 //    $("#btnCmd").prop('value', SHOW);
 
     var url =  "showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
@@ -123,7 +124,7 @@ $(document).ready( function() {
   {
     var userName = $("#userName").val();
     var userID = $("#userID").val();
-	var chosenRecipe = $("#choice").val();
+	var chosenRecipe = $("#recipeChoice").val();
 
     $("#btnCmd").prop('value', EDIT);
     var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
@@ -146,7 +147,7 @@ $(document).ready( function() {
   // ------------------------------------
   {
 //    var chosenRecipe = $("#recipeChooser").val();
-    $("#choice").prop('value', myItem);
+    $("#recipeChoice").prop('value', myItem);
     $("#btnCmd").prop('value', EDIT);
 //    var url =  $("#subDir").val() + "forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+myItem;
     var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+myItem;

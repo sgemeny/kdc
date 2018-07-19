@@ -78,8 +78,9 @@ function chooseItem($conn)
                  type="button" value="Cancel" >';
   echo '</div>';
 
+echo '<div class="foodDiv">';
   getGroceryItems($conn, "");
-
+echo '</div>';
   echo '<br>';
   echo '<div class="grocHead" id="grocTitle"></div>';
 

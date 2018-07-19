@@ -107,7 +107,6 @@ echo '<body>';
 
     echo '<div id="trackContainer">';   // YELLOW
       echo '<br>';
-/********/
         echo '<div id="dateHolder">';
           $today = date('M d, Y');
           $startDate = date('Y-m-d');
@@ -118,7 +117,6 @@ echo '<body>';
           echo '<input id="btnChange" class="myIconButton" name="btnChange" type="button" value="' . $today . '"/`>';
           echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
         echo '</div>';   // dateHolder;
-/********/
 
       echo '<div id="chooserHolder">';  // AQUA
         selectRecipe($conn, "Add Recipe to List");

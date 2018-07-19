@@ -56,6 +56,15 @@ body {
     overflow: hidden;
   }
 
+/**************
+  table#log
+  {
+    position:absolute
+    margin-left:0;
+    margin-top:0;
+  }
+*********************/
+
   tfoot
   {
     color: MidnightBlue;

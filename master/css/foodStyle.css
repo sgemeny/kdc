@@ -5,9 +5,7 @@
   .wrapper
   {
     margin-top: 20px;
-/*    width:45%; */
     margin-left:0;
-    background: pink;
   }
 
   #recipeWrapper
@@ -20,9 +18,14 @@
     margin-left:50%;
   }
 
+  .foodDiv
+  {
+    margin-left:-100%;
+  }
+
   #chooserHolder
   {
-    background-color: aqua;
+//    background-color: aqua;
   }
 
   .bigInput
