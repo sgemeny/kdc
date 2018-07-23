@@ -61,13 +61,6 @@ $(document).ready( function() {
     document.location.href = url;
   });
 
-  $("#btnTrack").click(function(event)
-  // ------------------------------------
-  {
-    var url =  "includes/track.php";
-    document.location.href = url;
-  });
-
   $("#btnDaily").click(function(event)
   // ------------------------------------
   {

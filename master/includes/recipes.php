@@ -24,6 +24,13 @@
   showBanner("Choose A Recipe");
   $conn = dbConnect();
 
+/**************************
+ echo "SESSION VARS:";
+ echo "<pre>";
+  print_r($_SESSION);
+ echo "</pre>";
+/**************************/
+
   if (isset($_GET["cmd"])) $cmd = $_GET["cmd"];
   else $cmd = CHOOSE;
 
@@ -79,7 +86,6 @@ function chooseRecipe($conn)
     var owner = $("#owner").val();   
     var user = $("#userID").val();
 
-//alert("owner: " + owner + ", user: " + user);
     if (owner == user)
     { 
        canEdit=1;
@@ -127,8 +133,8 @@ $(document).ready( function() {
 	var chosenRecipe = $("#recipeChoice").val();
 
     $("#btnCmd").prop('value', EDIT);
-    var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
-    document.location.href = url;
+    window.location.href = "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
+    exit();
   });
 
   $("#btnAdd").click(function(event)

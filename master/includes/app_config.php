@@ -13,7 +13,7 @@ function app_config()
   $masterDB = array(
                'hostname' => 'localhost',
                'username' => 'williao8',
-               'password' => 'mareseatoatsanddoeseatoats',
+               'password' => 'stink3bun%',
                'database' => 'williao8_dietModified_20160521'
 //               'database' => 'williao8_diet_test'
              );
