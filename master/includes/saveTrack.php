@@ -1,7 +1,9 @@
 <?php
 /*************  for testing  *
-$_POST["data"] = '[{"userID":"1"},[{"Qty":"1.00"},{"UOM_DESC":"Serving"},{"itemID":"50019"},{"servingAmt":"51.549999237061"},{"Water":"23.017074659348"},{"Calories":"134.82386800461"},{"Protein":"2.9383499565125"},{"Fat":"4.4075249347687"},{"Carbs":"20.55813969574"},{"Fiber":"0.74747498893738"},{"Sugars":"1.0103799850464"},{"Phosphorus":"34.847799484253"},{"Potassium":"38.672809427643"},{"Sodium":"163.78981257591"},{"gramsPerUnit":"51.549999237061"},{"trackingID":"0"}],[{"Qty":"1.00"},{"UOM_DESC":"Each"},{"itemID":"72"},{"servingAmt":"50.0000"},{"Water":"38.05"},{"Calories":"71.5"},{"Protein":"6.3"},{"Fat":"4.75"},{"Carbs":"0.35"},{"Fiber":"0"},{"Sugars":"0.2"},{"Phosphorus":"99"},{"Potassium":"69"},{"Sodium":"71"},{"gramsPerUnit":"50.0000"},{"trackingID":"0"}]]';
+$_POST["data"] = '[{"userID":"1"},{"sqlDate":"Apr 4, 2018"},[{"Qty":"1.00"},{"UOM_DESC":"Each"},{"itemID":"279"},{"servingAmt":"119.0000"},{"Water":"53.55"},{"Calories":"312.97"},{"Protein":"15.47"},{"Fat":"14.042"},{"Carbs":"33.082"},{"Fiber":"1.309"},{"Sugars":"7.378"},{"Phosphorus":"166.6"},{"Potassium":"238"},{"Sodium":"744.94"},{"gramsPerUnit":"119.0000"},{"trackingID":"0"}],[{"Qty":"1.00"},{"UOM_DESC":"Each"},{"itemID":"283"},{"servingAmt":"71.0000"},{"Water":"25.986"},{"Calories":"229.33"},{"Protein":"2.414"},{"Fat":"11.005"},{"Carbs":"30.246"},{"Fiber":"2.769"},{"Sugars":"0.142"},{"Phosphorus":"90.17"},{"Potassium":"423.16"},{"Sodium":"134.19"},{"gramsPerUnit":"71.0000"},{"trackingID":"0"}]]';
 /*************/
+
+//require_once ('./logError.php');
 
 // Save multiple rows
 // -------------------
@@ -20,11 +22,19 @@ $_POST["data"] = '[{"userID":"1"},[{"Qty":"1.00"},{"UOM_DESC":"Serving"},{"itemI
     $updates = json_decode($_POST["data"]);
     $things = current($updates);
 
-    $sqlAppend  = "INSERT INTO userLog ( userID, itemID, Qty, servingAmt, Water, Calories";
+    $userID = $updates[0]->userID;
+    $dt = strtotime($updates[1]->sqlDate);
+    $sqlDate = date('Y-m-d', $dt);
+//echo "sqlDate " . $sqlDate . "<br>";
+
+    $sqlAppend  = "INSERT INTO userLog ( dateEntered, userID, itemID, Qty, servingAmt";
+    $sqlAppend .= ", Water, Calories";
     $sqlAppend .= ", Protein, Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium ";
     $sqlAppend .= ", Sodium, UOM_Desc, gramsPerUnit)";
-    $sqlAppend .= " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";   
+    $sqlAppend .= " VALUES( (DATE '" . $sqlDate . "'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";   
     $appentTypes = 'iiddddddddddddsd';
+
+//echo "sqlAppend<br>" . $sqlAppend . "<br>";
 
     $sqlUpdate  = "UPDATE userLog ";
     $sqlUpdate .= "SET  Qty=?, servingAmt=?, Water=?, Calories=? ";
@@ -33,9 +43,10 @@ $_POST["data"] = '[{"userID":"1"},[{"Qty":"1.00"},{"UOM_DESC":"Serving"},{"itemI
     $sqlUpdate .= " WHERE trackingID=? ";
     $updateTypes = 'ddddddddddddi';
 
-    $userID = $updates[0]->userID;
-    $updates = array_slice($updates, 1);
-// echo "<pre>"; print_r($updates);  echo "</pre><br>";
+    $updates = array_slice($updates, 2);
+//echo "<pre>"; print_r($updates);  echo "</pre><br>";
+//$txt = var_export($updates);
+//logError("\n" . $sqlDate . "\n" .  $txt);
 
     // Setup for append query
     if (($stmtA = $conn->prepare($sqlAppend)))
@@ -44,10 +55,10 @@ $_POST["data"] = '[{"userID":"1"},[{"Qty":"1.00"},{"UOM_DESC":"Serving"},{"itemI
                                  , $Water, $Calories, $Protein, $Fat, $Carbs, $Fiber
                                  , $Sugars, $Phos, $Pot, $Sodium, $uomDesc, $gramsPer) )
          $sts = true;
-      else sqlErr(__FILE__, "input bind failed: ", $conn);
+      else sqlErr(__FILE__, "stmtA: input bind failed: ", $conn);
     }
 
-    else sqlErr(__FILE__, "prepare failed: ", $conn);
+    else sqlErr(__FILE__, "stmtA: prepare failed: ", $conn);
 
     if (!$sts) 
     {
@@ -63,10 +74,10 @@ $_POST["data"] = '[{"userID":"1"},[{"Qty":"1.00"},{"UOM_DESC":"Serving"},{"itemI
                                  , $Calories, $Protein, $Fat, $Carbs, $Fiber, $Sugars
                                  , $Phos, $Pot, $Sodium, $trackingID) )
          $sts = true;
-      else sqlErr(__FILE__, "input bind failed: ", $conn);
+      else sqlErr(__FILE__, "stmtB: input bind failed: ", $conn);
     }
 
-    else  sqlErr(__FILE__, "prepare failed: ", $conn);
+    else  sqlErr(__FILE__, "stmtB: prepare failed: ", $conn);
 
     if (!$sts) 
     {

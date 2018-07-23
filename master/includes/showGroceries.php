@@ -12,7 +12,7 @@
   require_once ('dbConnect.php');
   require_once ('banner.php');
   require_once ('displayButtons.php');
-  require_once ('chooseItem.php');
+  require_once ('chooseFoodItem.php');
   require_once ('logError.php');
 
   $postItCss = "../plugins/impromptu/jQuery-Impromptu-master/dist/jquery-impromptu.css";
@@ -63,15 +63,21 @@ function chooseItem($conn)
                , SHOW =>"Show Item"
 //               , ADD => "Add New Item"
                );
+
+  echo '<input type="hidden" name="choice" id="choice" value=' . $itemNo . ' />';
+
   // only ADMIN can edit food
   if ( $_SESSION["MEMBER_LEVEL"] ==10 ) $btns[EDIT]="Edit Item";
   if ( $_SESSION["MEMBER_LEVEL"] > 3) $btns[ADD]="Add New Item";
 
   displayButtons($btns);
   echo '<div>';
-    echo '<input name="btnAddFood" id="btnAddFood" class="myButton hidden" type="button" disabled value="Add to Food List" >';
-    echo '<input name="btnCnclFood" id="btnCnclFood" class="myButton hidden" type="button" value="Cancel" >';
+    echo '<input name="btnAddFood" id="btnAddFood" class="myButton hidden" 
+                 type="button" disabled value="Add to Food List" >';
+    echo '<input name="btnCnclFood" id="btnCnclFood" class="myButton hidden" 
+                 type="button" value="Cancel" >';
   echo '</div>';
+
   getGroceryItems($conn, "");
 
   echo '<br>';
@@ -591,8 +597,9 @@ $(document).ready( function() {
   {
     if (!pageDirty)
     {
-      var myItem = $("#itemChooser").val();
-      $("#choice").prop('value', myItem);
+//      var myItem = $("#itemChooser").val();
+//      $("#choice").prop('value', myItem);
+      var myItem = $("#choice").val();
       $("#btnCmd").prop('value', SHOW);
       $("#frmShowItems").submit();
     }
@@ -652,14 +659,6 @@ $(document).ready( function() {
     window.open("foodList.php", "_blank","resizable=yes,top=400,left=550,width=400,height=400");
   });
 *************/
-
-
-  $("#itemChooser").change(function()
-  // ------------------------------------
-  {
-    var myItem = $("#itemChooser").val();
-    $("#choice").prop('value', myItem);
-  });
 
   function btnChooseCallBack(v)
   // ------------------------------------
@@ -1145,39 +1144,6 @@ function saveError()
          });
      } // pageDirty
   }
-
-/******************************************
-  $("#btnLogOut").click(function(event)
-  // ------------------------------------
-  {
-     var myData = { "userName" : $("#userID").val() };
-
-     $.ajax(
-     {
-       url: "./logOut.php",
-       type: "post",
-       data: {"data" : JSON.stringify(myData)},
-       success: function( data, status)  // callback
-                {
-                   if (status=="success")
-                   {
-                       alert("Your have successfully logged out.");
-                       var url = "../../index.php";
-                       document.location.href = url;
-                   }
-                   else
-                   {
-                      alert("Error Occurred, Unable to log out");
-                   }
-                },
-       error: function(xhr)
-                {
-                  alert( "An error occured: " + xhr.status + " " + xhr.statusText);
-                }
-     });
-  });
-/******************************************/
-
 
 });  // end on page loaded
 

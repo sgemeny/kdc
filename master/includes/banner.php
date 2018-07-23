@@ -12,6 +12,8 @@ function showBanner($msg = "Welcome to Kidney Diet Central!")
   echo '<meta charset="utf-8">';
   echo '<title>Kidney Diet Tracker</title>';
   echo '<link rel="stylesheet" type="text/css" href="'.$styleSheet.'">';
+  echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">';
+   echo '<link rel="stylesheet" media="all" type="text/css" href="../css/foodStyle.css">';
 ?>
 
 <!-- Facebook Pixel Code -->

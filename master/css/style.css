@@ -16,7 +16,10 @@ body {
     background-color: OrangeRed;
     display: inline-block;
     font-weight: bold;
+<<<<<<< HEAD
+=======
 //    font-size: 1em;
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     font-size: .8em;
     color: White;
     -moz-border-radius: 25px;
@@ -36,6 +39,23 @@ body {
     background-color: green;
   }
 
+<<<<<<< HEAD
+  .myIconButton
+  {
+    background-color: OrangeRed;
+    font-weight: bold;
+    font-size: .8em;
+    color: White;
+  }
+
+  #dateHolder
+  { 
+//    display: inline-block;
+    margin-top: 2px;
+    float: right;
+  }
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
 
  /************************************
  * General table styling
@@ -130,12 +150,41 @@ body {
       width: 50%;
   }
 
+<<<<<<< HEAD
+  #trackContainer
+  {
+    width: 80%;
+/*    background: yellow; */
+    margin-top: -1em;
+    margin-left: 10%;
+    padding: 10px;
+    float: left;
+  }
+
+
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
   #recipeChooser
   {
      margin-top: 1em;
       width: 50%;
   }
 
+<<<<<<< HEAD
+  #xxxdateHolder
+  {
+/*      padding-left: 50px;
+      margin-top: 24px;
+      margin-bottom: -30px;
+*/
+      margin:auto;
+      width:50%;
+      font-weight: bold;
+      font-size: 120%;
+  }
+
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
  /*************************************
  * For Add New Recipe Box
  * ***********************************/

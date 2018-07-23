@@ -1,0 +1,6 @@
+[15-Jun-2018 10:08:41 CST6CDT] PHP Parse error:  syntax error, unexpected '$conn' (T_VARIABLE) in /home/williao8/staging/1/master/forms/editRecipe.php on line 35
+[15-Jun-2018 10:12:07 CST6CDT] PHP Parse error:  syntax error, unexpected ':', expecting ',' or ';' in /home/williao8/staging/1/master/forms/editRecipe.php on line 12
+[15-Jun-2018 10:21:43 CST6CDT] PHP Fatal error:  Uncaught Error: Call to undefined function logError() in /home/williao8/staging/1/master/forms/editRecipe.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/williao8/staging/1/master/forms/editRecipe.php on line 7

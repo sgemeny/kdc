@@ -16,11 +16,13 @@ $_POST["data"] = '[{"userID":"20","itemID":"158","Qty":2,"UOM_Desc":"Slice","ser
   {
     $updates = json_decode($_POST["data"]);
 
+    $dt = strtotime($updates[0]->sqlDate);
+    $sqlDate = date('Y-m-d', $dt);
 //echo "<pre>"; print_r($updates);  echo "</pre><br>";
 
-    $sqlAppend  = "INSERT INTO userLog ( userID, itemID, Qty, servingAmt, Water, Calories, Protein";
+    $sqlAppend  = "INSERT INTO userLog ( dateEntered, userID, itemID, Qty, servingAmt, Water, Calories, Protein";
     $sqlAppend .= ", Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium, Sodium, UOM_Desc, gramsPerUnit)";
-    $sqlAppend .= " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sqlAppend .= " VALUES( (DATE '" . $sqlDate . "'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     $sqlUpdate  = "UPDATE userLog ";
     $sqlUpdate .= "SET  Qty=?, servingAmt=?, Water=?, Calories=? ";

@@ -13,10 +13,6 @@
   require_once ('displayButtons.php');
   require_once ('chooseRecipe.php');
 
-//logError("Recipes SESSION userID " . $_SESSION["userID"]);
-//logError("Recipes SESSION userName " . $_SESSION["userName"]);
-//logError("Recipes SESSION level " . $_SESSION["MEMBER_LEVEL"]);
-//logError("Recipes path= " . getcwd());
   
 
   showBanner("Choose A Recipe");
@@ -27,7 +23,6 @@
 
   echo '<form id="frmShowRecipes" action="'.$self.'" method="get" >';
   echo '<input type="hidden" name="userID" id="userID" value="' . $_SESSION["userID"] .'" />';
-  echo '<input type="hidden" name="userName" id="userName" value="' . $_SESSION["userName"] .'" />';
 
   echo '<div id="addItemBox" class="hidden">';
    echo '<label for "itemName">New Name</label>';
@@ -110,10 +105,9 @@ $(document).ready( function() {
     $("#btnCmd").prop('value', SHOW);
 
 //    var url =  $("#subDir").val() + "includes/showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
-//    var url =  "showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
+    var url =  "showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
 
-//     document.location.href = url;
-     window.location.href =  "showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
+     document.location.href = url;
   });
 
   $("#btnEdit").click(function(event)
@@ -123,14 +117,13 @@ $(document).ready( function() {
     $("#choice").prop('value', chosenRecipe);
     $("#btnCmd").prop('value', EDIT);
 
-    window.location.href = "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
-    exit();
+    var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
+     document.location.href = url;
   });
 
   $("#btnAdd").click(function(event)
   // ------------------------------------
   {
-//alert("Add Clicked");
      $("#btnLine").addClass("hidden");
      $("#chooseRecipe").addClass("hidden");
      $("#pageTitle").text("Add Recipe");

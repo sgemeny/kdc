@@ -28,9 +28,17 @@ echo '<head>';
   // Bootstrap core CSS 
   echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >';
 
+  // Font-Awsome
+    echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">';
+
   // Custom styles for this template -->';
   echo '<link href="../css/custom.css" rel="stylesheet"> ';
   echo '<link href="../css/style.css" rel="stylesheet"> ';
+  echo '<link href="../css/datepicker.css" rel="stylesheet"> ';
+
+  // jQuery-UI
+  echo '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>';
+
   require_once ( '../scripts/fb_pixel.js' );
 echo '</head>';
 
@@ -40,6 +48,7 @@ echo '<body>';
   require_once ( './chooseRecipe.php');
   require_once ( './chooseItem.php');
   require_once ( './getTrack.php');
+  require_once ( './getNewTrack.php');
   require_once ( './cancelModal.php');
 
    $conn = dbConnect();
@@ -94,6 +103,18 @@ echo '<body>';
 
     echo '<div id="trackContainer">';   // YELLOW
       echo '<br>';
+
+        echo '<div id="dateHolder">';
+          $today = date('M d, Y');
+          $startDate = date('Y-m-d');
+          $msg = 'Food Log For '; 
+          echo '<button type="button" class="myIconButton";>';
+          echo '<span class="fa fa-calendar"></span>';
+          echo '</button>';
+          echo '<input id="btnChange" class="myIconButton" name="btnChange" type="button" value="' . $today . '"/`>';
+          echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
+        echo '</div>';   // dateHolder;
+
       echo '<div id="chooserHolder">';  // AQUA
         echo '<input type="hidden" name="recipeChoice" id="recipeChoice" />';
         selectRecipe($conn, "Add to List");
@@ -101,8 +122,6 @@ echo '<body>';
         echo '<input type="hidden" name="itemChoice" id="itemChoice" />';
         getGroceryItems($conn, "Add to List");
       echo '</div>'; // chooserHolder   aqua
-
-      // ...
 
     echo '</div>';  // trackContainer   yellow
   echo '</container>';
@@ -114,7 +133,6 @@ echo '<body>';
   echo '<div class="container">';
 
    echo '<div id="nutrientContainer">';  // CHARTREUSE
-//      echo '<table id="log" border="1" padding="5">';
       echo '<table id="log">';
         echo '<thead>';
           echo '<th colspan="2">Qty</th>';   // qty & uom description (ex. slice, cup)
@@ -137,87 +155,14 @@ echo '<body>';
 //          echo '<th>gramsPerUnit</th>';
         echo '</thead>';
 
-      $totWeight = $totWater = $totCalories = $totProtein = 0;
-      $totFat = $totCarbs = $totFiber = $totSugars = $totPhos = 0;
-      $totPotas = $totSodium = 0;
-
-      echo '<tbody>';
-      // get today's previous tracking info
-      if ($stmt = getTrackInfo($conn, $userID))
-      {
-//logError("got stmt");
-        while (mysqli_stmt_fetch($stmt))
-        {
-//logError("fetched a record");
-          echo '<tr class="rightJustify">';
-            echo '<td class="editable" dataVal="' . $qty . '">' . phpGetItemText($qty,2) . '</td>';
-            echo '<td>' .$uomDesc . '</td>';
-            echo '<td class="hidden">' . $itemID . '</td>';
-            echo '<td class="itemName">' . $itemName . '</td>';
-            echo '<td class="editable" dataVal="' . $serving . '">' . phpGetItemText($serving, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $water . '">' . phpGetItemText($water, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $calories . '">' . phpGetItemText($calories, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $protein . '">' . phpGetItemText($protein, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $fat . '">' . phpGetItemText($fat, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $carbs . '">' . phpGetItemText($carbs, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $fiber . '">' . phpGetItemText($fiber, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $sugars . '">' . phpGetItemText($sugars, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $phos . '">' . phpGetItemText($phos, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $potas . '">' . phpGetItemText($potas, 0) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $sodium . '">' . phpGetItemText($sodium, 0) . '</td>';
-            echo '<td class="hidden" dataVal="' . $gramsPer . '">' . $gramsPer . '</td>';
-            echo '<td><button type="button" class="delButton">Remove</td>';
-            echo '<td class="hidden" value="' . $trackingID . '" >' . $trackingID . '</td>';
-
-          echo '</tr>';
-          $totWeight += $serving;
-          $totWater += $water;
-          $totCalories += $calories;
-          $totProtein += $protein;
-          $totFat += $fat;
-          $totCarbs += $carbs;
-          $totFiber += $fiber;
-          $totSugars += $sugars;
-          $totPhos += $phos;
-          $totPotas += $potas;
-          $totSodium += $sodium;
-        }
-         mysqli_stmt_close($stmt);
-      }
-        echo '<tfoot id="logFooter">';
-          echo '<tr>';
-            echo '<td colspan="3">Totals</td>';
-            echo '<td class="nutriCol" dataVal="' . $totWeight . '">' . number_format($totWeight) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totWater . '">' . number_format($totWater) . '</td>'; 
-            echo '<td class="nutriCol" dataVal="' . $totCalories . '">' . number_format($totCalories) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totProtein . '">' . number_format($totProtein) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totFat . '">' . number_format($totFat) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totCarbs . '">' . number_format($totCarbs) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totFiber . '">' . number_format($totFiber) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totSugars . '">' . number_format($totSugars) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totPhos . '">' . number_format($totPhos) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totPotas . '">' . number_format($totPotas) . '</td>';
-            echo '<td class="nutriCol" dataVal="' . $totSodium . '">' . number_format($totSodium) . '</td>';
-            echo '<td class="hidden"></td>';  // gramsPerUnit not totaled
-            echo '<td class="hidden"></td>';  // button col
-            echo '<td class="hidden" class="trackID"></td>';  // trackingID col
-          echo '</tr>';
-        echo '</tfoot>';
-
-      echo '</tbody>';
+//   $startDate = "2018-04-03";
+        getTrackForPhp($conn, $userID, $startDate);
     echo '</table>';
 
   echo '</div>';  // NutrientContainer   chartreuse
   echo '</div>';  // trackContainer       yellow
   echo '</container>';
   echo '</section>';
-
-  function phpGetItemText($val, $dec)
-  //-------------------------
-  {
-     if ($val == -1.0) return "N/A";
-     else return number_format($val,$dec);
-  }
 
 /**************/
   // <!-- Placed at the end of the document so the pages load faster -->
@@ -317,9 +262,13 @@ echo '<body>';
   {
     pageName = '../starthere.php';
     if (!pageDirty)
+<<<<<<< HEAD
+      document.location.href = pageName;
+=======
 {
       document.location.href = pageName;
 }
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     else
       $('#cancelModal').modal('show');
   }
@@ -610,6 +559,11 @@ echo '<body>';
     // save new rows
     myData=[];
     myData[0] =  {"userID" : userID };
+<<<<<<< HEAD
+    var beginDate =  $("#sqlDate").val();
+    myData[1] = {"sqlDate" : beginDate };
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     var idx = 0;
     var breakFlag = false;
 
@@ -711,8 +665,14 @@ echo '<body>';
 
     if (breakFlag) 
        return false;
+<<<<<<< HEAD
+
+    var itemData = JSON.stringify(myData);
+
+=======
     var itemData = JSON.stringify(myData);
 x=1;
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     $.ajax(
     {
       url: "./saveTrack.php",
@@ -812,8 +772,71 @@ $(document).ready( function() {
   var txt = txt + 'Your changes will be lost?';
   var myButtons = { "Yes, Your Changes will NOT be saved!": true, "No, Stay On Page": false };
 
+<<<<<<< HEAD
+  var today = new Date;
+
+  $( "#btnChange" ).datepicker(
+      {
+          dateFormat: "M d, yy"
+        , today
+        , onClose: function(selectedDate)
+          {
+//            alert ("working " +  $("#sqlDate").val());
+            $("#sqlDate").val(selectedDate);
+            doSomething();
+          }
+      });
+
+   function doSomething()
+  //--------------------------
+  {  // Do something
+     var userID = $("#userID").val();
+     var beginDate = $("#sqlDate").val();
+
+     // get new data & re-build table
+     var arrayData = { "beginDate" : beginDate, "userID" : userID };
+     var itemData = JSON.stringify(arrayData);
+
+     $.ajax(
+     {
+           url: "./getNewTrack.php",
+           type: "post",
+           data: {"data" : itemData},
+           success: function( data, status)  // callback
+           {
+             result =  $.parseJSON(data);
+             if ( result[0] == "1")
+             {
+               $("#log tbody").empty();
+//               if ($("#log tfoot").length >0) 
+                      $("#log tfoot").empty();
+//               else
+//                      $("#log tfoot").append('<tfoot id="logFooter">i</tfoot>')
+
+               if (result[1] != null)
+                     $("#log tbody").append(result[1]);
+
+               $("#log tfoot").append(result[2]);
+             }
+             else
+             {
+               alert("Error Occurred, Unable to get data");
+             }
+           },
+           error: function(xhr)
+           {
+             alert( "An error occured: " + xhr.status + " " + xhr.statusText);
+           }
+     }); // ajax
+  }
+
 
 /***********************************/
+
+=======
+
+/***********************************/
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
   // On initialization, set each cell 'value' property
   // for later manipulation
   // each row
@@ -826,8 +849,11 @@ $(document).ready( function() {
      });
   });
 
+<<<<<<< HEAD
+=======
 /********************************/
 
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
   // Append a new row to tracking table
   function newRow(itemID, itemInfo)
   // -------------------------------
@@ -1193,6 +1219,10 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
   //----------------------------------
   {
     var userID = $("#userID").val();
+<<<<<<< HEAD
+    var sqlDate = $("#sqlDate").val();
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     var row = $("#log tbody").find('tr').eq(rowIndex);
 
     var qty = row.find('td').eq(QTY).attr("dataVal");
@@ -1205,6 +1235,10 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
     arrayData[0] =
     {
        "userID" : userID
+<<<<<<< HEAD
+     , "sqlDate" : sqlDate
+=======
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
      ,  "itemID" : row.find('td').eq(ITEMID).text()
      ,  "Qty": qty
      ,  "UOM_Desc" : row.find('td').eq(UOM_DESC).text()
@@ -1224,7 +1258,11 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
    }
 
     var itemData = JSON.stringify(arrayData);
+<<<<<<< HEAD
+
+=======
 a=1;
+>>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     $.ajax(
     {
       url: "./addUpdateTrackRow.php",
