@@ -18,6 +18,7 @@
         $msg = print_r($stak);
         echo "</pre>";
         $msg .= "\n";
+        $msg .= mysqli_error() . "\n";
         error_log($myMsg, 3, "/tmp/kdcErrors.log");
         sqlErr(__FILE__, "Failed on Connect, Error Num: " . mysqli_connect_errno(), "NULL");
    }

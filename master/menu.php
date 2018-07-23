@@ -61,13 +61,6 @@ $(document).ready( function() {
     document.location.href = url;
   });
 
-  $("#btnTrack").click(function(event)
-  // ------------------------------------
-  {
-    var url =  "includes/track.php";
-    document.location.href = url;
-  });
-
   $("#btnDaily").click(function(event)
   // ------------------------------------
   {
@@ -81,17 +74,17 @@ $(document).ready( function() {
     window.open("foodList.php", "_blank","resizable=yes,top=400,left=550,width=400,height=400");
   });
 
-  $("#btnTrack").click(function(event)
-  // ------------------------------------
-  {
-    var url =  "includes/track.php";
-    document.location.href = url;
-  });
-
   $("#btnDaily").click(function(event)
   // ------------------------------------
   {
     var url =  "includes/dailyTotals.php";
+    document.location.href = url;
+  });
+
+  $("#btnTrack").click(function(event)
+  // ------------------------------------
+  {
+    var url =  "includes/track.php";
     document.location.href = url;
   });
 

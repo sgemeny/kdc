@@ -1,6 +1,8 @@
-<!doctype html>
 <?php
   session_start();
+
+//require_once('../includes/logError');
+//logError("editRecipe SESSION userName " . $_SESSION["userName"]);
 
   if(!isset($_SESSION['userName']))
   {
