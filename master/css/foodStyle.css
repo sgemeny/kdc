@@ -1,5 +1,5 @@
  /*************************************
- * For Recipe & Item Chooser Dropdowns
+ * For Recipe & Food Item Chooser Dropdowns
  * ***********************************/
 
   .wrapper
@@ -99,9 +99,34 @@
     margin-left: auto;
     margin-right: auto;
 /***/
+  background:OrangeRed;
+  display:inline-block;
+  color:#FFF;
+  font-size: 25px;
+  font-weight: bold;
+
     margin-left:400px;
     width:200px;
   }
+
+#dateHolder:hover 
+{
+    background:orange;
+} 
+
+.calendar-btn {
+    border-right: 0px;
+}
+.input-button {
+    border-left: 0px;
+}
+
+.datebtn{
+    background:transparent;
+    outline:0;
+    border:0;
+}
+
 
   .myIconButton
   {

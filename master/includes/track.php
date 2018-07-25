@@ -111,10 +111,17 @@ echo '<body>';
           $today = date('M d, Y');
           $startDate = date('Y-m-d');
           $msg = 'Food Log For '; 
-          echo '<button type="button" class="myIconButton";>';
-          echo '<span class="fa fa-calendar"></span>';
-          echo '</button>';
-          echo '<input id="btnChange" class="myIconButton" name="btnChange" type="button" value="' . $today . '"/`>';
+
+//          echo '<button type="button" class="myIconButton";>';
+//          echo '<span class="fa fa-calendar"></span>';
+//          echo '</button>';
+//          echo '<input id="btnChange" class="myIconButton" name="btnChange" type="button" value="' . $today . '"/`>';
+
+          echo '<button type="button" class="datebtn calendar-btn"> <span class="fa fa-calendar"></span></button>';
+          echo '<input id="btnChange" class="datebtn input-button" name="btnChange" type="button" value="' . $today . '"/`>';
+          echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
+
+
           echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
         echo '</div>';   // dateHolder;
 

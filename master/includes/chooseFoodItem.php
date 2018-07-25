@@ -38,7 +38,7 @@ function selectItem($conn, $sql, $btnCap="Select")
      echo '<div id="chooseFoodHolder" class="item-list">';
        echo '<input type="input" placeholder="Search Food..." id="foodInput"
                    class="bigInput"
-                   onkeyup="myFilter(event)" autocomplete="off">';
+                   onkeyup="foodFilter(event)" autocomplete="off">';
 
        echo '<button type="submit" id="btnSearchFood" class="searchButton">
                    <i class="fa fa-search"></i> </button>';
@@ -70,7 +70,7 @@ function selectItem($conn, $sql, $btnCap="Select")
 <script>
   var textHighlighted = false;
 
-  function myFilter(event)
+  function foodFilter(event)
   // ------------------------
   {  // check for space bar
      var x = event.which || event.keyCode;
@@ -90,8 +90,8 @@ function selectItem($conn, $sql, $btnCap="Select")
      var text = $("#foodInput").val().toLowerCase();
      $("#foodItemChooser li").each(function(ndx, optn)
      {
-       if ( $(this).is(":visible") )
-       { // Showing
+//       if ( $(this).is(":visible") )
+//       { // Showing
          var myPhrase = $(this).text().toLowerCase();
          var words = text.split(" ");
 
@@ -111,8 +111,8 @@ function selectItem($conn, $sql, $btnCap="Select")
                 hideIt = true;
                 return false;
              }
-           });
-         }
+           }); // each word
+         } // multiple words
          else
          {  // only 1 word or less
             if (myPhrase.indexOf(words[0]) > -1)
@@ -124,10 +124,12 @@ function selectItem($conn, $sql, $btnCap="Select")
               hideIt = true;
             }
          }
-       }  // if showing,  ignore hidden, previously ruled out
+//     }  // if visible
 
        if (hideIt)
           $(this).hide();
+       else
+          $(this).show();
      }); // each option
   }
 

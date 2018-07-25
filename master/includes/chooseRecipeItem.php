@@ -44,7 +44,7 @@ function selectRecipe($conn, $btnCap="")
      echo '<div id="chooseRecipeHolder" class="item-list">';
        echo '<input type="input" placeholder="Search Recipe..." id="recipeInput"
                    class="bigInput"
-                   onkeyup="myFilter(event)" autocomplete="off">';
+                   onkeyup="recipeFilter(event)" autocomplete="off">';
 
       echo '<button type="submit" id="btnSearchRecipe" class="searchButton">
                    <i class="fa fa-search"></i> </button>';
@@ -81,7 +81,9 @@ function selectRecipe($conn, $btnCap="")
 ?>
 
 <script>
-  function myFilter(event)
+  var textHighlighted = false;
+
+  function recipeFilter(event)
   // ------------------------
   {  // check for space bar
      var x = event.which || event.keyCode;
@@ -101,8 +103,8 @@ function selectRecipe($conn, $btnCap="")
      var text = $("#recipeInput").val().toLowerCase();
      $("#recipeItemChooser li").each(function(ndx, optn)
      {
-       if ( $(this).is(":visible") )
-       { // Showing
+//       if ( $(this).is(":visible") )
+//       { // Showing
          var myPhrase = $(this).text().toLowerCase();
          var words = text.split(" ");
 
@@ -122,8 +124,8 @@ function selectRecipe($conn, $btnCap="")
                 hideIt = true;
                 return false;
              }
-           });
-         }
+           });  // each word
+         } // multiple words
          else
          {  // only 1 word or less
             if (myPhrase.indexOf(words[0]) > -1)
@@ -134,11 +136,13 @@ function selectRecipe($conn, $btnCap="")
             {
               hideIt = true;
             }
-         }
-       }  // if showing,  ignore hidden, previously ruled out
+         } // single word
+//       }  // if visible
 
        if (hideIt)
           $(this).hide();
+       else
+          $(this).show();
      }); // each option
   }
 
