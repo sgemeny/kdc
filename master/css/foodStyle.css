@@ -8,6 +8,11 @@
     margin-left:0;
   }
 
+  #recipeChooser
+  {
+     margin-top: 1em;
+  }
+
   #recipeWrapper
   {
     width:50%;
@@ -25,7 +30,10 @@
 
   #chooserHolder
   {
-//    background-color: aqua;
+    background-color: aqua;
+    height:75px;
+    width: 1200px;
+/*    position:fixed; */
   }
 
   .bigInput
@@ -78,9 +86,11 @@
     width: 28%;
   }
 
-  li
+  .chooser li
   {
      padding:3px 0px;
+     width: 300px;
+     background: white;
   }
 
   li:hover

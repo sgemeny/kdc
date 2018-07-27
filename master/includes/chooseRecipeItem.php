@@ -42,7 +42,7 @@ function selectRecipe($conn, $btnCap="")
     // create drop down box
     echo '<div class="wrapper" id="recipeWrapper">';
      echo '<div id="chooseRecipeHolder" class="item-list">';
-       echo '<input type="input" placeholder="Search Recipe..." id="recipeInput"
+       echo '<input type="input" placeholder="Search for Recipe..." id="recipeInput"
                    class="bigInput"
                    onkeyup="recipeFilter(event)" autocomplete="off">';
 

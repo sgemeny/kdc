@@ -30,6 +30,18 @@ body {
     background-color: darkGray;
   }
 
+  .saveButton
+  {
+    background-color: Green;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1em;
+    color: White;
+    padding: 5px;
+    vertical-align: middle;
+    width: 100%
+  }
+
   #btnSave:enabled
   {
     background-color: green;
@@ -72,14 +84,9 @@ body {
     text-align: right;
   }
 
-  .rightJustify
-  {
-    text-align: right;
-  }
-
 
  /*************************************
- * Buttons for Tracking table
+ * Tracking table, getDailyTotals, editRecipe
  * ***********************************/
   .delButton
   {
@@ -93,16 +100,9 @@ body {
     width: 100%
   }
 
-  .saveButton
+  .rightJustify
   {
-    background-color: Green;
-    display: inline-block;
-    font-weight: bold;
-    font-size: 1em;
-    color: White;
-    padding: 5px;
-    vertical-align: middle;
-    width: 100%
+    text-align: right;
   }
 
 
@@ -120,6 +120,8 @@ body {
       background-color: LightBlue;
     }
 
+    /* showGroceries, recipes *;
+    /*************************/
     #btnEnter
     {
       margin-top: .4em;

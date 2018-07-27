@@ -36,7 +36,7 @@ function selectItem($conn, $sql, $btnCap="Select")
     // create drop down box
     echo '<div class="wrapper" id="foodWrapper">';
      echo '<div id="chooseFoodHolder" class="item-list">';
-       echo '<input type="input" placeholder="Search Food..." id="foodInput"
+       echo '<input type="input" placeholder="Search for Food..." id="foodInput"
                    class="bigInput"
                    onkeyup="foodFilter(event)" autocomplete="off">';
 
