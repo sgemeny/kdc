@@ -19,8 +19,13 @@
   echo '<script type="text/javascript" src="'.$postIt.'"></script>';
   echo '<link rel="stylesheet" media="all" type="text/css" href="'.$postItCss.'">';
 
-  require_once ('../includes/dbConnect.php');
+  // this comes 1st, it has general style sheet reference in it
   require_once ('../includes/banner.php');
+
+  // style sheet specific to this page 
+  echo '<link rel="stylesheet" media="all" type="text/css" href="../css/editRecipe.css">';
+
+  require_once ('../includes/dbConnect.php');
   require_once ('../includes/fractions.php');
   require_once ('getRecipeInfo.php');
   require_once ('../includes/displayButtons.php');
@@ -79,8 +84,7 @@
   } 
 
   mysqli_stmt_fetch($stmt);
-//logError(__FILE__ . " isPublic= " . $isPublic);
-  showBanner("Edit " . $recipeName);
+  showBannerMsg("Edit " . $recipeName);
 
 
   // Display Button
@@ -96,9 +100,9 @@
 
     displayButtons($btns);
   echo '</form>';
-  echo '</div>'; // end of container (started in banner.php) 
+//  echo '</div>'; // end of container (started in banner.php) 
 
-  echo '<div class="recipeHolder">';
+  echo '<div id="recipeHolder"i class="container">';
   echo '<form name="frmEdit" action="'.$thisScript.'" method="get">';
   echo '<input id=dirty type"number" class="hidden" value="0">';
   echo '<input type="hidden" name="choice" id="choice" value="' . $chosenRecipe .'" />';
@@ -141,9 +145,6 @@
   echo '</div>';     // myHead
 
   $canBeSubRecipe = displayRecipe($conn, $chosenRecipe, $comments);
-//logError(__FILE__ . " canBeSubRecipe= " . $canBeSubRecipe);
-
-
  echo '<div id="comments">';  
 
   echo '<input type="number" id="canBeSub" class="hidden" value="'.$canBeSubRecipe.'"> </input>';
@@ -197,9 +198,6 @@
   {
     var objLen = $('option', obj).size();
     var wtLen = weights.length;
-
-//console.log("hello");
-//console.log(obj");
 
     setDirty();
 

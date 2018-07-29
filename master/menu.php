@@ -2,26 +2,22 @@
   session_start();
   $sessionID = session_ID();
 
-//require_once('includes/logError.php');
-//logError("menu SESSION ID " . $sessionID);
-//logError("menu SESSION VARS " . $vars);
-
   if(!isset($_SESSION['userName']))
   {
-logError("menu.php - username not set");
+      logError("menu.php - username not set");
       header("Location: " . "starthere.php");
       exit();
   }
   $self = $_SERVER['PHP_SELF'];
 
+  require_once ('includes/banner.php');
   require_once ('includes/dbConnect.php');
 
   $conn = dbConnect();
 
-  require_once ('includes/banner.php');
   require_once ('includes/displayButtons.php');
      
-  showBanner("Welcome " . $_SESSION["userName"] . " to KDC Main Menu");
+  showBannerMsg("Welcome " . $_SESSION["userName"] . " to KDC Main Menu");
   $conn = dbConnect();
 
   echo '<form id="frmChooseRecipe" action="'.$self.'" method="get" >';

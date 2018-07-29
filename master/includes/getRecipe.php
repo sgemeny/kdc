@@ -130,8 +130,6 @@ if (!$sts)
       if( empty($comments)) echo "No Comments have been entered.";
       else echo $comments;
     echo '</div>';  // commentBox
-
-    echo '</div>'; // end of recipeHolder 
   }
 
 }

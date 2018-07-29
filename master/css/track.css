@@ -1,0 +1,112 @@
+#trackHeader
+{
+    margin-top:0px;
+    width:1400px;
+    height:160px;
+    position:fixed;
+}
+
+  /* Testing new table def */
+/*********
+  table, th, td
+  {
+    margin-top: 20px;
+    border: 1px solid green;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: .5em .25em;
+    white-space: nowrap;
+    table-layout: fixed;
+  }
+
+  th
+  {
+    font-weight: bold;
+    text-align: center;
+    color: MidnightBlue;
+    overflow: hidden;
+  }
+
+  tfoot
+  {
+    color: MidnightBlue;
+    font-weight: bold;
+    text-align: right;
+  }
+
+/*********
+  #log tbody
+  {
+    display:block;
+    overflow:auto;
+    height:200px;
+    width:100%;
+  }
+
+  #log thead tr
+  {
+    display:block;
+  }
+
+  #log tfoot tr
+  {
+    display:block;
+  }
+/********************/
+
+  #nutrientContainer
+  {
+     width: 1200px;
+     height: 300px;
+/* background-color: pink; */
+    margin-top:140px;
+    margin-left:-80px;
+  }
+
+  #log
+  {
+     width: 1200px;
+/*     background-color: yellow; */
+  }
+
+/************
+  #log td
+   {
+     width 10px;
+   }
+
+  #log td+td
+  {
+    width: auto;
+  }
+/************/
+
+/********************/
+  #log th.nutriCol td.nutriCol
+  {
+     width:10%;
+  }
+
+  .itemName
+  {
+    width: 12em;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .qtyCol
+  {
+    width: 7%;
+  }
+
+  .qtyNameCol
+  {
+    width: 10%;
+  }
+
+  .stdCol
+  {
+    width: 55%;
+  }
+
+/********************/

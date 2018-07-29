@@ -1,19 +1,32 @@
-<!doctype html>
-<html>
 <?php
-
-function showBanner($msg = "Welcome to Kidney Diet Central!")
-{
-  $styleSheet = "../css/styleSheet.css";
-  if (!file_exists($styleSheet)) $styleSheet = "css/styleSheet.css";
-  $user = $_SESSION["userName"];
+echo "<html>";
 
   echo '<head>';
   echo '<meta charset="utf-8">';
   echo '<title>Kidney Diet Tracker</title>';
-  echo '<link rel="stylesheet" type="text/css" href="'.$styleSheet.'">';
+
+  // font awesome
   echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">';
-   echo '<link rel="stylesheet" media="all" type="text/css" href="../css/foodStyle.css">';
+
+  // Bootstrap core CSS
+  echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >';
+
+  echo '<link rel="stylesheet" type="text/css" href="/master/css/style.css">';
+
+  $user = $_SESSION["userName"];
+  echo '</head>';
+
+  echo '<body>';
+  echo ' <div class="container">';
+  echo '  <div id="banner">';
+  echo '    <a href="../../" title="Kidney Diet Central" id="kdc-logo">KidneyDietCentral</a>';
+  echo '  </div>'; // banner
+
+function showBannerMsg($msg = "Welcome to Kidney Diet Central!") 
+{
+  echo '   <h2 id="pageTitle">' . $msg . '</h2>';
+}
+
 ?>
 
 <!-- Facebook Pixel Code -->
@@ -32,25 +45,5 @@ src="https://www.facebook.com/tr?id=246219625835565&ev=PageView&noscript=1"
 <!-- DO NOT MODIFY -->
 <!-- End Facebook Pixel Code -->
 
-<?php
-  echo '</head>';
-
-  echo '<body>';
-  echo ' <div id="container">';
-  echo '  <div id="banner">';
-  echo '    <a href="../../" title="Kidney Diet Central" id="kdc-logo">KidneyDietCentral</a>';
-  echo '  </div>'; // banner
-
-/***************************
-  echo '   <div id="logOut">';
-  echo '     <input id="btnLogOut" name="btnLogOut" type="button" class="myButton" value="Log Out">';
-  echo '   </div>';  // logOut
-/***************************/
-  echo '   <h2 id="pageTitle">' . $msg . '</h2>';
-
-//<!--  </div>       end of container div -->
-
-}
-?>
 
 

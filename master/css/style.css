@@ -1,10 +1,55 @@
-body {
-  padding-top: 50px;
-}
+ /************************************
+ * for General Use
+ * ***********************************/
+  h2
+  {
+    margin-top: -.10em;
+    font-size: 1.4em;
+    color:DarkBlue;
+  }
+
+  h3
+  {
+    color: maroon;
+    margin-left: 8em;
+  }
+
+  .divCaption
+  {
+    margin-top: 1em;
+    margin-bottom: .5em;
+    font-weight: bold;
+    color: maroon;
+  }
+
+  body 
+  {
+    padding-top: 50px;
+    background-color: linen;
+     margin: 0;
+  }
 
   .hidden
   {
     display:none;
+  }
+
+  #banner #kdc-logo
+  { /* NOTE: path is relative to location of this css file */
+    background-image: url(../images/KDC_BannerHeader.jpg);
+    background-repeat:no-repeat;
+    display:block;
+
+    margin-top:-50px;
+    width: 960px;
+    height: 200px;
+  }
+
+  #kdc-logo
+  {
+    overflow: hidden;
+    text-indent:100%;
+    white-space: nowrap;
   }
 
 
@@ -68,15 +113,6 @@ body {
     overflow: hidden;
   }
 
-/**************
-  table#log
-  {
-    position:absolute
-    margin-left:0;
-    margin-top:0;
-  }
-*********************/
-
   tfoot
   {
     color: MidnightBlue;
@@ -105,6 +141,32 @@ body {
     text-align: right;
   }
 
+  .lefttJustify
+  {
+    text-align: left;
+  }
+
+/******************************
+/*  showGroceries & editRecipe*/
+/****************************/
+  .myHead
+  {
+    font-weight: bold;
+    color: maroon;
+  }
+
+  #sub
+  {
+    display: inline-block;
+    margin-left: 15%;
+  }
+
+  #pub
+  {
+    display: inline-block;
+    float: right;
+  }
+
 
  /*************************************
  * For Add New Recipe Box
@@ -120,7 +182,8 @@ body {
       background-color: LightBlue;
     }
 
-    /* showGroceries, recipes *;
+    /*************************
+    /* showGroceries, recipes 
     /*************************/
     #btnEnter
     {

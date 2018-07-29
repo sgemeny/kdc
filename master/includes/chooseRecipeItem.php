@@ -156,6 +156,7 @@ $(document).ready( function() {
      $("#recipeChoice").prop('value', data[0]);
      $("#owner").prop('value', data[1]);
      $("#recipeInput").val($(this).text());
+  checkIfCanEdit();
      $("#recipeChooser").hide();
 
   });

@@ -1,4 +1,3 @@
-<!doctype html>
 <?php
   if ( !session_id() )
 	session_start();
@@ -12,10 +11,6 @@
   $userID = $_SESSION["userID"];
   $self = $_SERVER['PHP_SELF'];
 
-//logError("TRACK SESSION userID " . $_SESSION["userID"]);
-//logError("TRACK SESSION userName " . $_SESSION["userName"]);
-
-/*************/
 echo '<html>';
 echo '<head>';
   echo ' <meta charset="utf-8">';
@@ -34,6 +29,7 @@ echo '<head>';
   // Custom styles for this template -->';
   echo '<link href="../css/custom.css" rel="stylesheet"> ';
   echo '<link href="../css/style.css" rel="stylesheet"> ';
+  echo '<link href="../css/track.css" rel="stylesheet"> ';
   echo '<link href="../css/datepicker.css" rel="stylesheet"> ';
   echo '<link href="../css/foodStyle.css" rel="stylesheet"> ';
 
@@ -86,7 +82,7 @@ echo '<body>';
                   echo '<li><a href="#" onClick="kdcMenu();">KDC Main Menu</a></li>';
           
             echo '<li><a id="home" href="#" onClick=memberHome()>Member Area</a></li>';
-            echo '<li><a id="log" href="#" onClick="showLog();">Show Log</a></li>';
+            echo '<li><a id="btnLog" href="#" onClick="showLog();">Show Log</a></li>';
             echo '<li><a id="saveAll" href="#" onClick="saveItems();">Save All</a></li>';
             echo '<li><a id="cnclIt" href="#" onClick="cnclEdits();">Cancel</a></li>';
           echo '</ul>';
@@ -94,82 +90,59 @@ echo '<body>';
       echo '</div>';  // container
     echo '</nav>';
 
-
-
-
 /**************/
-  echo '<section>';
   echo '<div id=outerBox class="container">';
-
     echo '<form id="frmTrack" action="'.$self.'" method="get" >';
       echo '<input type="hidden" name="userID" id="userID" value="' . $userID .'" />';
     echo '</form>';  // frmTrack
 
-    echo '<div id="trackContainer">';   // YELLOW
-      echo '<br>';
-        echo '<div id="dateHolder">';
-          $today = date('M d, Y');
-          $startDate = date('Y-m-d');
-          $msg = 'Food Log For '; 
+    // Set up date, recipe and foood choosers
+    echo '<div id="trackHeader">';
+      echo '<div id="dateHolder">';
+        $today = date('M d, Y');
+        $startDate = date('Y-m-d');
+        $msg = 'Food Log For '; 
 
-//          echo '<button type="button" class="myIconButton";>';
-//          echo '<span class="fa fa-calendar"></span>';
-//          echo '</button>';
-//          echo '<input id="btnChange" class="myIconButton" name="btnChange" type="button" value="' . $today . '"/`>';
-
-          echo '<button type="button" class="datebtn calendar-btn"> <span class="fa fa-calendar"></span></button>';
-          echo '<input id="btnChange" class="datebtn input-button" name="btnChange" type="button" value="' . $today . '"/`>';
-          echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
-
-
-          echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
-        echo '</div>';   // dateHolder;
+        echo '<button type="button" class="datebtn calendar-btn"> <span class="fa fa-calendar"></span></button>';
+        echo '<input id="btnChange" class="datebtn input-button" name="btnChange" type="button" value="' . $today . '"/`>';
+        echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
+      echo '</div>';   // dateHolder;
 
       echo '<div id="chooserHolder">';  // AQUA
         selectRecipe($conn, "Add Recipe to List");
         getGroceryItems($conn, "Add Food To List");
       echo '</div>'; // chooserHolder   aqua
+    echo '</div>';  // trackHeader   yellow
+  echo '</container>'; // outerBox
 
-    echo '</div>';  // trackContainer   yellow
-  echo '</container>';
-  echo '</section>';
-/**************/
-
-/**************/
-  echo '<section>';
+  // build nutrition table
   echo '<div class="container">';
+   echo '<div id = "nutrientContainer">';
+    echo '<table id="log">';
+      echo '<thead>';
+        echo '<th colspan="2">Qty</th>';   // qty & uom description (ex. slice, cup)
+        echo '<th  class="hidden">itemID</th>';
+        echo '<th class="itemName">Item</th>';
+        echo '<th class="stdCol">Weight</th>';
+        echo '<th class="stdCol">Water</th>';
+        echo '<th class="stdCol">Calories</th>';
+        echo '<th class="stdCol">Protein</th>';
+        echo '<th class="stdCol">Fat</th>';
+        echo '<th class="stdCol">Carbs</th>';
+        echo '<th class="stdCol">Fiber</th>';
+        echo '<th class="stdCol">Sugars</th>';
+        echo '<th class="stdCol">Phos.</th>';
+        echo '<th class="stdCol">Pot.</th>';
+        echo '<th class="stdCol">Sodium</th>';
+        echo '<th class="hidden">gramsPerUnit</th>';
+        echo '<th>Option</th>';
+        echo '<th class="hidden" value=>trackID</th>';
+      echo '</thead>';
 
-   echo '<div id="nutrientContainer">';  // CHARTREUSE
-      echo '<table id="log">';
-        echo '<thead>';
-          echo '<th colspan="2">Qty</th>';   // qty & uom description (ex. slice, cup)
-          echo '<th  class="hidden">itemID</th>';
-          echo '<th class="itemName">Item</th>';
-          echo '<th class="stdCol">Weight</th>';
-          echo '<th class="stdCol">Water</th>';
-          echo '<th class="stdCol">Calories</th>';
-          echo '<th class="stdCol">Protein</th>';
-          echo '<th class="stdCol">Fat</th>';
-          echo '<th class="stdCol">Carbs</th>';
-          echo '<th class="stdCol">Fiber</th>';
-          echo '<th class="stdCol">Sugars</th>';
-          echo '<th class="stdCol">Phos.</th>';
-          echo '<th class="stdCol">Pot.</th>';
-          echo '<th class="stdCol">Sodium</th>';
-          echo '<th class="hidden">gramsPerUnit</th>';
-          echo '<th>Option</th>';
-          echo '<th class="hidden" value=>trackID</th>';
-//          echo '<th>gramsPerUnit</th>';
-        echo '</thead>';
-
-//   $startDate = "2018-04-03";
-        getTrackForPhp($conn, $userID, $startDate);
+      getTrackForPhp($conn, $userID, $startDate);
     echo '</table>';
-
-  echo '</div>';  // NutrientContainer   chartreuse
-  echo '</div>';  // trackContainer       yellow
-  echo '</container>';
-  echo '</section>';
+   echo '</div>';  // nutrientContainer
+ echo '</div>';  // container
 
 /**************/
   // <!-- Placed at the end of the document so the pages load faster -->
@@ -179,8 +152,9 @@ echo '<body>';
   echo '<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>';
   echo '<script src="'.$nutrients.'"></script>';
   echo '<script src="'.$numbers.'"></script>';
+echo '</body>';
+echo '</html>';
 ?>
-
 <script>
 
   var pageDirty = 0;
@@ -949,9 +923,6 @@ $("#log tbody").find('tr').eq(rowIndex).find('td').eq(QTY).focus();
      var opt = $("#recipeChoice").val().split("+");
      var recipeID = opt[0];
      var recipeOwner = opt[1];
- //    var tmp = $("select[name='chosenRecipe'").find('option:selected').text()
- //    var tmp= "<li>" + tmp + "</li>";
-//     $("#foodList").append(tmp);
 
      var arrayData = { "ID" : recipeID };
      var itemData = JSON.stringify(arrayData);
@@ -1365,5 +1336,3 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
 
 </script>
 
-  </body>
-</html>

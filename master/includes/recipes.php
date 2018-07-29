@@ -7,28 +7,18 @@
     header("Location: " . "../../index.php");
     exit();
   }  
-  require_once ('dbConnect.php');
+
   require_once ('banner.php');
+  echo '<link href="../css/foodStyle.css" rel="stylesheet"> ';
+
+  require_once ('dbConnect.php');
   require_once ('displayButtons.php');
   require_once ('chooseRecipeItem.php');
   require_once ('logError.php');
 
+  showBannerMsg("Choose A Recipe");
   
-//logError("Recipes SESSION userID " . $_SESSION["userID"]);
-//logError("Recipes SESSION userName " . $_SESSION["userName"]);
-//logError("Recipes SESSION level " . $_SESSION["MEMBER_LEVEL"]);
-//logError("Recipes path= " . getcwd());
-  
-
-  showBanner("Choose A Recipe");
   $conn = dbConnect();
-
-/**************************
- echo "SESSION VARS:";
- echo "<pre>";
-  print_r($_SESSION);
- echo "</pre>";
-/**************************/
 
   if (isset($_GET["cmd"])) $cmd = $_GET["cmd"];
   else $cmd = CHOOSE;
@@ -112,15 +102,9 @@ $(document).ready( function() {
   $("#btnShow").click(function(event)
   // ------------------------------------
   {
-//    var opt = $("#recipeChooser").val().split("+");
-//    var chosenRecipe = opt[0];
     canEdit = checkIfCanEdit();
 	var chosenRecipe = $("#recipeChoice").val();
-//    $("#recipeChoice").prop('value', chosenRecipe);
-//    $("#btnCmd").prop('value', SHOW);
-
     var url =  "showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
-
      document.location.href = url;
   });
 

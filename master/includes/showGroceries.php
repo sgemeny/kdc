@@ -1,4 +1,3 @@
-<!doctype html>
 <?php
   session_start();
 
@@ -15,10 +14,10 @@
   require_once ('chooseFoodItem.php');
   require_once ('logError.php');
 
+  echo '<link href="../css/foodStyle.css" rel="stylesheet"> ';
   $postItCss = "../plugins/impromptu/jQuery-Impromptu-master/dist/jquery-impromptu.css";
   echo '<link rel="stylesheet" media="all" type="text/css" href="'.$postItCss.'">';
 
-//  showBanner("View Food List");
   $conn = dbConnect();
 
   if (isset($_GET["cmd"])) $cmd = $_GET["cmd"];
@@ -33,12 +32,12 @@
   switch ($cmd)
   {
       case CHOOSE:
-        showBanner("View Food List");
+        showBannerMsg("View Food List");
         chooseItem($conn);
       break;
 
       case EDIT:
-       showBanner("Edit Food Item");
+       showBannerMsg("Edit Food Item");
        if (isset ($_GET["itemChooser"]))
            showEditItem($conn, $_GET["itemChooser"]);
        else
@@ -46,7 +45,7 @@
       break;
 
       case SHOW:
-       showBanner("Nutritional Values");
+       showBannerMsg("Nutritional Values");
        if (isset ($_GET["itemChooser"]))
            showItem($conn, $_GET["itemChooser"]);
        else
@@ -160,7 +159,6 @@ function showEditItem($conn, $itemNo)
       echo '</div>';   // grocery
     echo '</div>';     // myHead
 
-//    echo "<table id='myTable'>";
     echo "<table id='myTable1'>";
      echo "<tr>";
       $fld_name = '<input type="text" id="GroceryName" ';

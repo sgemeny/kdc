@@ -67,7 +67,7 @@
     mysqli_stmt_close($stmt);
   }
 
-  showBanner($itemName);
+  showBannerMsg($itemName);
 
   $btns = array( MENU => "Main Menu"
                , CHOOSE =>"Choose New"
@@ -78,7 +78,7 @@
 
   echo '</div>';   // end of container (started in banner.php)
 
-  echo '<div class="recipeHolder">';
+  echo '<div id="recipeHolder" class="container">';
   echo '<form id="frmShowRecipe" action="'.$self.'" method="get" >';
 //  echo '<input type="hidden" name="subDir" id="subDir" value="' . $subDir .'" />';
   echo '<input type="hidden" name="chosenRecipe" id="chosenRecipe" value="' . $chosenRecipe .'" />';
@@ -104,6 +104,7 @@
   echo '</div>';  // divCaption
 
   showNutrients($conn, $chosenRecipe, $servSize);
+ echo '</div>'; // end of recipeHolder
   echo '</form>';
 
   // <!-- Placed at the end of the document so the pages load faster -->
