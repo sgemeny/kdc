@@ -88,6 +88,8 @@
 
   .chooser li
   {
+     list-style-type: none;
+     margin-left: -40px;
      padding:3px 0px;
      width: 300px;
      background: white;
