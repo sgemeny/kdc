@@ -12,9 +12,10 @@
   echo '<link href="../css/foodStyle.css" rel="stylesheet"> ';
 
   require_once ('dbConnect.php');
+  require_once ('logError.php');
+  require_once ('canEditRecipe.php');
   require_once ('displayButtons.php');
   require_once ('chooseRecipeItem.php');
-  require_once ('logError.php');
 
   showBannerMsg("Choose A Recipe");
   
@@ -68,25 +69,6 @@ function chooseRecipe($conn)
 ?>
 
  <script>
- function checkIfCanEdit()
- // ----------------------
- {
-    var chosenRecipe = $("#recipeChoice").val();   
-    var owner = $("#owner").val();   
-    var user = $("#userID").val();
-
-    if (owner == user)
-    { 
-       canEdit=1;
-       $("#btnEdit").prop('disabled',false);
-    }
-    else
-    {
-      canEdit=0;
-      $("#btnEdit").prop('disabled', true);
-    }
-    return canEdit;
- }
 
 $(document).ready( function() {
 // ----------------------------

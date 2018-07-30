@@ -1,5 +1,6 @@
 <?php
 
+require_once ('./canEditRecipe.php');
 require_once ('./dbErr.php');
 require_once ('./jquery.php');
 require_once ('./logError.php');
