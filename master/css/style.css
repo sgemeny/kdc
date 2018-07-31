@@ -17,10 +17,85 @@
   .divCaption
   {
     margin-top: 1em;
-    margin-bottom: .5em;
+/*    margin-bottom: .5em; */
     font-weight: bold;
     color: maroon;
   }
+
+  #commentCap
+  {
+    width:55%;
+    margin-left: 100px;
+/*****
+    margin-left: auto;
+    margin-right: auto;
+    margin-left: 100px;
+/*****/
+  }
+
+ #commentBox
+  {
+      width: 55%;
+      height: 100px;
+      padding: 4px;
+      text-align: left;
+      border-style: solid;
+      border-color: green;   /* #008000; */
+      border-width: 1px;
+    margin-bottom: .3em;
+    margin-left: 100px;
+/*****
+    margin-left: auto;
+    margin-right: auto;
+/*****/
+  }
+
+  #comments
+  {
+    width:55%;
+    margin-left: 100px;
+/*****
+    margin-left: auto;
+    margin-right: auto;
+/*****/
+  }
+
+  #weight
+  {
+    float: right;
+  }
+
+  .totals
+  {
+     margin-top: 5px;
+  }
+
+  .totalsHolder
+  {
+    margin-left: 100px;
+/*****
+    margin-left: auto;
+    margin-right: auto;
+/*****/
+    font-size: 1em;  /* 1em=16px */
+    width: 50%;
+  }
+
+  #servingInfo
+  {
+    width: 50%;
+    margin-left: 100px;
+/*****
+    margin-left: auto;
+    margin-right: auto;
+/*****/
+  }
+
+  #enterServing
+  {
+    float: left;
+  }
+
 
   body 
   {

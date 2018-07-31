@@ -92,6 +92,7 @@
     width: 12em;
     white-space:nowrap;
     text-overflow: ellipsis;
+    text-align: left;
   }
 
   .qtyCol

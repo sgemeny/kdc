@@ -107,6 +107,7 @@ echo '<body>';
         echo '<input id="btnChange" class="datebtn input-button" name="btnChange" type="button" value="' . $today . '"/`>';
         echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
       echo '</div>';   // dateHolder;
+    echo '<span class="fa fa-arrow-left"></span>Click here to change date';
 
       echo '<div id="chooserHolder">';  // AQUA
         selectRecipe($conn, "Add Recipe to List");

@@ -16,11 +16,13 @@
   #recipeWrapper
   {
     width:50%;
+    background-color: pink;
   }
 
   #foodWrapper
   {
     margin-left:50%;
+    background-color: yellow;
   }
 
   .foodDiv
@@ -139,6 +141,10 @@
     border:0;
 }
 
+  #dateMsg
+  {
+    display: inline-block;
+  }
 
   .myIconButton
   {
@@ -147,5 +153,4 @@
     font-size: 25px;
     color: White;
   }
-
 

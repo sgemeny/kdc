@@ -1,15 +1,9 @@
-  #commentCap
-  {
-    width:55%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
  /************************************
  * for editRecipe.php
  * ***********************************/
   #tblRecipe
   {
+    margin-top: 5px;
     table-layout: fixed; 
     width: 100%;
     white-space: nowrap;
@@ -91,32 +85,8 @@
 
 /********** end styleSheet.css **********/
 
-
-
-
-  #commentBox
-  {
-      width: 55%;
-      height: 100px;
-      padding: 4px;
-      text-align: left;
-      border-style: solid;
-      border-color: green;   /* #008000; */
-      border-width: 1px;
-    margin-bottom: .3em;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   #editCaption
   {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #comments
-  {
-    width:55%;
     margin-left: auto;
     margin-right: auto;
   }
