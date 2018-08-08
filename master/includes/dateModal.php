@@ -11,7 +11,8 @@
         echo '</div>'; // modal header
 
         echo '<div class="modal-body">';
-          echo '<p><br>Changes have been made<br> Do you want save your changes?</p>';
+//          echo '<p><br>Changes have been made<br> Do you want save your changes?</p>';
+          echo '<h2>Changes have been made</h2> <h2>Do you want to go back & save your changes?</h2>';
         echo '</div>'; // modal body
 
         echo '<div class="modal-footer">';
