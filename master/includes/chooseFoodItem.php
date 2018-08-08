@@ -168,7 +168,13 @@ $(document).ready( function() {
   $("#btnSearchFood").click(function()
   // ------------------------------------
   {
-     $("#foodChooser").toggle();
+     if ( $("#foodChooser").hasClass("hidden") )
+     {
+        $("#foodChooser").removeClass("hidden");
+        $("#foodChooser").show();
+     }
+     else 
+       $("#foodChooser").toggle();
   });
 
 });  // end on page loaded

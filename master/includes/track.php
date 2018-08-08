@@ -1,4 +1,6 @@
 <?php
+/*error_reporting(E_ALL);
+ini_set('display_errors', 1);*/
   if ( !session_id() )
 	session_start();
 
@@ -48,6 +50,7 @@ echo '<body>';
   require_once ( './getTrack.php');
   require_once ( './getNewTrack.php');
   require_once ( './cancelModal.php');
+  require_once ( './dateModal.php');
 
    $conn = dbConnect();
    if ($conn==NULL) 
@@ -119,6 +122,7 @@ echo '<body>';
   // build nutrition table
   echo '<div class="container">';
    echo '<div id = "nutrientContainer">';
+    echo '<table id="header-fixed"></table>';
     echo '<table id="log">';
       echo '<thead>';
         echo '<th colspan="2">Qty</th>';   // qty & uom description (ex. slice, cup)
@@ -157,6 +161,26 @@ echo '</body>';
 echo '</html>';
 ?>
 <script>
+
+var tableOffset = $("#log").offset().top;
+var $header = $("#log > thead").clone();
+var $fixedHeader = $("#header-fixed").append($header);
+
+$("#nutrientContainer").bind("scroll", function() {
+        $("#header-fixed th").each(function(index){
+            var index2 = index;
+            $(this).width(function(index2){
+                //$("#log thead th").eq(index).width();
+                var element = $("#log thead th").eq(index)[0];
+                var nWidth = window.getComputedStyle(element).width;
+                return parseFloat(nWidth, 10)-14;
+            });
+        });
+    if ($fixedHeader.is(":hidden")) {
+        $("#header-fixed tr:first th[colspan=2]").attr('colspan',1);
+        $fixedHeader.show();
+    }
+});
 
   var pageDirty = 0;
   var firstNewRow = 0;
@@ -224,7 +248,6 @@ echo '</html>';
     if (pageDirty)
     {
       pageName="";
-      formName = frmTrack;
       $('#cancelModal').modal('show')
     }
   };
@@ -747,9 +770,11 @@ $(document).ready( function() {
         , today
         , onClose: function(selectedDate)
           {
-//            alert ("working " +  $("#sqlDate").val());
             $("#sqlDate").val(selectedDate);
-            doSomething();
+            if (pageDirty)
+               $('#dateModal').modal('show');
+            else
+               doSomething();
           }
       });
 
@@ -758,6 +783,7 @@ $(document).ready( function() {
   {  // Do something
      var userID = $("#userID").val();
      var beginDate = $("#sqlDate").val();
+
 
      // get new data & re-build table
      var arrayData = { "beginDate" : beginDate, "userID" : userID };
@@ -774,10 +800,7 @@ $(document).ready( function() {
              if ( result[0] == "1")
              {
                $("#log tbody").empty();
-//               if ($("#log tfoot").length >0) 
                       $("#log tfoot").empty();
-//               else
-//                      $("#log tfoot").append('<tfoot id="logFooter">i</tfoot>')
 
                if (result[1] != null)
                      $("#log tbody").append(result[1]);
@@ -795,6 +818,21 @@ $(document).ready( function() {
            }
      }); // ajax
   }
+
+    $('#btnLose').click(function(e) // lose changes
+    // ------------------------------------
+    { // lose changes, leave without saving
+      $('#dateModal').modal('toggle');
+      e.preventDefault();
+      zeroDirty();
+      doSomething();
+    });
+
+    $('#btnContinue').click(function()  // stay on page
+    // ------------------------------------
+    { // stay on page, keep changes
+      $('#dateModal').modal('toggle');
+    });
 
 
 /***********************************/

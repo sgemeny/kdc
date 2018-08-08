@@ -6,6 +6,7 @@
   {
     margin-top: 20px;
     margin-left:0;
+    width: 45%;
   }
 
   #recipeChooser
@@ -15,14 +16,13 @@
 
   #recipeWrapper
   {
-    width:50%;
-    background-color: pink;
+    /*background-color: pink;*/
   }
 
   #foodWrapper
   {
     margin-left:50%;
-    background-color: yellow;
+    /*background-color: yellow;*/
   }
 
   .foodDiv
@@ -40,18 +40,21 @@
 
   .bigInput
   {
-    float: left;
-    width:50%;
+    /*float: left;*/
+    /*width:50%;*/
+    width: 270px;
+    display:inline-block;
     padding: 6px;
     font-size: 17px;
     border: 1px solid grey;
-    float: left;
     background: #f1f1f1;
   }
 
   .searchButton
   {
-    float: left;
+    /*float: left;*/
+    position:relative;
+    top:-2px;
     padding: 10px;
     background: OrangeRed;
     color: white;
@@ -65,7 +68,7 @@
   .selectButton
   {
     margin-left: 10px;
-    float: left;
+    /*float: left;*/
     padding: 8px;
     background: OrangeRed;
     color: white;
@@ -87,14 +90,39 @@
     display: none;
     width: 28%;
   }
+  #chooseRecipeHolder{
+      float:left;
+  }
+
+  #recipeChooser,#foodChooser{
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    width: 270px;
+    position: fixed;
+    margin-top: 0px;
+    }
+
+    #recipeItemChooser,#foodItemChooser{
+        overflow-y: auto;
+        height: 400px;
+        width: 100%;
+        display: block;
+        overflow-x: hidden;
+        margin-left: 0;
+        padding-left: 0;
+    }
 
   .chooser li
   {
      list-style-type: none;
-     margin-left: -40px;
+     /*margin-left: -40px;*/
      padding:3px 0px;
-     width: 300px;
+     /*width: 300px;*/
      background: white;
+     padding-left: 6px;
+     width: 100%;
   }
 
   li:hover

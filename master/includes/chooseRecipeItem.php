@@ -180,7 +180,14 @@ $(document).ready( function() {
   $("#btnSearchRecipe").click(function()
   // ------------------------------------
   {
-     $("#recipeChooser").toggle();
+     if ( $("#recipeChooser").hasClass("hidden") )
+     {
+        $("#recipeChooser").removeClass("hidden");
+        $("#recipeChooser").show();
+     }
+     else
+       $("#recipeChooser").toggle();
+
   });
 
 });  // end on page loaded
