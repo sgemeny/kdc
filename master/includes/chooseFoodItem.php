@@ -74,8 +74,15 @@ function selectItem($conn, $sql, $btnCap="Select")
   // ------------------------
   {  // check for space bar
      var x = event.which || event.keyCode;
-     if (x == 0x20)
-         return false; // space, nothing to do;
+     if (x == 0x20) // space
+         return false; // nothing to do;
+
+     if (x==09)  // tab key
+     {
+       $("#foodChooser").removeClass("hidden");
+       $("#foodChooser").show();
+       return;
+     }
 
      if ( (textHighlighted==true) && (window.getSelection().toString()) == "")
      {
@@ -153,7 +160,7 @@ $(document).ready( function() {
   $("body").click(function(e)
   // ------------------------------------
   {
-     if ( ! $(e.target).parent().hasClass('item-list') )
+     if ( ! $(e.target).parent().hasClass('item-list'))
            $("#foodChooser").hide();
 
   });

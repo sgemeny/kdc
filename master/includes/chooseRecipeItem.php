@@ -91,6 +91,12 @@ function selectRecipe($conn, $btnCap="")
      if (x == 0x20)
          return false; // space, nothing to do;
 
+     if (x==09)  // tab key
+     {
+       $("#recipeChooser").removeClass("hidden");
+       $("#recipeChooser").show();
+       return;
+     }
      if ( (textHighlighted==true) && (window.getSelection().toString()) == "")
      {
        $("#recipeItemChooser li").show();
@@ -157,7 +163,7 @@ $(document).ready( function() {
      $("#recipeChoice").prop('value', data[0]);
      $("#owner").prop('value', data[1]);
      $("#recipeInput").val($(this).text());
-  checkIfCanEdit();
+     checkIfCanEdit();
      $("#recipeChooser").hide();
 
   });
@@ -165,7 +171,7 @@ $(document).ready( function() {
   $("body").click(function(e)
   // ------------------------------------
   {
-     if ( ! $(e.target).parent().hasClass('item-list') )
+     if ( ! $(e.target).parent().hasClass('item-list')) 
            $("#recipeChooser").hide();
 
   });

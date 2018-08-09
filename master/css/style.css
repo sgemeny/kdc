@@ -218,6 +218,12 @@
     color: maroon;
   }
 
+  #grocID, #itemIDs
+  {
+    display: inline-block;
+    margin-left: 25px;
+  }
+
   #sub
   {
     display: inline-block;

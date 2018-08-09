@@ -154,7 +154,7 @@ function showEditItem($conn, $itemNo)
     // display item name id and usda ndb
     echo '<div class="myHead grocHead>';
       echo $grocName;
-      echo '<div id="grocery">';
+      echo '<div id="grocId">';
         echo 'ID: '  . $itemNo;
       echo '</div>';   // grocery
     echo '</div>';     // myHead
@@ -347,7 +347,7 @@ function showItem($conn, $itemNo)
     // display item name id and usda ndb
     echo '<div class = "myHead grocHead">';
       echo $grocName;
-      echo '<div id="grocery">';
+      echo '<div id="grocID">';
         echo 'ID: '  . $itemNo;
       echo '</div>';   // grocery
 
