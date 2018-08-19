@@ -28,12 +28,12 @@ echo '<head>';
   echo '<link href="css/style.css" rel="stylesheet"> ';
 echo '</head>';
 
+if ($embedded == 0)
+{
   echo '<body>';
     echo '<nav class="navbar navbar-inverse navbar-fixed-top"> ';
       echo '<div class="container">';
         echo '<div class="navbar-header">';
-        if ($embedded ==0)
-        {
           echo '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
@@ -44,35 +44,36 @@ echo '</head>';
           echo '<div id="img">';
             echo '<a href="../" class="pull-left"><img src="images/kdcLogo.png" alt="KDC" ></a>';
           echo '</div>'; // img
-        }
-        else
-        {
-          echo '<div id="img">';
-            echo '<a href="#" class="pull-left"><img src="images/kdcLogo.png" alt="KDC" ></a>';
-          echo '</div>'; // img
-        }
         echo '</div>';   // navbar header -->
 
       echo '<div id="navbar" class="collapse navbar-collapse">';
-//        echo '<ul class="nav navbar-nav">';
         echo '<ul class="nav navbar-nav pull-left">';
           echo '<li><a id="home" href="../");">Home</a></li>';
           echo '<li><a id="home" href="../member-home">Member Area</a></li>';
         echo '</ul>';
-        echo '<h2>USDA Food Search</h2>';
       echo '</div>'; // nav-collapse -->
     echo '</div>';  // container
   echo '</nav>';
 
   echo '<section>';
-  echo '<br><br>';
-
-  echo '<div class="container">';
-    echo '<input type="hidden" name="embedded" id="embedded" value="' . $embedded .'" />';
-    echo '<div>';
-      echo '<input type="text" id="searchItem">';
+    echo '<br><br>';
+    echo '<div class="container">';
+    echo '<h2 class="leftJustify">USDA Food Search</h2>';
+    echo '<div iD="inputDiv">';
+      echo '<input type="text" id="searchItem" placeholder="Search for food">';
       echo '<input name="btnSearch" class="myButton" id="btnSearch" type="button" value="Search">';
     echo '</div>';
+}
+else
+{
+  echo '<section>';
+    echo '<div iD="inputDiv" class="embedded">';
+      echo '<input type="text" id="searchItem" placeholder="Search for food">';
+      echo '<input name="btnSearch" class="myButton" id="btnSearch" type="button" value="Search">';
+    echo '</div>';
+}
+
+    echo '<input type="hidden" name="embedded" id="embedded" value="' . $embedded .'" />';
 
     // create drop down box  
     echo '<div id="chooseItem" class="hidden">';
@@ -86,8 +87,8 @@ echo '</head>';
       echo '<table id="itemTable">';
         echo '<thead></thead>';
         echo '<tbody></tbody>';
-      echo '<table>';
-    echo '<div>';  // end table div
+      echo '</table>';
+    echo '</div>';  // end itemDiv
 
     echo '<br>';
 
@@ -98,7 +99,7 @@ echo '</head>';
         echo '<select name="weightChoice" id="weightChoice"></select>';
       echo '</div>';
     }
-    else
+    else  // NOT embedded
     {  // create list of measures   
       echo '<div id="measures">';
         echo '<h4 id="measure"></h4>';
@@ -106,7 +107,7 @@ echo '</head>';
           echo '<thead><th>Item</th><th>Grams</th></thead>';
             echo '<tbody> </tbody>';
         echo '</table>';
-      echo '<div>';  // end table div
+      echo '</div>';  // end measures div
 
       echo "<br>";
       $servingSize=10;
@@ -121,7 +122,7 @@ echo '</head>';
       echo '</div>';  // end of enterServing
 
       // show nutrients for serving size
-      echo '<div>';
+      echo '<div id="testDiv">';   // for table
         echo '<table class="totals hidden" id="tbl_perServing">';
           echo '<thead>';
             echo '<th>Water</th>';
@@ -151,7 +152,7 @@ echo '</head>';
             echo "</tr>";
           echo "</tbody>";
         echo '</table>';
-      echo '<div>';  // end table div
+      echo '</div>';  // end table div
     } // if embedded
 
   echo '</section>';
