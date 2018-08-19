@@ -168,12 +168,15 @@ $(document).ready( function() {
 
   });
 
+<<<<<<< HEAD
   $("#recipeInput").focus(
   // -----------------------
      function(){
         $(this).val('');
     });
 
+=======
+>>>>>>> 33c30fb1a16e67a313ae9edac41fe5cbed5db827
   $("body").click(function(e)
   // ------------------------------------
   {
