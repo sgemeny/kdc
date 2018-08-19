@@ -1,4 +1,3 @@
-<!doctype html>
 <?php
   session_start();
 
@@ -15,10 +14,10 @@
   require_once ('chooseFoodItem.php');
   require_once ('logError.php');
 
+  echo '<link href="../css/foodStyle.css" rel="stylesheet"> ';
   $postItCss = "../plugins/impromptu/jQuery-Impromptu-master/dist/jquery-impromptu.css";
   echo '<link rel="stylesheet" media="all" type="text/css" href="'.$postItCss.'">';
 
-//  showBanner("View Food List");
   $conn = dbConnect();
 
   if (isset($_GET["cmd"])) $cmd = $_GET["cmd"];
@@ -33,24 +32,24 @@
   switch ($cmd)
   {
       case CHOOSE:
-        showBanner("View Food List");
+        showBannerMsg("View Food List");
         chooseItem($conn);
       break;
 
       case EDIT:
-       showBanner("Edit Food Item");
+       showBannerMsg("Edit Food Item");
        if (isset ($_GET["itemChooser"]))
            showEditItem($conn, $_GET["itemChooser"]);
        else
-           showEditItem($conn, $_GET["choice"]);
+           showEditItem($conn, $_GET["itemChoice"]);
       break;
 
       case SHOW:
-       showBanner("Nutritional Values");
+       showBannerMsg("Nutritional Values");
        if (isset ($_GET["itemChooser"]))
            showItem($conn, $_GET["itemChooser"]);
        else
-           showItem($conn, $_GET["choice"]);
+           showItem($conn, $_GET["itemChoice"]);
       break;
   }
   echo "</form>";
@@ -61,10 +60,7 @@ function chooseItem($conn)
 {
   $btns = array( MENU => "Main Menu"
                , SHOW =>"Show Item"
-//               , ADD => "Add New Item"
                );
-
-  echo '<input type="hidden" name="choice" id="choice" value=' . $itemNo . ' />';
 
   // only ADMIN can edit food
   if ( $_SESSION["MEMBER_LEVEL"] ==10 ) $btns[EDIT]="Edit Item";
@@ -78,14 +74,15 @@ function chooseItem($conn)
                  type="button" value="Cancel" >';
   echo '</div>';
 
+echo '<div class="foodDiv">';
   getGroceryItems($conn, "");
-
+echo '</div>';
   echo '<br>';
   echo '<div class="grocHead" id="grocTitle"></div>';
 
   // frame for USDA food look up
   echo '<div id="frameDiv" class="hidden">';
-    echo '<iframe src="" id="frame" height="100%" width="100%"></iframe>';
+    echo '<iframe src="" id="frame" height="90%" width="90%"></iframe>';
   echo '</div>';
 }
 
@@ -104,7 +101,7 @@ function showEditItem($conn, $itemNo)
   displayButtons($btns);
 
   // save in the form to make available to jquery code
-  echo '<input type="hidden" name="choice" id="choice" value=' . $itemNo . ' />';
+//  echo '<input type="hidden" name="itemChoice" id="itemChoice" value=' . $itemNo . ' />';
 
   $sql =  "SELECT GroceryName, groceryTypeID, NDB_No, Water, Calories, ";
   $sql .= "Protein, Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium, Sodium, ";
@@ -154,12 +151,11 @@ function showEditItem($conn, $itemNo)
     // display item name id and usda ndb
     echo '<div class="myHead grocHead>';
       echo $grocName;
-      echo '<div id="grocery">';
+      echo '<div id="grocId">';
         echo 'ID: '  . $itemNo;
       echo '</div>';   // grocery
     echo '</div>';     // myHead
 
-//    echo "<table id='myTable'>";
     echo "<table id='myTable1'>";
      echo "<tr>";
       $fld_name = '<input type="text" id="GroceryName" ';
@@ -302,7 +298,7 @@ function showItem($conn, $itemNo)
   if ( $_SESSION["MEMBER_LEVEL"] ==10 ) $btns[EDIT]="Edit Item";
   displayButtons($btns);
 
-  echo '<input type="hidden" name="choice" id="choice" value=' . $itemNo . ' />';
+//  echo '<input type="hidden" name="itemChoice" id="itemChoice" value=' . $itemNo . ' />';
 
   $sql =  "SELECT GroceryName, groceryTypeID, NDB_No, Water, Calories, ";
   $sql .= "Protein, Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium, Sodium, ";
@@ -348,7 +344,7 @@ function showItem($conn, $itemNo)
     // display item name id and usda ndb
     echo '<div class = "myHead grocHead">';
       echo $grocName;
-      echo '<div id="grocery">';
+      echo '<div id="grocID">';
         echo 'ID: '  . $itemNo;
       echo '</div>';   // grocery
 
@@ -551,7 +547,6 @@ $(document).ready( function() {
 
   /*************************/
 
-
   function jConfirm(text, title, btns, callback)
   // ------------------------------------
   {
@@ -597,9 +592,7 @@ $(document).ready( function() {
   {
     if (!pageDirty)
     {
-//      var myItem = $("#itemChooser").val();
-//      $("#choice").prop('value', myItem);
-      var myItem = $("#choice").val();
+      var myItem = $("#itemChoice").val();
       $("#btnCmd").prop('value', SHOW);
       $("#frmShowItems").submit();
     }
@@ -612,8 +605,8 @@ $(document).ready( function() {
   {
     if (v)
     {
-      var myItem = $("#itemChooser").val();
-      $("#choice").prop('value', myItem);
+      var myItem = $("#itemChoice").val();
+//      $("#choice").prop('value', myItem);
       $("#btnCmd").prop('value', SHOW);
       $("#frmShowItems").submit();
     }
@@ -622,10 +615,8 @@ $(document).ready( function() {
   $("#btnEdit").click(function(event)
   // ------------------------------------
   { // can get here when itemChooser not on screen
-    // it will be undefined, but choice will be defined
-    var myItem = $("#itemChooser").val();
-    if (typeof myItem === "undefined")
-         myItem = $("#choice").val();
+    // it will be undefined, but itemChoice will be defined
+    var myItem = $("#itemChoice").val();
     editItem(myItem);
   });
 
@@ -652,14 +643,6 @@ $(document).ready( function() {
 //    $("#frmShowItems").submit();
   });
 
-/*************
-  $("#btnUSDA").click(function(event)
-  // ------------------------------------
-  {
-    window.open("foodList.php", "_blank","resizable=yes,top=400,left=550,width=400,height=400");
-  });
-*************/
-
   function btnChooseCallBack(v)
   // ------------------------------------
   {
@@ -684,7 +667,6 @@ $(document).ready( function() {
     }
   });
 
-
   $("#btnSave").click(function(event)
   // ------------------------------------
   {
@@ -693,17 +675,13 @@ $(document).ready( function() {
 
   $("#btnAdd").click(function(event)
   // ------------------------------------
-  {
-/********************
-     $("#frmShowItems").addClass("hidden");
-     $("#myTable").addClass("hidden");
-     $("#addItemBox").removeClass("hidden");
-     $("#grocName").focus();
-********************/
-
-     // show buttons
+  {  // show buttons
      $("#btnAddFood").removeClass("hidden");
      $("#btnCnclFood").removeClass("hidden");
+
+// hide food chooser div
+ $(".foodDiv").addClass("hidden");
+ $("#pageTitle").text("Search USDA");
 
      // hide chooser drop down
      $("#itemChooser").addClass("hidden");
@@ -722,6 +700,9 @@ $(document).ready( function() {
      $("#frameDiv").addClass("hidden");
      $("#itemChooser").removeClass("hidden");
      $("#btnLine").removeClass("hidden");
+// show food chooser
+ $(".foodDiv").show();
+ $("#pageTitle").text("View Food List");
   });
 
  $("#btnAddFood").click(function()
@@ -729,7 +710,7 @@ $(document).ready( function() {
   {
      var volNames = ['tsp', 'tbsp', 'cup', 'each', 'quart', 'oz', 'can'];
      var volIds = [1, 2, 3, 4, 7, 9, 20];
-//debugger;
+
      // get item name and NDB number of chosen item
      var itemName = $("#frame").contents().find("#itemChooser option:selected").text() + ", ";
      var ndb = $("#frame").contents().find("#itemChooser option:selected").val();
@@ -812,8 +793,6 @@ $(document).ready( function() {
           myData["gramsPerCup"] = gramsPerCup;
 
         var itemData = JSON.stringify(myData);
-//console.debug(itemData);
-//debugger;
 
      // Add grocery item to data base
      $.ajax(
@@ -861,6 +840,7 @@ $(document).ready( function() {
      $("#frameDiv").addClass("hidden");
      $("#itemChooser").removeClass("hidden");
      $("#btnLine").removeClass("hidden");
+$(".foodDiv").show();
   });
 
 function saveError()
@@ -872,7 +852,7 @@ function saveError()
   function editItem(myItem)
   // ------------------------------------
   {
-    $("#choice").prop('value', myItem);
+    $("#itemChoice").prop('value', myItem);
     $("#btnCmd").prop('value', EDIT);
     $("itemChooser").prop('value', myItem);
     var url =  "showGroceries.php?cmd="+EDIT+"&itemChooser=" + myItem;
@@ -882,9 +862,9 @@ function saveError()
   function showNewItem(myItem)
   // ------------------------------------
   {
-    $("#choice").prop('value', myItem);
+    $("#itemChoice").prop('value', myItem);
     $("#btnCmd").prop('value', SHOW);
-    $("itemChooser").prop('value', myItem);
+//    $("itemChooser").prop('value', myItem);
     var url =  "showGroceries.php?cmd="+SHOW+"&itemChooser=" + myItem;
     document.location.href = url;
   }
@@ -895,14 +875,6 @@ function saveError()
      $("#frmShowItems").removeClass("hidden");
      $("#myTable").removeClass("hidden");
      $("#addItemBox").addClass("hidden");
-/**************************************************
-     $("#btnMenu").removeClass("hidden");
-     $("#btnAdd").removeClass("hidden");
-     $("#btnShow").removeClass("hidden");
-     $("#btnEdit").removeClass("hidden");
-     $("#chooser").removeClass("hidden");
-     $("#btnChoose").removeClass("hidden");
-**************************************************/
   }
 
 
@@ -929,16 +901,9 @@ function saveError()
   function itemExists(itemName)
   // -------------------------------
   {
-     // This approach is nasty & time consuming, but I
-     // couldn't get the more elegant approaches to compile correctly
-     // var exists = $("#itemChooser option[value='" +itemName+"']").length
-     // var exists = $("#itemChooser").find('option[value="'+itemName +'"]').length > 0
-
      var found = false;
-     $("#itemChooser option").each(function()
-     {
-// console.debug( $(this).text());
-       // remove all spaces for compare
+     $("#itemChooser li").each(function()
+     { // remove all spaces for compare
        if ( $(this).text().toUpperCase().replace(/ /g,'') == itemName.toUpperCase().replace(/ /g,'') )
        {
            alert(itemName +  " Already Exists.  Please Try Another");
@@ -954,13 +919,14 @@ function saveError()
   // ------------------------------------
   {
      // update "chooser" select
-     newOption = $('<option value="' + id + '">' + newItem + '</option>');
+//     newOption = $('<option value="' + id + '">' + newItem + '</option>');
+     newOption = $('<li data-id=' + id + '>' + newItem + '</li>');
      done = false;
-     $("#itemChooser option").each(function(ndx, option)
+     $("#itemChooser li").each(function(ndx)
      {
-        if ( option.text.toUpperCase() >= newItem.toUpperCase())
+        if ( $(this).text().toUpperCase() >= newItem.toUpperCase())
         { // insert new item here
-          $("#itemChooser option").eq(ndx).before(newOption);
+          $('#itemChooser li:eq(ndx)').before(newOption);
           return false;
         }
     });
@@ -976,11 +942,6 @@ function saveError()
 //     var itemData = JSON.stringify(arrayData).replace(/'/g, "\\'")
      var itemData = JSON.stringify(arrayData);
      var itemId;
-
-     // This approach is nasty & time consuming, but I
-     // couldn't get the more elegant approaches to compile correctly
-     // var exists = $("#itemChooser option[value='" +itemName+"']").length
-     // var exists = $("#itemChooser").find('option[value="'+itemName +'"]').length > 0
 
      var found = false;
      $("#itemChooser option").each(function()
@@ -1031,7 +992,7 @@ function saveError()
   // ----------------
   {
      var ndb=  $("#ndbNo").val();
-     var itemNo = $("#choice").val();
+     var itemNo = $("#itemChoice").val();
      var itemName = $("#groceryName").val();
 
      if (pageDirty)
@@ -1040,8 +1001,6 @@ function saveError()
         var arrayRow=0;
 
         var myData =  {items: [{GroceryNameID: itemNo}]};
-//        myData.items.push( {NDB_NO: ndb});
-//        myData.items.push( {GroceryName: itemName});
         $('#myTable1 tr').each(function(row, tr)
         {
             switch (row)
@@ -1144,6 +1103,7 @@ function saveError()
          });
      } // pageDirty
   }
+
 
 });  // end on page loaded
 

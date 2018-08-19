@@ -20,6 +20,7 @@
     overflow: hidden;
   }
 
+/******
   h2
   {
     color:white;
@@ -31,6 +32,7 @@
   {
     font-weight: bold;
   }
+/******/
 
   h4
   {
@@ -42,7 +44,6 @@
     background-color: OrangeRed;
     display: inline-block;
     font-weight: bold;
-//    font-size: 1em;
     font-size: .8em;
     color: White;
     -moz-border-radius: 25px;
@@ -52,7 +53,18 @@
     min-width: 8em;
   }
 
-  #itemChooser
+  select#itemChooser
   {
     width:300px;
   }
+
+  #inputDiv.embedded
+  {
+    margin-top:-50px;
+  }
+
+  #measures
+  {
+/*    background: aqua; */
+  }
+

@@ -8,6 +8,8 @@
 
   $self = $_SERVER['PHP_SELF'];
 
+  echo '<link href="../css/style.css" rel="stylesheet"> ';
+
   require_once ('dbConnect.php');
   require_once ('banner.php');
   require_once ('displayButtons.php');
@@ -67,7 +69,7 @@
     mysqli_stmt_close($stmt);
   }
 
-  showBanner($itemName);
+  showBannerMsg($itemName);
 
   $btns = array( MENU => "Main Menu"
                , CHOOSE =>"Choose New"
@@ -78,7 +80,7 @@
 
   echo '</div>';   // end of container (started in banner.php)
 
-  echo '<div class="recipeHolder">';
+  echo '<div id="recipeHolder" class="container">';
   echo '<form id="frmShowRecipe" action="'.$self.'" method="get" >';
 //  echo '<input type="hidden" name="subDir" id="subDir" value="' . $subDir .'" />';
   echo '<input type="hidden" name="chosenRecipe" id="chosenRecipe" value="' . $chosenRecipe .'" />';
@@ -88,15 +90,14 @@
 
   getRecipe($conn, $chosenRecipe, $comments);
   echo '<div class="divCaption" id="servingInfo">';
-
     echo '<div id="enterServing">';
-      echo '<label for "serving" id="specialLabel">Serving Size(g)</label>';
-      $fld_serving = '<input type="number" id="serving"'; 
-      $fld_serving .= 'value="'.number_format($servSize).'" ';
-      $fld_serving .= 'onchange="calcServing()"';
-      $fld_serving .= 'onfocus="savePrevious()"';
-      $fld_serving .= ' min="1" max="999" size=5 length=5 step="1"/>';
-      echo $fld_serving;
+       echo '<label for "serving" id="specialLabel">Serving Size(g)</label>';
+       $fld_serving = '<input type="number" id="serving"'; 
+       $fld_serving .= 'value="'.number_format($servSize).'" ';
+       $fld_serving .= 'onchange="calcServing()"';
+       $fld_serving .= 'onfocus="savePrevious()"';
+       $fld_serving .= ' min="1" max="999" size=5 length=5 step="1"/>';
+       echo $fld_serving;
     echo '</div>';  // end of enterServing
     echo '<div id="weight">';
       echo "Recipe Total Weight " . $totWeight . "(g)";
@@ -104,6 +105,7 @@
   echo '</div>';  // divCaption
 
   showNutrients($conn, $chosenRecipe, $servSize);
+ echo '</div>'; // end of recipeHolder
   echo '</form>';
 
   // <!-- Placed at the end of the document so the pages load faster -->

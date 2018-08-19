@@ -1,15 +1,13 @@
 <?php
-  session_start();
-
-//require_once('../includes/logError');
-//logError("editRecipe SESSION userName " . $_SESSION["userName"]);
-
-  if(!isset($_SESSION['userName']))
+  if (session_status() == PHP_SESSION_NONE) 
   {
-    header("Location: " . "../../index.php");
-    exit();
+    session_start();
+    if(!isset($_POST['userName']))
+    {
+      require_once ('../includes/getUser.php');
+    }
   }
-
+//  require_once ('../includes/logError.php');
   global $canBeSubRecipe;
 
   // placed first for these these plugins
@@ -21,17 +19,17 @@
   echo '<script type="text/javascript" src="'.$postIt.'"></script>';
   echo '<link rel="stylesheet" media="all" type="text/css" href="'.$postItCss.'">';
 
-  require_once ('../includes/dbConnect.php');
+  // this comes 1st, it has general style sheet reference in it
   require_once ('../includes/banner.php');
+
+  // style sheet specific to this page 
+  echo '<link rel="stylesheet" media="all" type="text/css" href="../css/editRecipe.css">';
+
+  require_once ('../includes/dbConnect.php');
   require_once ('../includes/fractions.php');
   require_once ('getRecipeInfo.php');
-  require_once ('../includes/logError.php');
   require_once ('../includes/displayButtons.php');
 
-
-//logError("Edit Recipe SESSION userID " . $_SESSION["userID"]);
-//logError("Edit Recipe SESSION userName " . $_SESSION["userName"]);
-//logError("Edit Recipe SESSION level " . $_SESSION["MEMBER_LEVEL"]);
 
   $conn = dbConnect();
 
@@ -86,8 +84,7 @@
   } 
 
   mysqli_stmt_fetch($stmt);
-//logError(__FILE__ . " isPublic= " . $isPublic);
-  showBanner("Edit " . $recipeName);
+  showBannerMsg("Edit " . $recipeName);
 
 
   // Display Button
@@ -103,9 +100,9 @@
 
     displayButtons($btns);
   echo '</form>';
-  echo '</div>'; // end of container (started in banner.php) 
+//  echo '</div>'; // end of container (started in banner.php) 
 
-  echo '<div class="recipeHolder">';
+  echo '<div id="recipeHolder"i class="container">';
   echo '<form name="frmEdit" action="'.$thisScript.'" method="get">';
   echo '<input id=dirty type"number" class="hidden" value="0">';
   echo '<input type="hidden" name="choice" id="choice" value="' . $chosenRecipe .'" />';
@@ -148,9 +145,6 @@
   echo '</div>';     // myHead
 
   $canBeSubRecipe = displayRecipe($conn, $chosenRecipe, $comments);
-//logError(__FILE__ . " canBeSubRecipe= " . $canBeSubRecipe);
-
-
  echo '<div id="comments">';  
 
   echo '<input type="number" id="canBeSub" class="hidden" value="'.$canBeSubRecipe.'"> </input>';
@@ -204,9 +198,6 @@
   {
     var objLen = $('option', obj).size();
     var wtLen = weights.length;
-
-//console.log("hello");
-//console.log(obj");
 
     setDirty();
 
@@ -651,39 +642,6 @@ $(document).ready( function() {
          });
      } // pageDirty
   } // saveRecipe
-
-/******************
-  $("#btnLogOut").click(function(event)
-  // ------------------------------------
-  {
-     var myData = { "userName" : $("#username").val() };
-
-     $.ajax(
-     {
-       url: "../includes/logOut.php",
-       type: "post",
-       data: {"data" : JSON.stringify(myData)},
-       success: function( data, status)  // callback
-                {
-                   if (status=="success")
-                   {
-                       alert("Your have successfully logged out.");
-                       var url = "../../starthere.php";
-                       document.location.href = url;
-                   }
-                   else
-                   {
-                      alert("Error Occurred, Unable to log out");
-                   }
-                },
-       error: function(xhr)
-                {
-                  alert( "An error occured: " + xhr.status + " " + xhr.statusText);
-                }
-     });
-  });
-/******************/
-
 
 });  // end on page loaded
 

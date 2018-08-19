@@ -5,6 +5,8 @@ require_once ( 'jquery.php' );
 function getGroceryItems($conn, $btnCap)
 //----------------------------
 {
+  echo '<input type="hidden" name="itemChoice" id="itemChoice" />';
+
   $sql = "SELECT GroceryNameID, GroceryName FROM GROCERIES ";
   $sql .= "ORDER BY GroceryName";
   selectItem($conn, $sql, $btnCap);
@@ -32,15 +34,23 @@ function selectItem($conn, $sql, $btnCap="Select")
   if ($sts)
   {
     // create drop down box
-    echo '<div id="wrapper">';
-     echo '<div id="chooseHolder" class="item-list">';
-       echo '<input type="input" placeholder="Search.." id="myInput"
-                   onkeyup="myFilter(event)" autocomplete="off">';
+    echo '<div class="wrapper" id="foodWrapper">';
+     echo '<div id="chooseFoodHolder" class="item-list">';
+       echo '<input type="input" placeholder="Search for Food..." id="foodInput"
+                   class="bigInput"
+                   onkeyup="foodFilter(event)" autocomplete="off">';
 
-       echo '<button id="btnSelectItem" name="btnSelectItem" type="button"
-                    <i class="fa fa-search"></i></button>';
-       echo '<div id="chooser" class="hidden">';
-         echo '<ul id="itemChooser">';
+       echo '<button type="submit" id="btnSearchFood" class="searchButton">
+                   <i class="fa fa-search"></i> </button>';
+
+       if ($btnCap != "")
+       {
+           echo '<input id="btnSelectFood" name="btnSelectFood" 
+                        class="selectButton"
+                        type="button" value="' . $btnCap . '">';
+       }
+       echo '<div id="foodChooser" class="chooser hidden">';
+         echo '<ul id="foodItemChooser">';
           // Fetch one at a time from result
           while (mysqli_stmt_fetch($stmt))
           {
@@ -58,22 +68,37 @@ function selectItem($conn, $sql, $btnCap="Select")
 ?>
 
 <script>
-  function myFilter(event)
+  var textHighlighted = false;
+
+  function foodFilter(event)
   // ------------------------
   {  // check for space bar
      var x = event.which || event.keyCode;
-     if (x == 0x20)
-         return false; // space, nothing to do;
+     if (x == 0x20) // space
+         return false; // nothing to do;
 
-     if ( $("#myInput").val().length == 0 )
-              $("#itemChooser li").show();
+     if (x==09)  // tab key
+     {
+       $("#foodChooser").removeClass("hidden");
+       $("#foodChooser").show();
+       return;
+     }
+
+     if ( (textHighlighted==true) && (window.getSelection().toString()) == "")
+     {
+       $("#foodItemChooser li").show();
+       textHighlighted = false;
+     }
+
+     if ( $("#foodInput").val().length == 0 )
+              $("#foodItemChooser li").show();
 
      var hideIt = false;
-     var text = $("#myInput").val().toLowerCase();
-     $("#itemChooser li").each(function(ndx, optn)
+     var text = $("#foodInput").val().toLowerCase();
+     $("#foodItemChooser li").each(function(ndx, optn)
      {
-       if ( $(this).is(":visible") )
-       { // Showing
+//       if ( $(this).is(":visible") )
+//       { // Showing
          var myPhrase = $(this).text().toLowerCase();
          var words = text.split(" ");
 
@@ -93,8 +118,8 @@ function selectItem($conn, $sql, $btnCap="Select")
                 hideIt = true;
                 return false;
              }
-           });
-         }
+           }); // each word
+         } // multiple words
          else
          {  // only 1 word or less
             if (myPhrase.indexOf(words[0]) > -1)
@@ -106,47 +131,67 @@ function selectItem($conn, $sql, $btnCap="Select")
               hideIt = true;
             }
          }
-       }  // if showing,  ignore hidden, previously ruled out
+//     }  // if visible
 
        if (hideIt)
           $(this).hide();
+       else
+          $(this).show();
      }); // each option
   }
 
 $(document).ready( function() {
 // ----------------------------
 
-  $("#itemChooser").on('click', 'li', function(e)
+  $("#foodItemChooser").on('click', 'li', function(e)
   // ------------------------------------
   {
-alert( $(this).text() + '\n' + $(this).attr('data-id'));
-//     e.stopPropagation();
-//     $("#myInput").val(e.target.textContent);
-      $("#myInput").val($(this).text());
-      $("#choice").prop('value', $(this).attr('data-id'));
-      $("#chooser").hide();
+      $("#foodInput").val($(this).text());
+      $("#itemChoice").prop('value', $(this).attr('data-id'));
+      $("#foodChooser").hide();
+  });
+
+  $("#foodInput").select(function(e)
+  // ------------------------------------
+  {
+     textHighlighted = true;
   });
 
   $("body").click(function(e)
   // ------------------------------------
   {
-//     e.stopPropagation();
-//     x= e.target.textContent;
-     if ( ! $(e.target).parent().hasClass('item-list') )
-           $("#chooser").hide();
+     if ( ! $(e.target).parent().hasClass('item-list'))
+           $("#foodChooser").hide();
 
   });
 
-  $("#myInput").click(function()
+  $("#foodInput").focus(
+  // ----------------------
+     function(){
+        $(this).val('');
+    });
+
+  $("#foodInput").on('click', function(e)
   // ------------------------------------
   {
-     $("#chooser").show();
+     $("#foodChooser").removeClass("hidden");
+     $("#foodItemChooser li").each(function(ndx, optn)
+     {
+       $(this).show;
+     });
+     $("#foodChooser").show();
   });
 
-  $("#btnSelectItem").click(function()
+  $("#btnSearchFood").click(function()
   // ------------------------------------
   {
-     $("#chooser").toggle();
+     if ( $("#foodChooser").hasClass("hidden") )
+     {
+        $("#foodChooser").removeClass("hidden");
+        $("#foodChooser").show();
+     }
+     else 
+       $("#foodChooser").toggle();
   });
 
 });  // end on page loaded

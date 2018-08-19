@@ -1,5 +1,6 @@
-<!doctype html>
 <?php
+/*error_reporting(E_ALL);
+ini_set('display_errors', 1);*/
   if ( !session_id() )
 	session_start();
 
@@ -12,10 +13,6 @@
   $userID = $_SESSION["userID"];
   $self = $_SERVER['PHP_SELF'];
 
-//logError("TRACK SESSION userID " . $_SESSION["userID"]);
-//logError("TRACK SESSION userName " . $_SESSION["userName"]);
-
-/*************/
 echo '<html>';
 echo '<head>';
   echo ' <meta charset="utf-8">';
@@ -34,7 +31,10 @@ echo '<head>';
   // Custom styles for this template -->';
   echo '<link href="../css/custom.css" rel="stylesheet"> ';
   echo '<link href="../css/style.css" rel="stylesheet"> ';
+  echo '<link href="../css/track.css" rel="stylesheet"> ';
   echo '<link href="../css/datepicker.css" rel="stylesheet"> ';
+  echo '<link href="../css/foodStyle.css" rel="stylesheet"> ';
+
 
   // jQuery-UI
   echo '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>';
@@ -45,11 +45,12 @@ echo '</head>';
 echo '<body>';
   require_once ( './dbConnect.php');
   require_once ( './displayButtons.php');
-  require_once ( './chooseRecipe.php');
-  require_once ( './chooseItem.php');
+  require_once ( './chooseRecipeItem.php');
+  require_once ( './chooseFoodItem.php');
   require_once ( './getTrack.php');
   require_once ( './getNewTrack.php');
   require_once ( './cancelModal.php');
+  require_once ( './dateModal.php');
 
    $conn = dbConnect();
    if ($conn==NULL) 
@@ -61,7 +62,9 @@ echo '<body>';
   $nutrients= "../scripts/nutrients.js";
   $numbers = "../scripts/numbers.js";
 
-//  echo '<html>';
+     /*****************
+     * Navigation Bar
+     ******************/
       echo '<nav class="navbar navbar-inverse navbar-fixed-top"> ';
         echo '<div class="container">';
           echo '<div class="navbar-header">';
@@ -82,7 +85,7 @@ echo '<body>';
                   echo '<li><a href="#" onClick="kdcMenu();">KDC Main Menu</a></li>';
           
             echo '<li><a id="home" href="#" onClick=memberHome()>Member Area</a></li>';
-            echo '<li><a id="log" href="#" onClick="showLog();">Show Log</a></li>';
+            echo '<li><a id="btnLog" href="#" onClick="showLog();">Show Log</a></li>';
             echo '<li><a id="saveAll" href="#" onClick="saveItems();">Save All</a></li>';
             echo '<li><a id="cnclIt" href="#" onClick="cnclEdits();">Cancel</a></li>';
           echo '</ul>';
@@ -90,79 +93,61 @@ echo '<body>';
       echo '</div>';  // container
     echo '</nav>';
 
-
-
-
 /**************/
-  echo '<section>';
-  echo '<div class="container">';
-
+  echo '<div id=outerBox class="container">';
     echo '<form id="frmTrack" action="'.$self.'" method="get" >';
       echo '<input type="hidden" name="userID" id="userID" value="' . $userID .'" />';
     echo '</form>';  // frmTrack
 
-    echo '<div id="trackContainer">';   // YELLOW
-      echo '<br>';
+    // Set up date, recipe and foood choosers
+    echo '<div id="trackHeader">';
+      echo '<div id="dateHolder">';
+        $today = date('M d, Y');
+        $startDate = date('Y-m-d');
+        $msg = 'Food Log For '; 
 
-        echo '<div id="dateHolder">';
-          $today = date('M d, Y');
-          $startDate = date('Y-m-d');
-          $msg = 'Food Log For '; 
-          echo '<button type="button" class="myIconButton";>';
-          echo '<span class="fa fa-calendar"></span>';
-          echo '</button>';
-          echo '<input id="btnChange" class="myIconButton" name="btnChange" type="button" value="' . $today . '"/`>';
-          echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
-        echo '</div>';   // dateHolder;
+        echo '<button type="button" class="datebtn calendar-btn"> <span class="fa fa-calendar"></span></button>';
+        echo '<input id="btnChange" class="datebtn input-button" name="btnChange" type="button" value="' . $today . '"/`>';
+        echo '<input id="sqlDate" class="hidden" type input name="sqlDate" value="' . $today . '">';
+      echo '</div>';   // dateHolder;
+    echo '<span class="fa fa-arrow-left"></span>Click here to change date';
 
       echo '<div id="chooserHolder">';  // AQUA
-        echo '<input type="hidden" name="recipeChoice" id="recipeChoice" />';
-        selectRecipe($conn, "Add to List");
-
-        echo '<input type="hidden" name="itemChoice" id="itemChoice" />';
-        getGroceryItems($conn, "Add to List");
+        selectRecipe($conn, "Add Recipe to List");
+        getGroceryItems($conn, "Add Food To List");
       echo '</div>'; // chooserHolder   aqua
+    echo '</div>';  // trackHeader   yellow
+  echo '</container>'; // outerBox
 
-    echo '</div>';  // trackContainer   yellow
-  echo '</container>';
-  echo '</section>';
-/**************/
-
-/**************/
-  echo '<section>';
+  // build nutrition table
   echo '<div class="container">';
+   echo '<div id = "nutrientContainer">';
+    echo '<table id="header-fixed"></table>';
+    echo '<table id="log">';
+      echo '<thead>';
+        echo '<th colspan="2">Qty</th>';   // qty & uom description (ex. slice, cup)
+        echo '<th  class="hidden">itemID</th>';
+        echo '<th class="itemName">Item</th>';
+        echo '<th class="stdCol">Weight</th>';
+        echo '<th class="stdCol">Water</th>';
+        echo '<th class="stdCol">Calories</th>';
+        echo '<th class="stdCol">Protein</th>';
+        echo '<th class="stdCol">Fat</th>';
+        echo '<th class="stdCol">Carbs</th>';
+        echo '<th class="stdCol">Fiber</th>';
+        echo '<th class="stdCol">Sugars</th>';
+        echo '<th class="stdCol">Phos.</th>';
+        echo '<th class="stdCol">Pot.</th>';
+        echo '<th class="stdCol">Sodium</th>';
+        echo '<th class="hidden">gramsPerUnit</th>';
+        echo '<th>Option</th>';
+        echo '<th class="hidden" value=>trackID</th>';
+      echo '</thead>';
 
-   echo '<div id="nutrientContainer">';  // CHARTREUSE
-      echo '<table id="log">';
-        echo '<thead>';
-          echo '<th colspan="2">Qty</th>';   // qty & uom description (ex. slice, cup)
-          echo '<th  class="hidden">itemID</th>';
-          echo '<th class="itemName">Item</th>';
-          echo '<th class="stdCol">Weight</th>';
-          echo '<th class="stdCol">Water</th>';
-          echo '<th class="stdCol">Calories</th>';
-          echo '<th class="stdCol">Protein</th>';
-          echo '<th class="stdCol">Fat</th>';
-          echo '<th class="stdCol">Carbs</th>';
-          echo '<th class="stdCol">Fiber</th>';
-          echo '<th class="stdCol">Sugars</th>';
-          echo '<th class="stdCol">Phos.</th>';
-          echo '<th class="stdCol">Pot.</th>';
-          echo '<th class="stdCol">Sodium</th>';
-          echo '<th class="hidden">gramsPerUnit</th>';
-          echo '<th>Option</th>';
-          echo '<th class="hidden" value=>trackID</th>';
-//          echo '<th>gramsPerUnit</th>';
-        echo '</thead>';
-
-//   $startDate = "2018-04-03";
-        getTrackForPhp($conn, $userID, $startDate);
+      getTrackForPhp($conn, $userID, $startDate);
     echo '</table>';
-
-  echo '</div>';  // NutrientContainer   chartreuse
-  echo '</div>';  // trackContainer       yellow
-  echo '</container>';
-  echo '</section>';
+   echo '</div>';  // nutrientContainer
+ echo '</div>';  // container
 
 /**************/
   // <!-- Placed at the end of the document so the pages load faster -->
@@ -172,9 +157,30 @@ echo '<body>';
   echo '<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>';
   echo '<script src="'.$nutrients.'"></script>';
   echo '<script src="'.$numbers.'"></script>';
+echo '</body>';
+echo '</html>';
 ?>
-
 <script>
+
+var tableOffset = $("#log").offset().top;
+var $header = $("#log > thead").clone();
+var $fixedHeader = $("#header-fixed").append($header);
+
+$("#nutrientContainer").bind("scroll", function() {
+        $("#header-fixed th").each(function(index){
+            var index2 = index;
+            $(this).width(function(index2){
+                //$("#log thead th").eq(index).width();
+                var element = $("#log thead th").eq(index)[0];
+                var nWidth = window.getComputedStyle(element).width;
+                return parseFloat(nWidth, 10)-14;
+            });
+        });
+    if ($fixedHeader.is(":hidden")) {
+        $("#header-fixed tr:first th[colspan=2]").attr('colspan',1);
+        $fixedHeader.show();
+    }
+});
 
   var pageDirty = 0;
   var firstNewRow = 0;
@@ -242,7 +248,6 @@ echo '<body>';
     if (pageDirty)
     {
       pageName="";
-      formName = frmTrack;
       $('#cancelModal').modal('show')
     }
   };
@@ -262,13 +267,7 @@ echo '<body>';
   {
     pageName = '../starthere.php';
     if (!pageDirty)
-<<<<<<< HEAD
       document.location.href = pageName;
-=======
-{
-      document.location.href = pageName;
-}
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     else
       $('#cancelModal').modal('show');
   }
@@ -305,6 +304,7 @@ echo '<body>';
   // ------------------------------------
   {
     var tblRow =$("#log tbody").find('tr').eq(rowIndex);
+    var sum=0;
 
     // for each column in footer add corresponding colum in tblRow
     $("#log tfoot td").each( function(i, cell)
@@ -559,11 +559,8 @@ echo '<body>';
     // save new rows
     myData=[];
     myData[0] =  {"userID" : userID };
-<<<<<<< HEAD
     var beginDate =  $("#sqlDate").val();
     myData[1] = {"sqlDate" : beginDate };
-=======
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     var idx = 0;
     var breakFlag = false;
 
@@ -665,14 +662,9 @@ echo '<body>';
 
     if (breakFlag) 
        return false;
-<<<<<<< HEAD
 
     var itemData = JSON.stringify(myData);
 
-=======
-    var itemData = JSON.stringify(myData);
-x=1;
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     $.ajax(
     {
       url: "./saveTrack.php",
@@ -762,8 +754,7 @@ function logOff()
 
 $(document).ready( function() {
 // ----------------------------
-  $('#btnSelectRecipe').show();
-  $('#btnSelectItem').show();
+//  $('#btnSelectRecipe').show();
 
   firstNewRow=$("#log tbody tr").length;
 
@@ -772,7 +763,6 @@ $(document).ready( function() {
   var txt = txt + 'Your changes will be lost?';
   var myButtons = { "Yes, Your Changes will NOT be saved!": true, "No, Stay On Page": false };
 
-<<<<<<< HEAD
   var today = new Date;
 
   $( "#btnChange" ).datepicker(
@@ -781,9 +771,11 @@ $(document).ready( function() {
         , today
         , onClose: function(selectedDate)
           {
-//            alert ("working " +  $("#sqlDate").val());
             $("#sqlDate").val(selectedDate);
-            doSomething();
+            if (pageDirty)
+               $('#dateModal').modal('show');
+            else
+               doSomething();
           }
       });
 
@@ -792,6 +784,7 @@ $(document).ready( function() {
   {  // Do something
      var userID = $("#userID").val();
      var beginDate = $("#sqlDate").val();
+
 
      // get new data & re-build table
      var arrayData = { "beginDate" : beginDate, "userID" : userID };
@@ -808,15 +801,13 @@ $(document).ready( function() {
              if ( result[0] == "1")
              {
                $("#log tbody").empty();
-//               if ($("#log tfoot").length >0) 
                       $("#log tfoot").empty();
-//               else
-//                      $("#log tfoot").append('<tfoot id="logFooter">i</tfoot>')
 
                if (result[1] != null)
                      $("#log tbody").append(result[1]);
 
                $("#log tfoot").append(result[2]);
+               pageDirty = true;
              }
              else
              {
@@ -830,13 +821,24 @@ $(document).ready( function() {
      }); // ajax
   }
 
+    $('#btnLose').click(function(e) // lose changes
+    // ------------------------------------
+    { // lose changes, leave without saving
+      $('#dateModal').modal('toggle');
+      e.preventDefault();
+      zeroDirty();
+      doSomething();
+    });
+
+    $('#btnContinue').click(function()  // stay on page
+    // ------------------------------------
+    { // stay on page, keep changes
+      $('#dateModal').modal('toggle');
+    });
+
 
 /***********************************/
 
-=======
-
-/***********************************/
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
   // On initialization, set each cell 'value' property
   // for later manipulation
   // each row
@@ -849,11 +851,6 @@ $(document).ready( function() {
      });
   });
 
-<<<<<<< HEAD
-=======
-/********************************/
-
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
   // Append a new row to tracking table
   function newRow(itemID, itemInfo)
   // -------------------------------
@@ -866,7 +863,6 @@ $(document).ready( function() {
     var row  = '<tr class="rightJustify">';
     row += '<td dataVal="' + qty + '"><input type="number" value=' + '"' + qty + '"' ;;  // Qty
     row += ' min=".1" max="9999" step=".1"';
-//    row += 'onchange="qtyChanged(this)">';
     row += '</td>';
 
     row += '<td>' + itemInfo[UOM_DESC] + '</td>';   // serving
@@ -925,14 +921,12 @@ $("#log tbody").find('tr').eq(rowIndex).find('td').eq(QTY).focus();
   }
 
 
-  $("#btnSelectItem").click(function(event)
+  $("#btnSelectFood").click(function(event)
   // ------------------------------------
   {
-     var itemID = $("#itemChooser").val();
-     var tmp = $("select[name='itemChooser'").find('option:selected').text()
-     var tmp= "<li>" + tmp + "</li>";
-     $("#foodList").append(tmp);    // add to food List
-
+     if ( $("#itemChoice").val() == "" )
+          return;
+     var itemID = $("#itemChoice").val();
      var arrayData = { "GroceryNameID" : itemID };
      var itemData = JSON.stringify(arrayData);
 
@@ -963,11 +957,13 @@ $("#log tbody").find('tr').eq(rowIndex).find('td').eq(QTY).focus();
   $("#btnSelectRecipe").click(function(event)
   // ------------------------------------
   {
-     var opt = $("#recipeChooser").val().split("+");
+     if ($("#recipeChoice").val() == "")
+         return;
+     var recipID = $("#recipeChoice").val();
+
+     var opt = $("#recipeChoice").val().split("+");
      var recipeID = opt[0];
-     var tmp = $("select[name='chosenRecipe'").find('option:selected').text()
-     var tmp= "<li>" + tmp + "</li>";
-     $("#foodList").append(tmp);
+     var recipeOwner = opt[1];
 
      var arrayData = { "ID" : recipeID };
      var itemData = JSON.stringify(arrayData);
@@ -1219,10 +1215,7 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
   //----------------------------------
   {
     var userID = $("#userID").val();
-<<<<<<< HEAD
     var sqlDate = $("#sqlDate").val();
-=======
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     var row = $("#log tbody").find('tr').eq(rowIndex);
 
     var qty = row.find('td').eq(QTY).attr("dataVal");
@@ -1235,10 +1228,7 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
     arrayData[0] =
     {
        "userID" : userID
-<<<<<<< HEAD
      , "sqlDate" : sqlDate
-=======
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
      ,  "itemID" : row.find('td').eq(ITEMID).text()
      ,  "Qty": qty
      ,  "UOM_Desc" : row.find('td').eq(UOM_DESC).text()
@@ -1258,11 +1248,7 @@ is NaN. NaN evaluates to false, so num ends up being set to 0.
    }
 
     var itemData = JSON.stringify(arrayData);
-<<<<<<< HEAD
 
-=======
-a=1;
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     $.ajax(
     {
       url: "./addUpdateTrackRow.php",
@@ -1391,5 +1377,3 @@ a=1;
 
 </script>
 
-  </body>
-</html>

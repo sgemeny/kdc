@@ -1,4 +1,3 @@
-<!doctype html>
 <?php
   session_start();
   $self = $_SERVER['PHP_SELF'];
@@ -8,14 +7,18 @@
     header("Location: " . "../../index.php");
     exit();
   }  
-  require_once ('dbConnect.php');
+
   require_once ('banner.php');
+  echo '<link href="../css/foodStyle.css" rel="stylesheet"> ';
+
+  require_once ('dbConnect.php');
+  require_once ('logError.php');
+  require_once ('canEditRecipe.php');
   require_once ('displayButtons.php');
-  require_once ('chooseRecipe.php');
+  require_once ('chooseRecipeItem.php');
 
+  showBannerMsg("Choose A Recipe");
   
-
-  showBanner("Choose A Recipe");
   $conn = dbConnect();
 
   if (isset($_GET["cmd"])) $cmd = $_GET["cmd"];
@@ -23,12 +26,15 @@
 
   echo '<form id="frmShowRecipes" action="'.$self.'" method="get" >';
   echo '<input type="hidden" name="userID" id="userID" value="' . $_SESSION["userID"] .'" />';
+  echo '<input type="hidden" name="userName" id="userName" value="' . $_SESSION["userName"] .'" />';
 
   echo '<div id="addItemBox" class="hidden">';
    echo '<label for "itemName">New Name</label>';
-   echo '<input type="text" id="itemName" required>';
-   echo '<input name="btnEnter" id="btnEnter" class="myButton" type="button" value="Enter" >';
-   echo '<input name="btnCnclBox" class="myButton" id="btnCnclBox" type="button" value="Cancel">';
+   echo '<input type="text" id="itemName" tabindex="1" required>';
+   echo '<input name="btnEnter" id="btnEnter" class="myButton" 
+                type="button" value="Enter" tabindex="2" >';
+   echo '<input name="btnCnclBox" class="myButton" id="btnCnclBox" 
+                type="button" value="Cancel" tabindex=3>';
   echo '</div>';  // addItemBox
 
   switch ($cmd)
@@ -50,10 +56,12 @@ function chooseRecipe($conn)
                );
 
   displayButtons($btns);
-  echo '<input type="hidden" name="choice" id="choice" />';
-  selectRecipe($conn, "");  // recipe selector
+//  echo '<input type="hidden" name="choice" id="choice" />';
+//  echo '<input type="hidden" name="owner" id="owner" />';
+    selectRecipe($conn, "");  // recipe selector
 } // choose Recipe
 
+  // At bottom to load last
   $buttons= "../scripts/buttons.js";
   echo '<script src="'.$buttons.'"></script>';
   require_once ( 'jquery.php' );
@@ -61,27 +69,6 @@ function chooseRecipe($conn)
 ?>
 
  <script>
- function checkIfCanEdit()
- // ----------------------
- {
-    var opt = $("#recipeChooser").val().split("+");
-    var chosenRecipe = opt[0];
-    var owner = opt[1];
-    var user = $("#userID").val();
-
-//alert("owner: " + owner + ", user: " + user);
-    if (owner == user)
-    { 
-       canEdit=1;
-       $("#btnEdit").prop('disabled',false);
-    }
-    else
-    {
-      canEdit=0;
-      $("#btnEdit").prop('disabled', true);
-    }
-    return canEdit;
- }
 
 $(document).ready( function() {
 // ----------------------------
@@ -97,43 +84,31 @@ $(document).ready( function() {
   $("#btnShow").click(function(event)
   // ------------------------------------
   {
-    var opt = $("#recipeChooser").val().split("+");
-    var chosenRecipe = opt[0];
-
     canEdit = checkIfCanEdit();
-    $("#choice").prop('value', chosenRecipe);
-    $("#btnCmd").prop('value', SHOW);
-
-//    var url =  $("#subDir").val() + "includes/showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
+	var chosenRecipe = $("#recipeChoice").val();
     var url =  "showRecipe.php?cmd="+ SHOW +"&chosenRecipe="+chosenRecipe+"&canEdit="+canEdit;
-
      document.location.href = url;
   });
 
   $("#btnEdit").click(function(event)
   // ------------------------------------
   {
-    var chosenRecipe = $("#recipeChooser").val();
-    $("#choice").prop('value', chosenRecipe);
-    $("#btnCmd").prop('value', EDIT);
+    var userName = $("#userName").val();
+    var userID = $("#userID").val();
+	var chosenRecipe = $("#recipeChoice").val();
 
-    var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
-     document.location.href = url;
+    $("#btnCmd").prop('value', EDIT);
+    window.location.href = "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+chosenRecipe;
+    exit();
   });
 
   $("#btnAdd").click(function(event)
   // ------------------------------------
   {
      $("#btnLine").addClass("hidden");
-     $("#chooseRecipe").addClass("hidden");
+//     $("#chooseRecipe").addClass("hidden");
+     $("#chooseHolder").addClass("hidden");
      $("#pageTitle").text("Add Recipe");
-/*****************
-     $("#btnMenu").addClass("hidden");
-     $("#btnShow").addClass("hidden");
-     $("#btnEdit").addClass("hidden");
-     $("#btnAdd").addClass("hidden");
-     $("#chooser").addClass("hidden");
-/*****************/
      $("#addItemBox").removeClass("hidden");
      $("#itemName").focus();
 
@@ -143,7 +118,7 @@ $(document).ready( function() {
   // ------------------------------------
   {
 //    var chosenRecipe = $("#recipeChooser").val();
-    $("#choice").prop('value', myItem);
+    $("#recipeChoice").prop('value', myItem);
     $("#btnCmd").prop('value', EDIT);
 //    var url =  $("#subDir").val() + "forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+myItem;
     var url =  "../forms/editRecipe.php?cmd="+ EDIT +"&chosenRecipe="+myItem;
@@ -155,15 +130,9 @@ $(document).ready( function() {
   {
      $("#addItemBox").addClass("hidden");
      $("#btnLine").removeClass("hidden");
-     $("#chooseRecipe").removeClass("hidden");
+//     $("#chooseRecipe").removeClass("hidden");
+     $("#chooseHolder").removeClass("hidden");
      $("#pageTitle").text("Choose A Recipe");
-/**************
-     $("#btnMenu").removeClass("hidden");
-     $("#btnAdd").removeClass("hidden");
-     $("#btnShow").removeClass("hidden");
-     $("#btnEdit").removeClass("hidden");
-     $("#chooser").removeClass("hidden");
-/**************/
   }
 
   $("#btnCnclBox").click(function(event)
@@ -194,16 +163,16 @@ $(document).ready( function() {
     $("#frmShowRecipes").submit();
   });
 
-  function updateChooser(id, newItem)
+  function updateChooser(owner, id, newItem)
   // ------------------------------------
   {
      // update "chooser" select
-     $("#recipeChooser option").each(function(ndx, option)
+     $("#itemChooser li").each(function(ndx)
      {
-        if ( option.text.toUpperCase() >= newItem.toUpperCase())
+        if ( $(this).text().toUpperCase() >= newItem.toUpperCase())
         { // insert new item here
-          newOption = $('<option value="' + id + '">' + newItem + '</option>');
-          $("#recipeChooser option").eq(ndx).before(newOption);
+          newOption = $('<li data-id=' + owner + '+' + id + '>' + newItem + '</li>');
+          $('#itemChooser li:eq(ndx)').after(newOption);
           return false;
         }
     });
@@ -216,15 +185,13 @@ $(document).ready( function() {
      var owner = $("#userID").val();
      var arrayData = { "owner" : owner,  "RecipeName" : itemName };
      var itemData = JSON.stringify(arrayData).replace(/'/g, "\\'")
-     var itemId;
-
 
      // This approach is nasty & time consuming, but I
      // couldn't get the more elegant approaches to compile correctly
      // var exists = $("#recipeChooser option[value='" +itemName+"']").length
      // var exists = $("#recipeChooser").find('option[value="'+itemName +'"]').length > 0
      var found = false;
-     $("#recipeChooser option").each(function()
+     $("#itemChooser li").each(function()
      {
        if ($(this).text().toUpperCase()==itemName.toUpperCase())
        {
@@ -251,7 +218,7 @@ $(document).ready( function() {
                      var itemID = $.parseJSON(data);
                      if (itemID)
                      {
-                       updateChooser(itemID, itemName);
+                       updateChooser(owner, itemID, itemName);
                        editItem(itemID);
                        alert("Your Item was Successfully Added");
                      }
@@ -267,39 +234,6 @@ $(document).ready( function() {
                 }
      });
   }
-
-
-/**************************************
-  $("#btnLogOut").click(function(event)
-  // ------------------------------------
-  {
-     var myData = { "userID" : $("#userID").val() };
-
-     $.ajax(
-     {
-       url: "./logOut.php",
-       type: "post",
-       data: {"data" : JSON.stringify(myData)},
-       success: function( data, status)  // callback
-                {
-                   if (status=="success")
-                   {
-                       alert("Your have successfully logged out.");
-                       var url = "../../index.php";
-                       document.location.href = url;
-                   }
-                   else
-                   {
-                      alert("Error Occurred, Unable to log out");
-                   }
-                },
-       error: function(xhr)
-                {
-                  alert( "An error occured: " + xhr.status + " " + xhr.statusText);
-                }
-     });
-  });
-/**************************************/
 
 });  // doc ready
 

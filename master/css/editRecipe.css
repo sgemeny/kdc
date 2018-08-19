@@ -1,0 +1,102 @@
+ /************************************
+ * for editRecipe.php
+ * ***********************************/
+  #tblRecipe
+  {
+    margin-top: 5px;
+    table-layout: fixed; 
+    width: 100%;
+    white-space: nowrap;
+  }
+
+/******
+  td
+  {
+    text-overflow: ellipsis;
+  }
+
+  .qty
+  {
+    width: 65px;
+  }
+
+  .uom
+  {
+    width: 20pix;
+  }
+
+  .item
+  {
+    width: 50px;
+  }
+
+  .dirs
+  {
+    width: 100px;
+  }
+
+  .seqCol
+  {
+    width: 10%;
+  }
+
+  .idCol
+  {
+    width: 3.125em;
+  }
+/******/
+
+/* from styleSheet.css, with %s modified */
+
+ #tblRecipe td
+  {
+    table-layout: fixed;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  #tblRecipe .qty
+  {
+    width: 10%;
+  }
+
+  #tblRecipe .uom
+  {
+    width: 10%;
+  }
+
+  #tblRecipe .item
+  {
+    width: 35%;
+  }
+
+  #tblRecipe .dirs
+  {
+    width: 40%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  #tblRecipe .seqCol
+  {
+    width: 5%;
+  }
+
+/********** end styleSheet.css **********/
+
+  #editCaption
+  {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #addComment
+  {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    border: 1px solid green;
+    width: 100%;
+  }
+
+

@@ -1,55 +1,249 @@
-  #myInput
+ /*************************************
+ * For Recipe & Food Item Chooser Dropdowns
+ * ***********************************/
+
+  .wrapper
   {
-    width:24.5%;
-    padding: 10px;
+    margin-top: 20px;
+    margin-left:0;
+    width: 45%;
+  }
+
+  #recipeChooser
+  {
+     margin-top: 1em;
+  }
+
+  #recipeWrapper
+  {
+    /*background-color: pink;*/
+  }
+
+  #foodWrapper
+  {
+    margin-left:50%;
+    /*background-color: yellow;*/
+  }
+
+  .foodDiv
+  {
+    margin-left:-100%;
+  }
+
+  #chooserHolder
+  {
+/*    background-color: aqua; */
+    height:75px;
+    width: 1200px;
+/*    position:fixed; */
+  }
+
+  .bigInput
+  {
+    /*float: left;*/
+    /*width:50%;*/
+    width: 270px;
+    display:inline-block;
+    padding: 6px;
     font-size: 17px;
     border: 1px solid grey;
-    float: left;
     background: #f1f1f1;
   }
 
-  #btnSelectItem
+  .searchButton
   {
-    float: left;
-    width: 5%;
+    /*float: left;*/
+    position:relative;
+    top:-2px;
     padding: 10px;
     background: OrangeRed;
     color: white;
-    font-size: 20px;
+    font-size: .8em;
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
+    height: 38px;
   }
 
-  #btnSelectItem:hover
+  .selectButton
+  {
+    margin-left: 10px;
+    /*float: left;*/
+    padding: 8px;
+    background: OrangeRed;
+    color: white;
+    font-size: .8em;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+  }
+
+  .searchButton:hover, .selectButton:hover
   {
     background: Orange;
   }
 
-  #chooseHolder
+  .chooser
   {
-    margin: auto;
-     background-color: yellow:
-  }
-
-  #chooser
-  {
-/*    background-color: pink; */
     display: none;
     width: 28%;
   }
+  #chooseRecipeHolder{
+      float:left;
+  }
 
-  #itemChooser
+  #recipeChooser,#foodChooser{
+    display: block;
+    width: 100%;
+    z-index: 1;
+    width: 270px;
+    position: absolute;
+    margin-top: 0px;
+    }
+
+    #recipeItemChooser,#foodItemChooser{
+        overflow-y: auto;
+        height: 400px;
+        width: 100%;
+        display: block;
+        overflow-x: hidden;
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+  .chooser li
   {
-/***
-    list-style-type: disc;
-    background-color: linen;
-    margin-top: -8px;
-****/
+     list-style-type: none;
+     /*margin-left: -40px;*/
+     padding:3px 0px;
+     /*width: 300px;*/
+     background: white;
+     padding-left: 6px;
+     width: 100%;
+  }
 
-  li 
+  li:hover
   {
     cursor: pointer
   }
+
+ /*************************************
+ * Date Stuff
+ * ***********************************/
+  #dateHolder
+  {
+    margin-top: 8px;
+/***
+ centering just looked a little off
+    margin-left: auto;
+    margin-right: auto;
+/***/
+  background:OrangeRed;
+  display:inline-block;
+  color:#FFF;
+  font-size: 15px;
+  font-weight: bold;
+
+    margin-left:400px;
+    width:200px;
   }
 
+#dateHolder:hover 
+{
+    background:orange;
+} 
+
+.calendar-btn {
+    border-right: 0px;
+}
+.input-button {
+    border-left: 0px;
+}
+
+.datebtn{
+    background:transparent;
+    outline:0;
+    border:0;
+}
+
+  #dateMsg
+  {
+    display: inline-block;
+  }
+
+  .myIconButton
+  {
+    background-color: OrangeRed;
+    font-weight: bold;
+    font-size: 25px;
+    color: White;
+  }
+
+  #ui-datepicker-div{
+	margin-left: -25px;
+  }
+  
+  .selectButton:focus{
+	  outline:none;
+  }
+   /**********************************
+ Responsive design
+ **********************************/
+	
+@media screen and (max-width: 1350px) { 
+	#chooserHolder{
+		width: auto;
+		max-width: 100%;
+		padding: 0 15px;
+	}
+	#trackHeader {
+		width: auto;
+		max-width: 100%;
+		text-align: center;
+	}
+	
+	#dateHolder{
+		margin-left:0;
+	}
+	
+	.wrapper{
+		text-align: left;
+		width:50%;
+	}
+	
+	#ui-datepicker-div {
+		margin-left: -60px;
+	}
+}
+
+@media screen and (max-width: 960px) { 
+	#chooseRecipeHolder {
+		float: none;
+		/*text-align: center;*/
+	}
+	.wrapper{
+		width:100%;
+	}
+	#foodWrapper {
+		margin-left: 0;
+	}
+	
+	#recipeChooser, #foodChooser{
+		width:46%;
+	}
+	.bigInput{
+		width:50%;
+	}
+		
+	.searchButton:hover, .selectButton:hover
+	{
+		background: OrangeRed;
+	}
+		
+	.searchButton:active, .selectButton:active
+	{
+		background: Orange;
+	}
+}

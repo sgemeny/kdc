@@ -20,6 +20,11 @@ $_POST["data"] = ' {"beginDate":"Apr 5, 2018","userID":"1"} ';
     global $totFat, $totCarbs, $totFiber, $totSugars, $totPhos;
     global $totPotas, $totSodium;
 
+    $totWeight = $totWater = $totCalories = $totProtein = 0;
+    $totFat = $totCarbs = $totFiber = $totSugars = $totPhos = 0;
+    $totPotas = $totSodium = 0;
+
+
     require_once('./logError.php');
     require_once('./setupTrackInfo.php');
 //logError("getNewTrack");

@@ -165,7 +165,7 @@ function displayRecipe($conn, $chosenRecipe, $comments)
     { // for each recipe item
       $disableFlag="";
       $fld_UOM = '<select id="UOM" onchange="setDirty(this)"' . $disableFlag . '>';
-      $fld_Instr  = '<input type="text" id="Directions" name="dirs" ';
+      $fld_Instr  = '<input type="text" id="dirs" name="dirs" size="55"';
       $fld_Instr .= 'value="'.$instructs.'" ';
       $fld_Instr .= 'onchange="setDirty(this)" />';
       $fld_Instr .= '</input>';
@@ -177,8 +177,8 @@ function displayRecipe($conn, $chosenRecipe, $comments)
 
       $diableFlag = "";
       echo '<tr>';
-        // Quantity whole Number Drop Down
-        // -------------------------------
+        // Break quantity into whole number & fraction
+        // -------------------------------------------
         $qtyWhole = floor($quantity);
         $qtyFrac = round($quantity - $qtyWhole, 3, PHP_ROUND_HALF_DOWN);
 

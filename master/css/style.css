@@ -1,10 +1,112 @@
-body {
-  padding-top: 50px;
-}
+ /************************************
+ * for General Use
+ * ***********************************/
+  h2
+  {
+    margin-top: -.10em;
+    font-size: 1.4em;
+    color:DarkBlue;
+  }
+
+  h3
+  {
+    color: maroon;
+    margin-left: 8em;
+  }
+
+  .divCaption
+  {
+    margin-top: 1em;
+/*    margin-bottom: .5em; */
+    font-weight: bold;
+    color: maroon;
+  }
+
+  #commentCap
+  {
+    width:55%;
+    margin-left: 100px;
+  }
+
+ #commentBox
+  {
+      width: 55%;
+      height: 100px;
+      padding: 4px;
+      text-align: left;
+      border-style: solid;
+      border-color: green;   /* #008000; */
+      border-width: 1px;
+    margin-bottom: .3em;
+    margin-left: 100px;
+  }
+
+  #comments
+  {
+    width:55%;
+    margin-left: 100px;
+  }
+
+  #weight
+  {
+    float: right;
+  }
+
+  .totals
+  {
+     margin-top: 5px;
+  }
+
+  .totalsHolder
+  {
+    margin-left: 100px;
+    font-size: 1em;  /* 1em=16px */
+    width: 50%;
+  }
+
+  /*********************
+  *  For showRecipe 
+  /*********************/
+  #servingInfo
+  {
+    width: 50%;
+    margin-left: 100px;
+  }
+
+  #enterServing
+  {
+/*background:yellow;*/
+  }
+
+
+  body 
+  {
+    padding-top: 50px;
+    background-color: linen;
+     margin: 0;
+  }
 
   .hidden
   {
     display:none;
+  }
+
+  #banner #kdc-logo
+  { /* NOTE: path is relative to location of this css file */
+    background-image: url(../images/KDC_BannerHeader.jpg);
+    background-repeat:no-repeat;
+    display:block;
+
+    margin-top:-50px;
+    width: 960px;
+    height: 200px;
+  }
+
+  #kdc-logo
+  {
+    overflow: hidden;
+    text-indent:100%;
+    white-space: nowrap;
   }
 
 
@@ -16,10 +118,6 @@ body {
     background-color: OrangeRed;
     display: inline-block;
     font-weight: bold;
-<<<<<<< HEAD
-=======
-//    font-size: 1em;
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
     font-size: .8em;
     color: White;
     -moz-border-radius: 25px;
@@ -34,39 +132,36 @@ body {
     background-color: darkGray;
   }
 
+  .saveButton
+  {
+    background-color: Green;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1em;
+    color: White;
+    padding: 5px;
+    vertical-align: middle;
+    width: 100%
+  }
+
   #btnSave:enabled
   {
     background-color: green;
   }
-
-<<<<<<< HEAD
-  .myIconButton
-  {
-    background-color: OrangeRed;
-    font-weight: bold;
-    font-size: .8em;
-    color: White;
-  }
-
-  #dateHolder
-  { 
-//    display: inline-block;
-    margin-top: 2px;
-    float: right;
-  }
-=======
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
 
  /************************************
  * General table styling
  * **********************************/
   table, th, td
   {
+    margin-top: 0px;
     border: 1px solid green;
     overflow: hidden;
     border-collapse: separate;
-    border-spacing: .5em .25em;
+    /*border-spacing: .5em .25em;*/
     white-space: nowrap;
+    /*padding: 5px;*/
+    border-spacing: 0;
   }
 
   th
@@ -77,6 +172,10 @@ body {
     overflow: hidden;
   }
 
+  td, th {
+    padding: 6px;
+  }
+
   tfoot
   {
     color: MidnightBlue;
@@ -84,20 +183,9 @@ body {
     text-align: right;
   }
 
-  .rightJustify
-  {
-    text-align: right;
-  }
-
-
-  /* not working */
-  .input[type="number"]
-  {
-    width:10%;
-  }
 
  /*************************************
- * Buttons for Tracking table
+ * Tracking table, getDailyTotals, editRecipe
  * ***********************************/
   .delButton
   {
@@ -111,80 +199,44 @@ body {
     width: 100%
   }
 
-  .saveButton
+  .rightJustify
   {
-    background-color: Green;
-    display: inline-block;
+    text-align: right;
+  }
+
+  .leftJustify
+  {
+    text-align: left;
+  }
+
+/******************************
+/*  showGroceries & editRecipe*/
+/****************************/
+  .myHead
+  {
     font-weight: bold;
-    font-size: 1em;
-    color: White;
-    padding: 5px;
-    vertical-align: middle;
-    width: 100%
+    color: maroon;
   }
 
-
-
- /*************************************
- * For Recipe & Item Chooser Dropdowns
- * ***********************************/
-
-  #chooserHolder
+  #grocID, #itemIDs
   {
-    margin: auto;
-/*    background-color: aqua; */
+    display: inline-block;
+    margin-left: 25px;
   }
 
-  label[for="recipeChooser"]
+  #sub
   {
-     margin-left: 6.0em;
+    display: inline-block;
+    margin-left: 15%;
   }
 
-  label[for="itemChooser"]
+  #pub
   {
-     margin-left: 3.5em;
-  }
-
-  #itemChooser
-  {
-      width: 50%;
-  }
-
-<<<<<<< HEAD
-  #trackContainer
-  {
-    width: 80%;
-/*    background: yellow; */
-    margin-top: -1em;
-    margin-left: 10%;
-    padding: 10px;
-    float: left;
+    display: inline-block;
+    float: right;
   }
 
 
-=======
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
-  #recipeChooser
-  {
-     margin-top: 1em;
-      width: 50%;
-  }
-
-<<<<<<< HEAD
-  #xxxdateHolder
-  {
-/*      padding-left: 50px;
-      margin-top: 24px;
-      margin-bottom: -30px;
-*/
-      margin:auto;
-      width:50%;
-      font-weight: bold;
-      font-size: 120%;
-  }
-
-=======
->>>>>>> 385be0f2f88367426e9b4094386020cdb2908736
  /*************************************
  * For Add New Recipe Box
  * ***********************************/
@@ -199,39 +251,30 @@ body {
       background-color: LightBlue;
     }
 
+    /*************************
+    /* showGroceries, recipes 
+    /*************************/
     #btnEnter
     {
-//      margin-left: 8em;
       margin-top: .4em;
     }
 
-/*********************************
-.em-text{
-	color:#1caa98 !important;
-}
+  /*************************
+  /* showGroceries (iframe styling)
+  /*************************/
+  .foodDiv
+  {
+    margin-left:-100%;
+  }
 
-.jumbotron{
-	background: url(../img/site_showcase_bg.jpg) no-repeat top center;
-	color:#fff;
-	height:500px;
-	overflow:none;
+  #frameDiv
+  {
+    margin-top: -25px;
+  }
+  /*************************/
+  iframe
+  {
+    border: none; /*1px solid green;*/
+  }
 
-}
-
-.jumbotron h1{
-	margin-top:60px;
-}
-
-.jumbotron p{
-	margin-bottom:40px;
-}
-
-.jumbotron img.app-btn{
-	width:40%;
-	margin-right:30px;
-}
-
-.jumbotron img.showcase-img{
-	width:75%;
-}
-*****************************************/
+  /*************************/

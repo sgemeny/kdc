@@ -15,7 +15,6 @@ function app_config()
                'username' => 'williao8',
                'password' => 'stink3bun%',
                'database' => 'williao8_dietModified_20160521'
-//               'database' => 'williao8_diet_test'
              );
   $db=  $_SESSION['db'];
 

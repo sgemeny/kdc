@@ -1,0 +1,102 @@
+#trackHeader
+{
+    margin-top:0px;
+    width:1200px;
+    height:160px;
+    position:relative;
+}
+
+  #nutrientContainer
+  {
+     width: 1220px;
+     height: 353px;
+/* background-color: pink; */
+    margin-top:-20px;
+    margin-left:-80px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    position: relative;
+  }
+
+  #log
+  {
+     width: 1200px;
+/*     background-color: yellow; */
+  }
+
+  #header-fixed{
+      position: fixed;display:none;background-color:linen;width:1200px;margin-top: 0;
+  }
+
+  #log th.nutriCol td.nutriCol
+  {
+     width:10%;
+  }
+
+  #log tr td input{width:70px;}
+
+  .itemName
+  {
+    width: auto;
+    white-space:normal;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
+
+  .qtyCol
+  {
+    width: 7%;
+  }
+
+  .qtyNameCol
+  {
+    width: 10%;
+  }
+
+  .stdCol
+  {
+    width: auto;
+  }
+
+ /**********************************
+ Responsive design
+ **********************************/
+	
+@media screen and (max-width: 1350px) { 
+	#nutrientContainer {
+		width: auto;
+		overflow-x: auto;
+		max-width: 100%;
+		margin: 0 auto;
+		max-height: 353px;
+		height: auto;
+	}
+	
+	.container {
+		width: 100%;
+	}
+	
+	#log {
+		width: 100%;
+		min-width:900px;
+	}
+	
+	#header-fixed {
+		width: auto;
+	}
+}
+
+@media screen and (max-width: 1100px) { 
+	
+	#header-fixed {
+		display:none !important;
+	}
+}
+
+@media screen and (max-width: 960px) { 
+	
+	#nutrientContainer {
+		margin-top: 15px;
+		margin-bottom: 20px;
+	}
+}

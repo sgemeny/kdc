@@ -35,21 +35,16 @@
   $(document).ready( function()
   // ----------------------------
   {
-    $('#btnNo').click(function(e)
+    $('#btnNo').click(function(e) // lose changes
     // ------------------------------------
     { // lose changes, leave without saving
       $('#canclModal').modal('toggle');
       e.preventDefault();
       zeroDirty();
-      if (pageName=="")
-//          formName.submit();
-         document.location.href = pageName;
-      else 
-         document.location.href = pageName;
-      a=1;
+      document.location.href = pageName;
     });
 
-    $('#btnYes').click(function()
+    $('#btnYes').click(function()  // stay on page
     // ------------------------------------
     { // stay on page, keep changes
       $('#cancelModal').modal('toggle');

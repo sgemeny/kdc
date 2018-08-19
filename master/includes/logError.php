@@ -1,6 +1,6 @@
 <?php
 //@ob_start();
-session_start();
+//session_start();
 
 function logError($msg)
 //-----------------------------
@@ -21,7 +21,6 @@ echo "</pre>";
 
    $dayTime =  date('Y-m-d') . "  " . date('g:i A');
    $myMsg=  "" . $dayTime . " ** " .$msg . "\n";
-//   error_log($myMsg . "\n", 3, "/tmp/kdcErrors.log");
    error_log($myMsg, 3, "/tmp/kdcErrors.log");
    return;
 }
