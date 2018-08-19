@@ -76,7 +76,6 @@ function selectItem($conn, $sql, $btnCap="Select")
      var x = event.which || event.keyCode;
      if (x == 0x20) // space
          return false; // nothing to do;
-<<<<<<< HEAD
 
      if (x==09)  // tab key
      {
@@ -91,22 +90,6 @@ function selectItem($conn, $sql, $btnCap="Select")
        textHighlighted = false;
      }
 
-=======
-
-     if (x==09)  // tab key
-     {
-       $("#foodChooser").removeClass("hidden");
-       $("#foodChooser").show();
-       return;
-     }
-
-     if ( (textHighlighted==true) && (window.getSelection().toString()) == "")
-     {
-       $("#foodItemChooser li").show();
-       textHighlighted = false;
-     }
-
->>>>>>> 33c30fb1a16e67a313ae9edac41fe5cbed5db827
      if ( $("#foodInput").val().length == 0 )
               $("#foodItemChooser li").show();
 
