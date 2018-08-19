@@ -40,4 +40,4 @@ xmlrpc.php
 ._*
 index.php
 phpinfo.php
-
+.well-known/
