@@ -2,26 +2,22 @@
   session_start();
   $sessionID = session_ID();
 
-//require_once('includes/logError.php');
-//logError("menu SESSION ID " . $sessionID);
-//logError("menu SESSION VARS " . $vars);
-
   if(!isset($_SESSION['userName']))
   {
-logError("menu.php - username not set");
+      logError("menu.php - username not set");
       header("Location: " . "starthere.php");
       exit();
   }
   $self = $_SERVER['PHP_SELF'];
 
+  require_once ('includes/banner.php');
   require_once ('includes/dbConnect.php');
 
   $conn = dbConnect();
 
-  require_once ('includes/banner.php');
   require_once ('includes/displayButtons.php');
      
-  showBanner("Welcome " . $_SESSION["userName"] . " to KDC Main Menu");
+  showBannerMsg("Welcome " . $_SESSION["userName"] . " to KDC Main Menu");
   $conn = dbConnect();
 
   echo '<form id="frmChooseRecipe" action="'.$self.'" method="get" >';
@@ -74,17 +70,17 @@ $(document).ready( function() {
     window.open("foodList.php", "_blank","resizable=yes,top=400,left=550,width=400,height=400");
   });
 
-  $("#btnDaily").click(function(event)
-  // ------------------------------------
-  {
-    var url =  "includes/dailyTotals.php";
-    document.location.href = url;
-  });
-
   $("#btnTrack").click(function(event)
   // ------------------------------------
   {
     var url =  "includes/track.php";
+    document.location.href = url;
+  });
+
+  $("#btnDaily").click(function(event)
+  // ------------------------------------
+  {
+    var url =  "includes/dailyTotals.php";
     document.location.href = url;
   });
 
