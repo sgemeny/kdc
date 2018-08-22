@@ -164,7 +164,7 @@ $(document).ready( function() {
      $("#owner").prop('value', data[1]);
      $("#recipeInput").val($(this).text());
      checkIfCanEdit();
-     $("#recipeChooser").hide();
+//     $("#recipeChooser").hide();
 
   });
 
@@ -174,11 +174,17 @@ $(document).ready( function() {
         $(this).val('');
     });
 
+  $("#recipeInput").select(function(e)
+  // ------------------------------------
+  {
+     textHighlighted = true;
+  });
+
   $("body").click(function(e)
   // ------------------------------------
   {
      if ( ! $(e.target).parent().hasClass('item-list')) 
-           $("#recipeChooser").hide();
+           $("#recipeChooser").addClass("hidden");
 
   });
 
@@ -201,10 +207,11 @@ $(document).ready( function() {
      {
         $("#recipeChooser").removeClass("hidden");
         $("#recipeChooser").show();
+        if ( $("#recipeInput").val() != '' )
+           $("#recipeInput").val('');
      }
      else
-       $("#recipeChooser").toggle();
-
+        $("#recipeChooser").addClass("hidden");
   });
 
 });  // end on page loaded

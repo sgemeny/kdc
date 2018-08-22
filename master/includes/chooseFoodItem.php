@@ -148,7 +148,8 @@ $(document).ready( function() {
   {
       $("#foodInput").val($(this).text());
       $("#itemChoice").prop('value', $(this).attr('data-id'));
-      $("#foodChooser").hide();
+      $("#foodChooser").addClass("hidden");
+//      $("#foodChooser").hide();
   });
 
   $("#foodInput").select(function(e)
@@ -161,7 +162,7 @@ $(document).ready( function() {
   // ------------------------------------
   {
      if ( ! $(e.target).parent().hasClass('item-list'))
-           $("#foodChooser").hide();
+           $("#foodChooser").addClass("hidden");
 
   });
 
@@ -188,12 +189,12 @@ $(document).ready( function() {
      if ( $("#foodChooser").hasClass("hidden") )
      {
         $("#foodChooser").removeClass("hidden");
+        $("#foodInput").val('');
         $("#foodChooser").show();
      }
      else 
-       $("#foodChooser").toggle();
+        $("#foodChooser").addClass("hidden");
   });
-
 });  // end on page loaded
 
 

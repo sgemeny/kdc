@@ -719,43 +719,10 @@ $("#nutrientContainer").bind("scroll", function() {
     });
   }
 
-
-/***********************
-function logOff()
-//-------------------
-{
-  var myData = { "userName" : $("#username").val() };
-
-  $.ajax(
-  {
-    url: "./logOut.php",
-    type: "post",
-    data: {"data" : JSON.stringify(myData)},
-    success: function( data, status)  // callback
-             {
-                if (status=="success")
-                {
-                    alert("Your have successfully logged out.");
-                    var url = "../../index.php";
-                    document.location.href = url;
-                }
-                else
-                {
-                   alert("Error Occurred, Unable to log out");
-                }
-             },
-    error: function(xhr)
-             {
-               alert( "An error occured: " + xhr.status + " " + xhr.statusText);
-             }
-  });
-}
-/***********************/
+var curDay = new Date;
 
 $(document).ready( function() {
 // ----------------------------
-//  $('#btnSelectRecipe').show();
-
   firstNewRow=$("#log tbody tr").length;
 
   var title = 'WARNING';
@@ -769,12 +736,20 @@ $(document).ready( function() {
       {
           dateFormat: "M d, yy"
         , today
+        , beforeShow: function()
+          {
+            if (pageDirty)
+            {
+               $('#dateModal').modal('show');
+               return false;
+            }
+          }
         , onClose: function(selectedDate)
           {
             $("#sqlDate").val(selectedDate);
-            if (pageDirty)
-               $('#dateModal').modal('show');
-            else
+//            if (pageDirty)
+//               $('#dateModal').modal('show');
+//            else
                doSomething();
           }
       });
@@ -807,7 +782,6 @@ $(document).ready( function() {
                      $("#log tbody").append(result[1]);
 
                $("#log tfoot").append(result[2]);
-               pageDirty = true;
              }
              else
              {
@@ -828,6 +802,7 @@ $(document).ready( function() {
       e.preventDefault();
       zeroDirty();
       doSomething();
+      $("#btnChange").focus();
     });
 
     $('#btnContinue').click(function()  // stay on page
@@ -959,6 +934,8 @@ $("#log tbody").find('tr').eq(rowIndex).find('td').eq(QTY).focus();
   {
      if ($("#recipeChoice").val() == "")
          return;
+
+
      var recipID = $("#recipeChoice").val();
 
      var opt = $("#recipeChoice").val().split("+");

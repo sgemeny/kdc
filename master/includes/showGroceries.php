@@ -701,6 +701,7 @@ $(document).ready( function() {
      $("#itemChooser").removeClass("hidden");
      $("#btnLine").removeClass("hidden");
 // show food chooser
+ $(".foodDiv").removeClass("hidden");
  $(".foodDiv").show();
  $("#pageTitle").text("View Food List");
   });
@@ -840,6 +841,7 @@ $(document).ready( function() {
      $("#frameDiv").addClass("hidden");
      $("#itemChooser").removeClass("hidden");
      $("#btnLine").removeClass("hidden");
+     $(".foodDiv").removeClass("hidden");
 $(".foodDiv").show();
   });
 

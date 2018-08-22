@@ -14,6 +14,11 @@
     margin-left: 8em;
   }
 
+  .hidden
+  {
+    display:none;
+  }
+
   .divCaption
   {
     margin-top: 1em;
@@ -84,11 +89,6 @@
     padding-top: 50px;
     background-color: linen;
      margin: 0;
-  }
-
-  .hidden
-  {
-    display:none;
   }
 
   #banner #kdc-logo
