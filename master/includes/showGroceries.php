@@ -24,7 +24,6 @@
   else $cmd = CHOOSE;
 
   echo '<form id="frmInfo">';
-//  echo '<input type="hidden" name="subDir" id="subDir" value="' . $subDir .'" />';
   echo '<input type="hidden" name="userID" id="userID" value="' . $_SESSION["userID"] .'" />';
   echo '</form>';  // frmInfo
 
@@ -101,8 +100,6 @@ function showEditItem($conn, $itemNo)
   displayButtons($btns);
 
   // save in the form to make available to jquery code
-//  echo '<input type="hidden" name="itemChoice" id="itemChoice" value=' . $itemNo . ' />';
-
   $sql =  "SELECT GroceryName, groceryTypeID, NDB_No, Water, Calories, ";
   $sql .= "Protein, Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium, Sodium, ";
   $sql .= "gramsPerUnit, groc_UOM, gramsPerCup ";

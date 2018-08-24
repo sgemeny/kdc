@@ -40,7 +40,7 @@ function selectItem($conn, $sql, $btnCap="Select")
                    class="bigInput"
                    onkeyup="foodFilter(event)" autocomplete="off">';
 
-       echo '<button type="submit" id="btnSearchFood" class="searchButton">
+       echo '<button type="button" id="btnSearchFood" class="searchButton">
                    <i class="fa fa-search"></i> </button>';
 
        if ($btnCap != "")

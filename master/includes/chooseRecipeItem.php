@@ -47,7 +47,7 @@ function selectRecipe($conn, $btnCap="")
                    class="bigInput"
                    onkeyup="recipeFilter(event)" autocomplete="off">';
 
-      echo '<button type="submit" id="btnSearchRecipe" class="searchButton">
+      echo '<button type="button" id="btnSearchRecipe" class="searchButton" name="btnSearchRecipe">
                    <i class="fa fa-search"></i> </button>';
 
        if ($btnCap != "")
