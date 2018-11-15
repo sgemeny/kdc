@@ -3,25 +3,10 @@
 
 function app_config()
 {
-  $workDB = array(
-               'hostname' => 'localhost',
-               'username' => 'williao8_sue',
-               'password' => 'Pink1bun_',
-               'database' => 'dietModified_2016_05_21'
-             );
+  $myPath = $_SESSION['MYPATH'] . '/dbConfig64';
 
-  $masterDB = array(
-               'hostname' => 'localhost',
-               'username' => 'williao8',
-               'password' => 'stink3bun%',
-               'database' => 'williao8_dietModified_20160521'
-             );
-  $db=  $_SESSION['db'];
-
-  if ($db == MASTER)
-     return $masterDB;
-  else
-     return $workDB;
+  $db = json_decode(base64_decode(file_get_contents($myPath)), true);
+  return $db;
 }
 
 ?>
