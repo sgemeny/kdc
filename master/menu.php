@@ -10,6 +10,8 @@
   }
   $self = $_SERVER['PHP_SELF'];
 
+  $_SESSION[MYPATH] = dirname(dirname(__FILE__));
+
   require_once ('includes/banner.php');
   require_once ('includes/dbConnect.php');
 
