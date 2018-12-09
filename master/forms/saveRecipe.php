@@ -1,5 +1,8 @@
 <?php
 /**************** Test Data *************************
+$_POST["data"] ='[{"RecipeName":"Cinnamon Sugar Cookies/Dialysis & Kidney friendly","ID":"50213","servingSize":"60.0","isSubRecipe":1,"isPublic":0,"Comments":""},{"ID":"1651","Sequence":"5","Qty":2,"UOM_ID":"3","Item":"26","Instruction":"Add to bowl"},{"ID":"1651","Sequence":"10","Qty":2,"UOM_ID":"4","Item":"72","Instruction":"Add to bowl"}]';
+/*******************************************************
+
 // case 1
 /*******************************************************
 $_POST["data"] ='[{"RecipeName":"potato casserole","ID":"50048","servingSize":"10.0","isSubRecipe":0,"Comments":""},{"ID":"1393","Sequence":"5","Qty":6,"UOM_ID":"3","Item":"266","Instruction":"peel, slice thin"},{"ID":"1398","Sequence":"10","Qty":8,"UOM_ID":"9","Item":"263","Instruction":"crumble"}]';
@@ -21,7 +24,7 @@ $_POST["data"] ='[{"RecipeName":"Sues Breakfast","ID":"50138","servingSize":"121
   global $conn;
 
   $conn = dbConnect();
-
+if ($conn==NULL) echo "failed to connect";
   if (isset($_POST["data"]))
   {
     $updates = json_decode($_POST["data"]);

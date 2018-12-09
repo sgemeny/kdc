@@ -11,6 +11,10 @@
   $self = $_SERVER['PHP_SELF'];
 
   $_SESSION[MYPATH] = dirname(dirname(__FILE__));
+//echo 'MYPATH set to: ' . $_SESSION[MYPATH] . "<br>";
+//echo "file is: " . __FILE__ . "<br>";
+//echo "dirname of file is: " . dirname(__FILE__) . "<br>";
+//echo "dirname of dirname of file is: " . dirname(dirname(__FILE__)) . "<br>";
 
   require_once ('includes/banner.php');
   require_once ('includes/dbConnect.php');

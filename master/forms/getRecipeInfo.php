@@ -85,6 +85,7 @@ function displayRecipe($conn, $chosenRecipe, $comments)
   else
   {
     $Groceries = array(array());
+    $itemIdx = 0;
     $idx = 0;
     while (mysqli_stmt_fetch($stmt))
     {

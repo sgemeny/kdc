@@ -415,15 +415,6 @@ $(document).ready( function() {
   $( "#btnHide" ).click(function( event ) 
   // ------------------------------------
   {
-/******
-     $('#tblRecipe .idCol').each(function(row, id)
-     {
-        if ($(id).hasClass("hidden"))
-             $(id).removeClass("hidden");
-        else
-             $(id).addClass("hidden");
-     });
-******/
 
      $('#tblRecipe .seqCol').each(function(row, seq)
      {
@@ -512,7 +503,7 @@ $(document).ready( function() {
      newtr.find("#UOM").prop("disabled", false);
 
      newtr.find("#grocItem").val("310|1.0000");
-     newtr.find("#Directions").val("Type Directions Here");
+     newtr.find("#dirs").val("Type Directions Here");
      newtr.find("#seq").val(nextSeq);
      setDirty();
 
@@ -524,7 +515,8 @@ $(document).ready( function() {
      }
      var myData = JSON.stringify(arrayData);
 //     console.log(myData);
-//a=1;
+$("#tblRecipe tr:last").after(newtr);
+a=1;
      $.ajax(
       {
         url: "./addRow.php",
@@ -603,9 +595,8 @@ $(document).ready( function() {
               , "Sequence" : $(tr).find("#seq").val()
               , "Qty" : qty
               , "UOM_ID" : $(tr).find("select#UOM").val()
-//              , "Item" :  $(tr).find("select#grocItem").val()
               , "Item" : itemInfo[0] 
-              , "Instruction" : $(tr).find("#Directions").val()
+              , "Instruction" : $(tr).find("#dirs").val()
             }
         }) // each row
         

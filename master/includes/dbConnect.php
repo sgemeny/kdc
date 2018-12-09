@@ -6,6 +6,11 @@
  function dbConnect()
  { 
    $db = app_config();
+/***************
+echo '<pre>';
+print_r($db);
+echo "</pre>";
+/***************/
    $conn = new mysqli( $db['hostname']
 	             , $db['username']
 	             , $db['password']
