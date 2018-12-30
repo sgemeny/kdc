@@ -10,7 +10,7 @@
   }
   $self = $_SERVER['PHP_SELF'];
 
-  $_SESSION[MYPATH] = dirname(dirname(__FILE__));
+  $_SESSION['MYPATH'] = dirname(dirname(__FILE__));
 //echo 'MYPATH set to: ' . $_SESSION[MYPATH] . "<br>";
 //echo "file is: " . __FILE__ . "<br>";
 //echo "dirname of file is: " . dirname(__FILE__) . "<br>";
