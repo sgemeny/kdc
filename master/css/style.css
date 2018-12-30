@@ -21,8 +21,8 @@
 
   .divCaption
   {
+/*background-color: pink;*/
     margin-top: 1em;
-/*    margin-bottom: .5em; */
     font-weight: bold;
     color: maroon;
   }
@@ -52,11 +52,6 @@
     margin-left: 100px;
   }
 
-  #weight
-  {
-    float: right;
-  }
-
   .totals
   {
      margin-top: 5px;
@@ -72,15 +67,29 @@
   /*********************
   *  For showRecipe 
   /*********************/
-  #servingInfo
-  {
-    width: 50%;
-    margin-left: 100px;
-  }
-
   #enterServing
   {
-/*background:yellow;*/
+    margin-top: 1em;
+    font-weight: bold;
+/*background-color:orange;*/
+  }
+
+  #servingInfo
+  {
+    width: 66%;
+    margin-left: 100px; 
+    margin-bottom: -11px;
+  }
+
+  #specialLabel
+  {
+    margin-top: 11px;
+  }
+
+  #recipeWt
+  {
+    float: right;
+    margin-top: 11px;
   }
 
 

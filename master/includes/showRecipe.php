@@ -8,7 +8,7 @@
 
   $self = $_SERVER['PHP_SELF'];
 
-  echo '<link href="../css/style.css" rel="stylesheet"> ';
+//  echo '<link href="../css/style.css" rel="stylesheet"> ';
 
   require_once ('dbConnect.php');
   require_once ('banner.php');
@@ -98,10 +98,12 @@
        $fld_serving .= 'onfocus="savePrevious()"';
        $fld_serving .= ' min="1" max="999" size=5 length=5 step="1"/>';
        echo $fld_serving;
+
+//       echo '<div id="weight">';
+//         echo "Recipe Total Weight " . $totWeight . "(g)";
+         echo '<p id="recipeWt">' . "Recipe Total Weight "  . $totWeight . "(g)" . '</p>';
+//       echo '</div>';  // weight
     echo '</div>';  // end of enterServing
-    echo '<div id="weight">';
-      echo "Recipe Total Weight " . $totWeight . "(g)";
-    echo '</div>';  // weight
   echo '</div>';  // divCaption
 
   showNutrients($conn, $chosenRecipe, $servSize);
