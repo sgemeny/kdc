@@ -17,6 +17,7 @@
           $_SESSION["userID"] = $userID;
           $_SESSION["userName"] = $userName;
           $_SESSION["MEMBER_LEVEL"] = OPTIMIZEMEMBER_CURRENT_USER_ACCESS_LEVEL;
+          $_SESSION['MYPATH'] = dirname(__FILE__,3);
       }
       else // not logged in
       {
