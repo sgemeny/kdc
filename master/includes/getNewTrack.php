@@ -75,6 +75,10 @@ $_POST["data"] = ' {"beginDate":"Apr 5, 2018","userID":"1"} ';
     global $itemName, $uomDesc;
     global $Rows, $footer;
 
+    global $totWeight, $totWater, $totCalories, $totProtein;
+    global $totFat, $totCarbs, $totFiber, $totSugars, $totPhos;
+    global $totPotas, $totSodium;
+
       $totWeight = $totWater = $totCalories = $totProtein = 0;
       $totFat = $totCarbs = $totFiber = $totSugars = $totPhos = 0;
       $totPotas = $totSodium = 0;
@@ -82,14 +86,11 @@ $_POST["data"] = ' {"beginDate":"Apr 5, 2018","userID":"1"} ';
       // get specific day's tracking info
       if ($stmt = setUpTrackInfo($conn, $userID, $startDate))
       {
-$n =0;
          // get specific day's tracking info
          while (mysqli_stmt_fetch($stmt))
          {
-++$n;
             getStuffForJQuery($userID, $startDate);
          }
-//logError ("Num records=" . $n);
          mysqli_stmt_close($stmt);
       }
 else logError("uhOh!\n");
@@ -107,7 +108,7 @@ else logError("uhOh!\n");
     global $totWeight, $totWater, $totCalories, $totProtein;
     global $totFat, $totCarbs, $totFiber, $totSugars, $totPhos;
     global $totPotas, $totSodium;
-//logError( "At getStuffForJQuery " . $startDatei);
+//logError( "At getStuffForJQuery " . $startDate);
 
       // process one row of data
       $row = '<tr class="rightJustify">';

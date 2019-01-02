@@ -14,9 +14,6 @@
 
   require_once ('includes/banner.php');
   require_once ('includes/dbConnect.php');
-
-  $conn = dbConnect();
-
   require_once ('includes/displayButtons.php');
      
   showBannerMsg("Welcome " . $_SESSION["userName"] . " to KDC Main Menu");
