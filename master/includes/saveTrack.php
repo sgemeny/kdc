@@ -23,18 +23,23 @@ $_POST["data"] = '[{"userID":"1"},{"sqlDate":"Apr 4, 2018"},[{"Qty":"1.00"},{"UO
     $things = current($updates);
 
     $userID = $updates[0]->userID;
-    $dt = strtotime($updates[1]->sqlDate);
-    $sqlDate = date('Y-m-d', $dt);
+//    $dt = strtotime($updates[1]->sqlDate);
+    $dt = new DateTime($updates[1]->sqlDate);
+    $now = new DateTime('now');
+    $today = new DateTime(date('Y-m-d'));
+    $time = $today->diff($now);
+    $dt->add($time);
+    $sqlDate = $dt->format('Y-m-d H:i:s');
 //echo "sqlDate " . $sqlDate . "<br>";
 
     $sqlAppend  = "INSERT INTO userLog ( dateEntered, userID, itemID, Qty, servingAmt";
     $sqlAppend .= ", Water, Calories";
     $sqlAppend .= ", Protein, Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium ";
     $sqlAppend .= ", Sodium, UOM_Desc, gramsPerUnit)";
-    $sqlAppend .= " VALUES( (DATE '" . $sqlDate . "'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";   
+//    $sqlAppend .= " VALUES( '"$sqlDate."',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
+    $sqlAppend .= " VALUES('".$sqlDate."',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $appentTypes = 'iiddddddddddddsd';
-
-//echo "sqlAppend<br>" . $sqlAppend . "<br>";
+//    $sqlAppend .= " VALUES( (DATE '" . $sqlDate . "'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )";
 
     $sqlUpdate  = "UPDATE userLog ";
     $sqlUpdate .= "SET  Qty=?, servingAmt=?, Water=?, Calories=? ";

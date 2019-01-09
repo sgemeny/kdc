@@ -1,7 +1,6 @@
 <?php
-
 /*********** For Testing ****************
-$_POST["data"] = '[{"userID":"20","itemID":"158","Qty":2,"UOM_Desc":"Slice","servingAmt":18,"Water":"4.00","Calories":"86.00","Protein":"8.00","Fat":"6.00","Carbs":"0.00","Fiber":"0.00","Sugars":"0.00","Phosphorus":"70.00","Potassium":"96.00","Sodium":"324.00","gramsPerUnit":9,"trackingID":"385"}]';
+$_POST["data"] = '[{"userID":"1","sqlDate":"Jan 7, 2019","itemID":"234","Qty":"1.00","UOM_Desc":"Cup","servingAmt":244,"Water":"215.208","Calories":"102.47999999999999","Protein":"41.480000000000004","Fat":"24.400000000000002","Carbs":"27.572","Fiber":"2.6839999999999997","Sugars":"22.936","Phosphorus":"12.200000000000001","Potassium":"180.56","Sodium":"4.88","gramsPerUnit":244,"trackingID":"0"}]';
 /***************************************/
 
   session_start();
@@ -16,13 +15,16 @@ $_POST["data"] = '[{"userID":"20","itemID":"158","Qty":2,"UOM_Desc":"Slice","ser
   {
     $updates = json_decode($_POST["data"]);
 
-    $dt = strtotime($updates[0]->sqlDate);
-    $sqlDate = date('Y-m-d', $dt);
-//echo "<pre>"; print_r($updates);  echo "</pre><br>";
+    $dt = new DateTime($updates[0]->sqlDate);
+    $now = new DateTime('now');
+    $today = new DateTime(date('Y-m-d'));
+    $time = $today->diff($now);
+    $dt->add($time);
+    $sqlDate = $dt->format('Y-m-d H:i:s');
 
     $sqlAppend  = "INSERT INTO userLog ( dateEntered, userID, itemID, Qty, servingAmt, Water, Calories, Protein";
     $sqlAppend .= ", Fat, Carbs, Fiber, Sugars, Phosphorus, Potassium, Sodium, UOM_Desc, gramsPerUnit)";
-    $sqlAppend .= " VALUES( (DATE '" . $sqlDate . "'),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sqlAppend .= " VALUES('".$sqlDate."',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     $sqlUpdate  = "UPDATE userLog ";
     $sqlUpdate .= "SET  Qty=?, servingAmt=?, Water=?, Calories=? ";

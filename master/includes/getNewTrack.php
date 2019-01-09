@@ -27,9 +27,7 @@ $_POST["data"] = ' {"beginDate":"Apr 5, 2018","userID":"1"} ';
 
     require_once('./logError.php');
     require_once('./setupTrackInfo.php');
-//logError("getNewTrack");
 
-//logError($_POST["data"]);
   if (isset($_POST["data"]))
   {
     require_once ( './dbConnect.php');
@@ -38,19 +36,13 @@ $_POST["data"] = ' {"beginDate":"Apr 5, 2018","userID":"1"} ';
     $userID = $updates->userID;
     $dt = strtotime( $updates->beginDate );
     $sqlDate = date('Y-m-d', $dt);
-//logError("START:  sqlDate: " . $sqlDate);
     $conn = dbConnect();
 
     if ($conn!=NULL)
     {
       getTrackForJquery($conn, $userID, $sqlDate);
       getFooter();
-//$txt = var_export($Rows, true);
-//logError("\nRows\n" . $txt);
-//logError("\nfooter\n" . $footer);
       $retVal = array( 1, $Rows, $footer );
-//$txt = var_export($retVal, true);
-//logError("\n\nretVal\n" . $txt);
 
 //$txt=json_encode($retVal);
 //logError("\n\njson\n" . $txt);
@@ -108,7 +100,7 @@ else logError("uhOh!\n");
     global $totWeight, $totWater, $totCalories, $totProtein;
     global $totFat, $totCarbs, $totFiber, $totSugars, $totPhos;
     global $totPotas, $totSodium;
-//logError( "At getStuffForJQuery " . $startDate);
+//logError( "At getStuffForJQuery " . $startDate , "sizeof Rows=" . sizeof($Rows));
 
       // process one row of data
       $row = '<tr class="rightJustify">';
