@@ -901,7 +901,8 @@ function saveError()
   // -------------------------------
   {
      var found = false;
-     $("#itemChooser li").each(function()
+//     $("#itemChooser li").each(function()
+     $("#foodItemChooser li").each(function()
      { // remove all spaces for compare
        if ( $(this).text().toUpperCase().replace(/ /g,'') == itemName.toUpperCase().replace(/ /g,'') )
        {

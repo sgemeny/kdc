@@ -482,7 +482,6 @@ $("#searchItem").keyup(function(event){
             $("#tblMeasures tbody").append("<tr><td>" +measure + "</td><td>" + " " + eqv +"</td></tr>");
           }
     })
-    a=1;
   }
 });  // end on page loaded
 
