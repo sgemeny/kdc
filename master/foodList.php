@@ -115,10 +115,10 @@ else
         echo '<label for "serving">Enter Serving Size in Grams</label>';
         $fld_serving = '<input type="number" id="serving"';
         $fld_serving .= 'value="'.number_format($servingSize, 1, '.', '').'" ';
-        $fld_serving .= 'onchange="calcServing()"';
-        $fld_serving .= 'onfocus="savePrevious()"';
         $fld_serving .= ' min="1" max="999" size=5 length=5 step=".1"/>';
         echo $fld_serving;
+        echo '<input name="btnCalc" class="myButton" id="btnCalc" type="button" value="Calculate">';
+
       echo '</div>';  // end of enterServing
 
       // show nutrients for serving size
@@ -165,60 +165,18 @@ echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.mi
 
 <script>
   var items = [];
-//  var names = ["Water", "Energy", "Protein", "Total lipid (fat)", "Carbohydrate, by difference", "Fiber, total dietary", "Sugars, total", "Phosphorus, P", "Potassium, K", "Sodium, Na"];
-  var prevSize = 1;
-
-  function savePrevious()
-  //--------------------
-  {
-     prevSize = $('#serving').val() *1.0;
-  }
 
   function calcServing()
   // ------------------
   {
-     var newSize=$('#serving').val() * 1.0;
-     var tblRow = $("#tbl_perServing tr:last");
-     var invPrevSize = 1.0 / prevSize;  // invert & multiply
-     var mult = newSize * invPrevSize;
+     var mult=$('#serving').val() * 1.0;
+     servingRow = $("#tbl_perServing tbody tr");
 
-     servingRow = $("#tbl_perServing tr");
-//     var water = tblRow.find('td:eq(0)').text()*1.0 *newSize * invPrevSize;
-//     var calories = tblRow.find('td:eq(1)').text()*1.0 *newSize * invPrevSize;
-
-     var water = tblRow.find('td:eq(0)').text();
-     var calories = tblRow.find('td:eq(1)').text();
-     var protein = tblRow.find('td:eq(2)').text();
-     var fat = tblRow.find('td:eq(3)').text();
-     var carbs = tblRow.find('td:eq(4)').text();
-     var fiber = tblRow.find('td:eq(5)').text();
-     var sugar = tblRow.find('td:eq(6)').text();
-     var phos = tblRow.find('td:eq(7)').text();
-     var pot = tblRow.find('td:eq(8)').text();
-     var salt = tblRow.find('td:eq(9)').text();
-
-     if ($.isNumeric(water)) water = (water * mult).toFixed(2);
-     if ($.isNumeric(calories)) calories = (calories *mult).toFixed(2);
-     if ($.isNumeric(protein)) protein = (protein * mult).toFixed(2);
-     if ($.isNumeric(fat)) fat = (fat * mult).toFixed(2);
-     if ($.isNumeric(carbs)) carbs = (carbs * mult).toFixed(2);
-     if ($.isNumeric(fiber)) fiber = (fiber * mult).toFixed(2);
-     if ($.isNumeric(sugar)) sugar = (sugar * mult).toFixed(2);
-     if ($.isNumeric(phos)) phos = (phos * mult).toFixed(2);
-     if ($.isNumeric(pot)) pot = (pot * mult).toFixed(2);
-     if ($.isNumeric(salt)) salt = (salt * mult).toFixed(2);
-
-     servingRow = $("#tbl_perServing tr");
-     servingRow.find('td:eq(0)').text(water);
-     servingRow.find('td:eq(1)').text(calories);
-     servingRow.find('td:eq(2)').text(protein);
-     servingRow.find('td:eq(3)').text(fat);
-     servingRow.find('td:eq(4)').text(carbs);
-     servingRow.find('td:eq(5)').text(fiber);
-     servingRow.find('td:eq(6)').text(sugar);
-     servingRow.find('td:eq(7)').text(phos);
-     servingRow.find('td:eq(8)').text(pot);
-     servingRow.find('td:eq(9)').text(salt);
+     $("#itemTable tbody tr").each( function(i, row)
+     { // each nutrient row
+        var newVal = $(row).find("td").eq(1).text()*mult;
+        servingRow.find('td').eq(i).text(newVal.toFixed(2));
+     });
  };
 
 
@@ -230,11 +188,15 @@ $("#searchItem").keyup(function(event){
     }
 });
 
+ $("#btnCalc").click(function()
+  // ----------------------------
+  { // calculate new serving size
+        calcServing();
+  });  // end btnCalc
 
  $("#btnSearch").click(function()
   // ----------------------------
   { // empty for new entries
-
    $("#measures").addClass("hidden");
    if ( $("#embedded").val() == 0 )
        $("#tblMeasures tbody tr").remove();
