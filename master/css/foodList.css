@@ -35,6 +35,29 @@
     font-weight: bold;
   }
 
+  .footer
+  {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: lightGray;
+    color: white;
+    text-align: center;  position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+/******
+ I have a syntax problem here
+  #terms #privacy a:link
+  {
+    color: darkGray;
+  }
+/******/
+
   .myButton
   {
     background-color: OrangeRed;

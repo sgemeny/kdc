@@ -14,7 +14,7 @@ echo '<head>';
   echo ' <meta charset="utf-8">';
   echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
   echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-  echo '<title>USDA Food LookUp (Beta)</title>';
+  echo '<title>USDA Food Finder</title>';
 
   echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>';
   echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>';
@@ -45,13 +45,14 @@ if ($embedded == 0)
             echo '<a href="../" class="pull-left"><img src="images/kdcLogo.png" alt="KDC" ></a>';
           echo '</div>'; // img
         echo '</div>';   // navbar header -->
-
+      /***************Commented out for FoodFinder Version******************
       echo '<div id="navbar" class="collapse navbar-collapse">';
         echo '<ul class="nav navbar-nav pull-left">';
           echo '<li><a id="home" href="../");">Home</a></li>';
           echo '<li><a id="home" href="../member-home">Member Area</a></li>';
         echo '</ul>';
       echo '</div>'; // nav-collapse -->
+      /*****************************************************/
     echo '</div>';  // container
   echo '</nav>';
 
@@ -66,7 +67,7 @@ if ($embedded == 0)
   echo '<section>';
     echo '<br><br>';
     echo '<div class="container">';
-    echo '<h2 class="leftJustify">USDA Food Search (Beta)</h2>';
+    echo '<h2 class="leftJustify">USDA Food Finder</h2>';
     echo '<div iD="inputDiv">';
       echo '<input type="text" id="searchItem" placeholder="Search for food">';
       echo '<input name="btnSearch" class="myButton" id="btnSearch" type="button" value="Search">';
